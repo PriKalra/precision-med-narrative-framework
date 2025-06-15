@@ -5,52 +5,52 @@ import AgenticAIFlowchart from '../solution/AgenticAIFlowchart';
 
 const storySteps = [
     {
-        title: "1. GNNs: The Molecular Architects",
+        title: "1. Graph Neural Networks: Molecular Intelligence",
         description: [
-            "Graph Neural Networks (GNNs) excel at processing data structured as graphs. By representing drug molecules as graphs—where atoms are nodes and bonds are edges—GNNs can predict physicochemical and ADME properties directly from a chemical structure.",
-            "This capability accelerates model parameterization and automates a critical, time-consuming step in early drug discovery, enabling rapid screening of virtual compounds."
+            "Graph Neural Networks (GNNs) represent a paradigm shift in molecular property prediction, treating drug molecules as mathematical graphs where atoms become nodes and chemical bonds become edges. This graph-theoretic approach enables direct learning from molecular topology, capturing structural features that traditional descriptors miss.",
+            "The conceptual framework leverages message-passing algorithms to propagate information across molecular substructures, enabling prediction of ADME properties (Vss, CLh, Papp, fu) directly from SMILES strings. This automated parameterization could theoretically accelerate virtual screening workflows by orders of magnitude."
         ],
     },
     {
-        title: "2. Agentic AI: The Cognitive Engine",
+        title: "2. Agentic AI: Autonomous Scientific Reasoning",
         description: [
-            "Agentic AI provides the cognitive core of the framework, automating complex workflows from hypothesis generation to model validation. These systems employ Large Language Models for sophisticated reasoning but extend beyond them by using external tools and adaptive memory to execute multi-step tasks autonomously.",
-            "This transforms the development process from a series of manual steps into a cohesive, self-optimizing pipeline."
+            "Agentic AI extends beyond simple language models to create autonomous systems capable of scientific reasoning, tool usage, and adaptive learning. These theoretical agents would possess memory systems for context retention, planning capabilities for multi-step problem decomposition, and the ability to interact with external databases and simulation tools.",
+            "The conceptual framework envisions specialized agents for different aspects of drug development—from hypothesis generation to model validation—working collaboratively under human oversight to accelerate discovery timelines while maintaining scientific rigor."
         ],
     },
     {
-        title: "3. The Core Workflow: From Query to Plan",
+        title: "3. Natural Language Interface: Domain Expert Integration",
         description: [
-            "The process begins with a human expert defining a research question. A Conversational Agent interprets this natural language query, translating it into a structured task.",
-            "A Planning Agent then takes over, decomposing the high-level objective into a detailed, step-by-step workflow. This plan is presented back to the expert for review and approval, ensuring human-centric control from the outset."
+            "The proposed workflow begins with natural language query interpretation, allowing pharmacologists to pose research questions in domain-specific terminology. A specialized conversational agent, fine-tuned on biomedical literature, would parse complex queries involving drug-drug interactions, clearance mechanisms, or population pharmacokinetics.",
+            "An orchestration agent would then decompose high-level objectives into executable workflows, creating transparent, auditable plans that maintain the connection between scientific intent and computational execution."
         ],
     },
     {
-        title: "4. Data Foundation & Hypothesis Generation",
+        title: "4. Knowledge Integration: From Data to Insights",
         description: [
-            "Once the plan is approved, specialized agents are dispatched. Data Retrieval agents mine internal databases and public literature, while Knowledge Extraction agents build context from biomedical knowledge graphs.",
-            "A Hypothesis Generation agent then synthesizes this information to propose novel drug targets or repurposing candidates. Concurrently, a Machine Learning agent predicts key ADME parameters, feeding crucial data into the system."
+            "Specialized agents would mine disparate data sources—from ChEMBL and PubChem to proprietary databases—while knowledge extraction agents build contextual understanding from biomedical ontologies and literature. This multi-source integration addresses the data fragmentation challenge in pharmaceutical research.",
+            "A hypothesis generation agent would synthesize this information to propose novel drug targets, mechanism-based DDI predictions, or repurposing opportunities. Simultaneously, machine learning agents would predict missing ADME parameters using QSAR/QSPR models, creating a comprehensive parameter space for mechanistic modeling."
         ],
     },
     {
-        title: "5. Mechanistic Simulation at Scale",
+        title: "5. Mechanistic Simulation: In Silico Experimentation",
         description: [
-            "The heart of the framework is the Simulation Agent. It takes the generated hypotheses and predicted parameters to execute complex PBPK, PK/PD, or QSP models.",
-            "These in silico experiments predict drug disposition, efficacy, and potential toxicity, providing a deep mechanistic understanding of how a candidate compound will behave in a biological system."
+            "The simulation engine represents the mechanistic core, executing PBPK, PK/PD, and quantitative systems pharmacology (QSP) models with AI-predicted parameters. This hybrid approach combines the interpretability of mechanistic models with the predictive power of machine learning.",
+            "The theoretical framework would enable large-scale virtual trials, exploring parameter uncertainty through Monte Carlo simulation and sensitivity analysis to identify critical knowledge gaps and de-risk development decisions."
         ],
     },
     {
-        title: "6. The Self-Optimizing Loop",
+        title: "6. Adaptive Learning: Self-Improving Systems",
         description: [
-            "Results from the simulation are passed to an Evaluation Agent, which assesses them against criteria like efficacy, safety, and novelty. Its findings are fed to a Refinement Agent.",
-            "This agent formulates structured feedback to other agents, creating a closed loop of continuous improvement. This iterative process allows the system to autonomously learn, adapt, and optimize its strategies over time."
+            "A continuous learning loop would enable the system to improve prediction accuracy through Bayesian model updating and active learning strategies. Evaluation agents would assess simulation results against efficacy, safety, and feasibility criteria, while refinement agents provide structured feedback for system optimization.",
+            "This adaptive capability theoretically enables the framework to learn from both successes and failures, continuously refining its understanding of drug disposition and response mechanisms."
         ],
     },
     {
-        title: "7. Human-in-the-Loop Governance",
+        title: "7. Human-Centric Governance: Augmented Intelligence",
         description: [
-            "While automation drives efficiency, human expertise remains central. The Human Oversight agent ensures that experts review critical outputs, validate model logic, and provide strategic direction. This collaborative model augments human intellect rather than replacing it.",
-            "Finally, a Regulatory & Reporting agent automates the generation of compliance documents and publication-ready materials, ensuring that insights are captured and communicated effectively."
+            "Despite automation capabilities, human expertise remains central to the conceptual framework. Expert validation agents would ensure critical decisions undergo human review, maintaining scientific oversight and ethical responsibility in the development process.",
+            "Documentation agents would automatically generate regulatory submissions, study reports, and publication materials, ensuring that insights are captured in formats suitable for peer review and regulatory evaluation. This human-AI collaboration model aims to augment rather than replace scientific expertise."
         ],
     },
 ];
@@ -92,8 +92,11 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
         <section id={id} className="py-20 min-h-screen snap-start">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Solution: A Synergistic MIDD Framework</h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">To overcome the limitations of conventional models, this framework synergistically integrates advanced computational technologies. It uses Graph Neural Networks (GNNs) for molecular insights and Agentic AI to orchestrate complex workflows, creating a dynamic, predictive, and intelligent system for MIDD.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">Conceptual Framework: AI-Enhanced MIDD</h2>
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section presents a theoretical framework integrating Graph Neural Networks and Agentic AI with mechanistic pharmacological modeling. The proposed system represents a conceptual approach to addressing current limitations in drug development through autonomous, adaptive computational workflows.</p>
+                    <div className="mt-4 inline-block bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 px-3 py-1 rounded text-sm">
+                        Theoretical Framework • Research Concept
+                    </div>
                 </div>
                 
                 <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
@@ -122,7 +125,6 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
                        <div className="hidden lg:flex items-center justify-center h-full min-h-[80vh]">
                             <AgenticAIFlowchart activeStep={activeStep} />
                        </div>
-                       {/* A simplified, non-sticky view for mobile, shown once. */}
                        <div className="lg:hidden mt-8">
                            <AgenticAIFlowchart activeStep={storySteps.length - 1} />
                        </div>
