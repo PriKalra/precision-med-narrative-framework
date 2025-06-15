@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import FadeIn from '../ui/FadeIn';
 import PBPKDiagram from '../introduction/PBPKDiagram';
@@ -52,7 +51,7 @@ const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
     }, []);
 
     return (
-        <section id={id} className="py-20">
+        <section id={id} className="py-20 min-h-screen snap-start">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">The Foundation: Physiologically Based Pharmacokinetics (PBPK)</h2>

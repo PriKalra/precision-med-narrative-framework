@@ -4,7 +4,7 @@ import FadeIn from '../ui/FadeIn';
 
 const HeroSection: React.FC = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center bg-white">
+    <section id="hero" className="min-h-screen flex items-center bg-white snap-start">
       <div className="container mx-auto px-6 text-center">
         <FadeIn>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-800 leading-tight mb-4">Advancing Precision Medicine</h1>

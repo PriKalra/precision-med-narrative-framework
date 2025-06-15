@@ -4,6 +4,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth snap-y snap-proximity;
+  }
+
   :root {
     --background: 220 20% 98%; /* Equivalent to bg-slate-50 or #f8fafc */
     --foreground: 220 13% 20%; /* Equivalent to text-gray-800 or #1f2937 */
