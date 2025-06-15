@@ -49,10 +49,13 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(hsl(var(--muted-foreground) / 0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
   }
 }
 

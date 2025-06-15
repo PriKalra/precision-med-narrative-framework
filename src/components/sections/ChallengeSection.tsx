@@ -1,4 +1,3 @@
-
 import React from 'react';
 import FadeIn from '../ui/FadeIn';
 
@@ -22,7 +21,7 @@ const challenges = [
 
 const ChallengeSection: React.FC<{ id: string }> = ({ id }) => {
   return (
-    <section id={id} className="py-20 min-h-screen bg-background snap-start flex items-center">
+    <section id={id} className="py-20 min-h-screen snap-start flex items-center">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">The Challenge: Biological Complexity</h2>
