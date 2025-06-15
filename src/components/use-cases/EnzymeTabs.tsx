@@ -20,15 +20,15 @@ const EnzymeTabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<keyof typeof tabData>('cyp3a');
 
   return (
-    <div className="bg-slate-50 p-4 sm:p-8 rounded-xl shadow-lg">
-      <div className="flex flex-wrap justify-center border-b border-gray-200">
-        <button onClick={() => setActiveTab('cyp3a')} className={`enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'cyp3a' ? 'tab-active' : 'text-gray-800'}`}>CYP3A</button>
-        <button onClick={() => setActiveTab('ugts')} className={`enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'ugts' ? 'tab-active' : 'text-gray-800'}`}>UGTs</button>
-        <button onClick={() => setActiveTab('mdr1')} className={`enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'mdr1' ? 'tab-active' : 'text-gray-800'}`}>MDR1</button>
+    <div className="bg-card p-4 sm:p-8 rounded-xl shadow-lg">
+      <div className="flex flex-wrap justify-center border-b border-border">
+        <button onClick={() => setActiveTab('cyp3a')} className={`px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'cyp3a' ? 'tab-active' : 'text-muted-foreground hover:bg-secondary'}`}>CYP3A</button>
+        <button onClick={() => setActiveTab('ugts')} className={`px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'ugts' ? 'tab-active' : 'text-muted-foreground hover:bg-secondary'}`}>UGTs</button>
+        <button onClick={() => setActiveTab('mdr1')} className={`px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'mdr1' ? 'tab-active' : 'text-muted-foreground hover:bg-secondary'}`}>MDR1</button>
       </div>
       <div className="pt-4">
         <h4 className="font-bold text-lg mb-2">{tabData[activeTab].title}</h4>
-        <p className="text-gray-700">{tabData[activeTab].content}</p>
+        <p className="text-muted-foreground">{tabData[activeTab].content}</p>
       </div>
     </div>
   );

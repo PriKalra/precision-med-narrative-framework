@@ -42,7 +42,7 @@ const Index = () => {
     }, []);
 
     return (
-        <div className="bg-slate-50">
+        <div className="">
             <Header activeSection={activeSection} />
             <main>
                 <HeroSection />

@@ -23,14 +23,14 @@ const ContentStrategySection: React.FC<{ id: string }> = ({ id }) => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">UI Content Strategy</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">The narrative and design of this experience are intentionally crafted to make complex topics accessible and engaging.</p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">The narrative and design of this experience are intentionally crafted to make complex topics accessible and engaging.</p>
         </div>
         <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
           {contentPoints.map((point, index) => (
             <FadeIn key={point.title} delay={index * 200}>
-              <div className="p-6 bg-white rounded-xl shadow-md h-full">
+              <div className="p-6 bg-card rounded-xl shadow-md h-full">
                 <h3 className="text-xl font-semibold mb-3">{point.title}</h3>
-                <p className="text-gray-700">{point.description}</p>
+                <p className="text-muted-foreground">{point.description}</p>
               </div>
             </FadeIn>
           ))}

@@ -22,18 +22,18 @@ const challenges = [
 
 const ChallengeSection: React.FC<{ id: string }> = ({ id }) => {
   return (
-    <section id={id} className="py-20 min-h-screen bg-white snap-start flex items-center">
+    <section id={id} className="py-20 min-h-screen bg-background snap-start flex items-center">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">The Challenge: Biological Complexity</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">This section explores the core limitations of traditional PBPK models. While powerful, they struggle to account for the immense variability between and within individuals. Real-world biology is far more complex than a standard set of equations can capture, leading to a gap between model predictions and clinical reality. True precision medicine requires bridging this gap.</p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section explores the core limitations of traditional PBPK models. While powerful, they struggle to account for the immense variability between and within individuals. Real-world biology is far more complex than a standard set of equations can capture, leading to a gap between model predictions and clinical reality. True precision medicine requires bridging this gap.</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {challenges.map((challenge, index) => (
             <FadeIn key={challenge.title} delay={challenge.delay} className={index === 2 ? 'md:col-span-2 lg:col-span-1' : ''}>
-              <div className="p-6 bg-slate-50 rounded-xl shadow-md h-full">
-                <h3 className="text-xl font-semibold mb-3">{challenge.title}</h3>
-                <p className="text-gray-700">{challenge.description}</p>
+              <div className="p-6 bg-card rounded-xl shadow-md h-full">
+                <h3 className="text-xl font-semibold mb-3 text-card-foreground">{challenge.title}</h3>
+                <p className="text-muted-foreground">{challenge.description}</p>
               </div>
             </FadeIn>
           ))}

@@ -30,7 +30,19 @@ const SpeciesComparisonChart: React.FC = () => {
     const chartOptions = {
         responsive: true,
         maintainAspectRatio: false,
-        scales: { y: { beginAtZero: true, type: 'logarithmic' as const, title: { display: true, text: 'Value (Log Scale)' } } },
+        scales: { 
+            y: { 
+                beginAtZero: true, 
+                type: 'logarithmic' as const, 
+                title: { display: true, text: 'Value (Log Scale)', color: '#9ca3af' }, // gray-400
+                ticks: { color: '#9ca3af' },
+                grid: { color: 'rgba(156, 163, 175, 0.1)' }
+            },
+            x: {
+                ticks: { color: '#9ca3af' },
+                grid: { color: 'rgba(156, 163, 175, 0.1)' }
+            }
+        },
         plugins: {
             legend: { display: false },
             tooltip: {
@@ -49,13 +61,13 @@ const SpeciesComparisonChart: React.FC = () => {
     };
 
     return (
-        <div className="bg-slate-50 p-4 sm:p-8 rounded-xl shadow-lg">
+        <div className="bg-card p-4 sm:p-8 rounded-xl shadow-lg">
             <div className="flex justify-center space-x-2 mb-4">
                 {(Object.keys(speciesData) as Array<keyof typeof speciesData>).map((species) => (
                     <button
                         key={species}
                         onClick={() => setActiveSpecies(species)}
-                        className={`px-4 py-2 rounded-md font-semibold shadow transition-colors ${activeSpecies === species ? 'bg-blue-500 text-white' : 'bg-white text-gray-700'}`}
+                        className={`px-4 py-2 rounded-md font-semibold shadow transition-colors ${activeSpecies === species ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'}`}
                     >
                         {species.charAt(0).toUpperCase() + species.slice(1)}
                     </button>
@@ -64,7 +76,7 @@ const SpeciesComparisonChart: React.FC = () => {
             <div className="relative h-[350px] md:h-[400px]">
                 <Bar options={chartOptions} data={chartData} />
             </div>
-            <p className="text-xs text-gray-500 mt-4 text-center">
+            <p className="text-xs text-muted-foreground mt-4 text-center">
                 Note: The vertical axis uses a logarithmic scale to clearly display values that span several orders of magnitude. The values shown in tooltips are the actual linear scale values.
             </p>
         </div>

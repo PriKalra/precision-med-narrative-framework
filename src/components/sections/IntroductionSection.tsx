@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import FadeIn from '../ui/FadeIn';
 import PBPKDiagram from '../introduction/PBPKDiagram';
@@ -55,7 +56,7 @@ const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">The Foundation: Physiologically Based Pharmacokinetics (PBPK)</h2>
-                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">This section introduces the core concept of PBPK modeling. PBPK models are mechanistic frameworks that simulate how a drug moves through the body. They represent the body as a series of interconnected organ compartments, each with specific physiological properties. This allows scientists to predict drug concentrations in various tissues over time, providing a powerful tool for drug development.</p>
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section introduces the core concept of PBPK modeling. PBPK models are mechanistic frameworks that simulate how a drug moves through the body. They represent the body as a series of interconnected organ compartments, each with specific physiological properties. This allows scientists to predict drug concentrations in various tissues over time, providing a powerful tool for drug development.</p>
                 </div>
                 
                 <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
@@ -71,7 +72,7 @@ const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
                                 <FadeIn>
                                     <div className={`transition-opacity duration-500 ${activeStep === index ? 'opacity-100' : 'opacity-30'}`}>
                                         <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
-                                        <p className="text-gray-700 text-lg leading-relaxed">{step.description}</p>
+                                        <p className="text-foreground/80 text-lg leading-relaxed">{step.description}</p>
                                     </div>
                                 </FadeIn>
                             </div>

@@ -10,34 +10,34 @@ const challenges = [
 
 const FutureSection: React.FC<{ id: string }> = ({ id }) => {
     return (
-        <section id={id} className="py-20 min-h-screen bg-white snap-start flex items-center">
+        <section id={id} className="py-20 min-h-screen bg-background snap-start flex items-center">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">Challenges and Future Directions</h2>
-                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">Despite the immense potential, several significant challenges must be addressed to fully realize this framework's promise. The ultimate goal is to move beyond siloed models and create a holistic "digital twin": a dynamic, in-silico representation of an individual's physiology and disease state.</p>
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Despite the immense potential, several significant challenges must be addressed to fully realize this framework's promise. The ultimate goal is to move beyond siloed models and create a holistic "digital twin": a dynamic, in-silico representation of an individual's physiology and disease state.</p>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8 text-center">
                     {challenges.map(challenge => (
                         <FadeIn key={challenge.title} delay={challenge.delay}>
-                            <div className="p-6 bg-white rounded-xl shadow-lg h-full">
-                                <div className="text-4xl text-blue-500 mb-4">{challenge.icon}</div>
+                            <div className="p-6 bg-card rounded-xl shadow-lg h-full">
+                                <div className="text-4xl text-primary mb-4">{challenge.icon}</div>
                                 <h3 className="font-semibold text-xl mb-3">{challenge.title}</h3>
-                                <p className="text-gray-700">{challenge.description}</p>
+                                <p className="text-muted-foreground">{challenge.description}</p>
                             </div>
                         </FadeIn>
                     ))}
                 </div>
 
                 <FadeIn>
-                    <div className="mt-20 text-center bg-white p-8 rounded-xl shadow-lg">
-                        <h3 className="text-2xl font-bold text-gray-800">Towards a Unified Framework: PBPK, PK/PD, and QSP</h3>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">The future points towards a convergence of PBPK (drug movement), PK/PD (drug effect), and QSP (biological systems). Our integrated framework dissolves these traditional boundaries, creating a continuous feedback loop from molecule to population and back to the individual. This will enable:</p>
-                        <ul className="list-disc list-inside text-left max-w-xl mx-auto mt-4 text-gray-700 space-y-2">
-                            <li><span className="font-semibold">Continuous Translation:</span> Smoother transition of insights from in vitro to in vivo, preclinical to clinical, and population to individual.</li>
-                            <li><span className="font-semibold">Holistic Decision-Making:</span> Integrating drug exposure, efficacy, and safety across all stages for more informed, proactive decisions.</li>
-                            <li><span className="font-semibold">Reduced Silos:</span> Fostering interdisciplinary collaboration and a shared understanding of drug action from molecular to systemic levels.</li>
+                    <div className="mt-20 text-center bg-card p-8 rounded-xl shadow-lg">
+                        <h3 className="text-2xl font-bold text-foreground">Towards a Unified Framework: PBPK, PK/PD, and QSP</h3>
+                        <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">The future points towards a convergence of PBPK (drug movement), PK/PD (drug effect), and QSP (biological systems). Our integrated framework dissolves these traditional boundaries, creating a continuous feedback loop from molecule to population and back to the individual. This will enable:</p>
+                        <ul className="list-disc list-inside text-left max-w-xl mx-auto mt-4 text-muted-foreground space-y-2">
+                            <li><span className="font-semibold text-foreground">Continuous Translation:</span> Smoother transition of insights from in vitro to in vivo, preclinical to clinical, and population to individual.</li>
+                            <li><span className="font-semibold text-foreground">Holistic Decision-Making:</span> Integrating drug exposure, efficacy, and safety across all stages for more informed, proactive decisions.</li>
+                            <li><span className="font-semibold text-foreground">Reduced Silos:</span> Fostering interdisciplinary collaboration and a shared understanding of drug action from molecular to systemic levels.</li>
                         </ul>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-6">By operationalizing data into predictive, mechanistic insights, we can dramatically accelerate the journey of bringing transformative medicines to the patients who need them.</p>
+                        <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-6">By operationalizing data into predictive, mechanistic insights, we can dramatically accelerate the journey of bringing transformative medicines to the patients who need them.</p>
                     </div>
                 </FadeIn>
             </div>
