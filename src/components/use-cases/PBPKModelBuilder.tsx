@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import * as OCL from 'openchemlib';
 import { Input } from '@/components/ui/input';
@@ -28,18 +29,23 @@ const PBPKModelBuilder: React.FC = () => {
     // Simulate async operation
     setTimeout(() => {
       try {
-        const mol = OCL.Molecule.fromSmiles(smiles);
+        // Use a type assertion to bypass incomplete/incorrect typings in openchemlib
+        const OCLany: any = OCL;
+
+        const mol = OCLany.Molecule.fromSmiles(smiles);
         const formulaData = mol.getMolecularFormula();
-        
+        const molProps = new OCLany.MoleculeProperties(mol);
+
         const properties: PhyschemProps = {
-          mw: formulaData.relativeMass,
-          logP: mol.getLogP(),
-          tpsa: mol.getPolarSurfaceArea(),
-          formula: formulaData.formula,
+          mw: formulaData.getRelativeMass(),
+          logP: molProps.getLogP(),
+          tpsa: molProps.getPolarSurfaceArea(),
+          formula: formulaData.getFormula(),
         };
         setPhyschem(properties);
       } catch (e) {
         setError('Invalid SMILES string. Please check the input.');
+        console.error(e);
       } finally {
         setLoading(false);
       }
