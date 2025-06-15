@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import FadeIn from '../ui/FadeIn';
 import AgenticAIFlowchart from '../solution/AgenticAIFlowchart';
 
 const storySteps = [
@@ -104,14 +103,12 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
                                 ref={el => stepRefs.current[index] = el}
                                 className="min-h-[80vh] flex items-center" 
                             >
-                                <FadeIn>
-                                    <div className={`transition-opacity duration-500 ${activeStep === index ? 'opacity-100' : 'opacity-30'}`}>
-                                        <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
-                                        <div className="space-y-4 text-foreground/80 text-lg leading-relaxed">
-                                            {step.description.map((p, i) => <p key={i}>{p}</p>)}
-                                        </div>
+                                <div className={`transition-all duration-500 ease-in-out ${activeStep === index ? 'opacity-100 scale-100 blur-0' : 'opacity-40 scale-98 blur-sm'}`}>
+                                    <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
+                                    <div className="space-y-4 text-foreground/80 text-lg leading-relaxed">
+                                        {step.description.map((p, i) => <p key={i}>{p}</p>)}
                                     </div>
-                                </FadeIn>
+                                </div>
                             </div>
                         ))}
                     </div>

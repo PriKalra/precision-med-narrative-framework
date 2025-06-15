@@ -1,9 +1,13 @@
+
 import React, { useState, useRef, useEffect, ReactNode } from 'react';
+import { cn } from '@/lib/utils';
+
 interface FadeInProps {
   children: ReactNode;
   delay?: number;
   className?: string;
 }
+
 const FadeIn: React.FC<FadeInProps> = ({
   children,
   delay = 0,
@@ -11,6 +15,7 @@ const FadeIn: React.FC<FadeInProps> = ({
 }) => {
   const [isVisible, setVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -22,22 +27,32 @@ const FadeIn: React.FC<FadeInProps> = ({
     }, {
       threshold: 0.1
     });
-    const {
-      current
-    } = domRef;
+
+    const { current } = domRef;
     if (current) {
       observer.observe(current);
     }
+
     return () => {
       if (current) {
         observer.unobserve(current);
       }
     };
   }, []);
-  return <div ref={domRef} style={{
-    transitionDelay: `${delay}ms`
-  }} className="">
+
+  return (
+    <div
+      ref={domRef}
+      style={{ animationDelay: `${delay}ms` }}
+      className={cn(
+        'opacity-0', // Start invisible
+        isVisible && 'animate-fade-in', // Apply animation when visible
+        className
+      )}
+    >
       {children}
-    </div>;
+    </div>
+  );
 };
+
 export default FadeIn;
