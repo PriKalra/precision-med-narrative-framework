@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
   // IMPORTANT: You must replace `<YOUR_REPOSITORY_NAME>` with the name of your GitHub repository.
   // For example, if your repository URL is https://github.com/your-username/my-cool-app,
   // you should change this to `base: '/my-cool-app/'`
-  base: '/<YOUR_REPOSITORY_NAME>/',
+  base: '/precision-med-narrative-framework/',
   server: {
     host: "::",
     port: 8080,
