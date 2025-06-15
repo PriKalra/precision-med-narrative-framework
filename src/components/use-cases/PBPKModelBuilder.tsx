@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import * as OCL from 'openchemlib/full';
+import * as OCL from 'openchemlib';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
