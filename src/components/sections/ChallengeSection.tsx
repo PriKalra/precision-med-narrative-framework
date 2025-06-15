@@ -1,21 +1,20 @@
-
 import React from 'react';
 import FadeIn from '../ui/FadeIn';
 
 const challenges = [
   {
-    title: 'Pharmacogenomic Heterogeneity',
-    description: 'CYP2D6 polymorphisms create a 50-fold range in metabolic capacity across populations. CYP3A4 expression varies 20-fold between individuals. Transporter polymorphisms (SLCO1B1, ABCB1) alter tissue distribution. UGT variants affect glucuronidation rates. Current PBPK models use population-average parameters, failing to capture this genetic-driven variability in drug-metabolizing enzymes and transporters.',
+    title: 'Inter-Individual Variability',
+    description: 'No two people are the same. Genetic differences in metabolic enzymes, anatomical variations in organ size, age, and lifestyle factors like diet and smoking all create a unique pharmacokinetic profile for each individual. Traditional models often use "average" human parameters, failing to capture this diversity.',
     delay: 0,
   },
   {
-    title: 'Temporal Physiological Dynamics',
-    description: "Circadian rhythms modulate hepatic enzyme expression and renal blood flow. Pregnancy alters cardiac output (30-50% increase), organ blood flows, and CYP enzyme activities across trimesters. Aging affects body composition, albumin levels, and clearance mechanisms. These time-dependent physiological changes require dynamic parameterization beyond static population models.",
+    title: 'Intra-Individual Variability',
+    description: "An individual's physiology is dynamic; hormonal fluctuations during the menstrual cycle, physiological shifts during pregnancy, and changes with aging can alter how a drug is processed. Modeling these dynamic, time-dependent changes is a significant hurdle for conventional PBPK.",
     delay: 200,
   },
   {
-    title: 'In Vitro-In Vivo Extrapolation (IVIVE) Gaps',
-    description: "The hepatocyte-microsome disconnect represents a fundamental IVIVE challenge where intrinsic clearance (CLint) measured in liver microsomes often overestimates whole hepatocyte clearance by 2-10 fold. Binding artifacts, cofactor depletion, and subcellular localization effects create systematic prediction errors. Limited tissue-specific data for specialized organs (brain, reproductive tract) constrains mechanistic model development.",
+    title: 'Data Scarcity',
+    description: "Building robust models requires high-quality data. For many specific tissues, like the reproductive tract or thyroid, comprehensive data on local drug absorption and metabolism is limited or inconsistent. This data gap is a major bottleneck for creating truly predictive models.",
     delay: 400,
   },
 ];
@@ -25,11 +24,8 @@ const ChallengeSection: React.FC<{ id: string }> = ({ id }) => {
     <section id={id} className="py-20 min-h-screen snap-start flex items-center bg-transparent">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">Scientific Challenges: Beyond Population Averages</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Traditional PBPK modeling faces fundamental limitations when confronting the reality of human biological diversity. This section examines the core scientific challenges that necessitate advanced computational approaches for achieving true personalized medicine.</p>
-          <div className="mt-4 inline-block bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 px-3 py-1 rounded text-sm">
-            Scientific Limitations • Research Gaps
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">The Challenge: Biological Complexity</h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section explores the core limitations of traditional PBPK models. While powerful, they struggle to account for the immense variability between and within individuals. Real-world biology is far more complex than a standard set of equations can capture, leading to a gap between model predictions and clinical reality. True precision medicine requires bridging this gap.</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {challenges.map((challenge, index) => (

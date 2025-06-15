@@ -1,20 +1,19 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import FadeIn from '../ui/FadeIn';
 import PBPKDiagram from '../introduction/PBPKDiagram';
 
 const storySteps = [
     {
-        title: "Mechanistic Foundation: PBPK as Digital Physiology",
-        description: "Physiologically Based Pharmacokinetic (PBPK) models represent the gold standard for mechanistic drug disposition modeling. These models transform anatomical knowledge into mathematical frameworks, where each organ becomes a kinetically-defined compartment characterized by tissue volume (Vt), blood flow (Qt), and partition coefficients (Kp). This bottom-up approach enables prediction of tissue-specific drug concentrations through differential equations governing mass balance principles.",
+        title: "A Mechanistic View of the Body",
+        description: "Physiologically Based Pharmacokinetic (PBPK) models create a virtual representation of an organism by linking major organs—liver, kidney, brain—through the circulatory system. Each organ is a compartment defined by physiological parameters like volume and blood flow. This bottom-up approach enables the prediction of a drug's Absorption, Distribution, Metabolism, and Elimination (ADME), supporting critical decisions in early development.",
     },
     {
-        title: "From ADME Parameters to Tissue Kinetics",
-        description: "The simulation demonstrates how drug molecules traverse physiological barriers—from intestinal absorption governed by permeability and first-pass metabolism, through systemic distribution dictated by plasma protein binding and tissue affinity, to hepatic clearance mediated by enzyme kinetics (Vmax, Km) and renal elimination. These ADME processes are quantitatively captured through mechanistic parameters derived from in vitro experimentation.",
+        title: "Simulating Drug Disposition",
+        description: "The simulation illustrates how a drug distributes throughout the virtual organism, with concentrations changing in different organs over time. This quantitative characterization of drug disposition forms the mechanistic foundation for predicting a drug's journey and its potential effects, long before it is tested in humans.",
     },
     {
-        title: "Beyond Standard Models: Specialized Physiological Systems",
-        description: "Contemporary PBPK frameworks extend beyond conventional organ models to incorporate specialized physiological systems. Pregnancy PBPK models account for gestational changes in cardiac output, organ blood flows, and placental transfer kinetics. Pediatric models scale allometrically with body weight and maturation functions. Thyroid models incorporate iodine cycling and hormone synthesis pathways—each requiring domain-specific parameterization for accurate therapeutic area modeling.",
+        title: "Modeling Specialized Systems",
+        description: "Achieving true precision requires extending beyond standard models. This framework enhances the foundational PBPK structure by integrating models for specialized systems, such as reproductive and thyroid tissues. Incorporating these complexities is critical for assessing the safety and efficacy of specific drugs in distinct patient populations.",
     }
 ];
 
@@ -55,11 +54,8 @@ const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
         <section id={id} className="py-20 min-h-screen snap-start">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">Foundation: Mechanistic PBPK Modeling</h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Physiologically Based Pharmacokinetic modeling forms the mechanistic backbone of modern drug development. This section explores the theoretical foundations of PBPK as a systems pharmacology approach, demonstrating how anatomical knowledge translates into predictive mathematical frameworks for drug disposition and therapeutic optimization.</p>
-                    <div className="mt-4 inline-block bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-3 py-1 rounded text-sm">
-                        Conceptual Overview • Mechanistic Principles
-                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Foundation: Physiologically Based Pharmacokinetics (PBPK)</h2>
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section introduces Physiologically Based Pharmacokinetic (PBPK) modeling, a foundational discipline within Model-Informed Drug Discovery and Development (MIDD). PBPK models are mechanistic frameworks that quantify drug behavior by simulating its movement through a virtual representation of an organism. By defining the body as a network of organ compartments with distinct physiological properties, these models predict drug concentration-time profiles in various tissues, providing a critical quantitative tool for drug development.</p>
                 </div>
                 
                 <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
@@ -69,6 +65,7 @@ const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
                             <div 
                                 key={index} 
                                 ref={el => stepRefs.current[index] = el}
+                                // Each step needs significant height to ensure proper scroll-triggering
                                 className="min-h-[70vh] flex items-center" 
                             >
                                 <FadeIn>
@@ -82,10 +79,12 @@ const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
                     </div>
 
                     {/* Right Column: Sticky Visual */}
+                    {/* On mobile, this will stack naturally. On desktop, it becomes sticky. */}
                     <div className="lg:sticky top-24 h-full">
                        <div className="hidden lg:flex items-center justify-center h-full min-h-[70vh]">
                             <PBPKDiagram activeStep={activeStep} />
                        </div>
+                       {/* A simplified, non-sticky view for mobile, shown once. */}
                        <div className="lg:hidden mt-8">
                            <PBPKDiagram activeStep={2} />
                        </div>
