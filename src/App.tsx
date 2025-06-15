@@ -9,12 +9,16 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Vite provides `import.meta.env.PROD` which is true for production builds.
+// This sets the correct basename for GitHub Pages deployment, while using "/" for local dev.
+const basename = import.meta.env.PROD ? "/precision-med-narrative-framework/" : "/";
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/precision-med-narrative-framework/">
+      <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
