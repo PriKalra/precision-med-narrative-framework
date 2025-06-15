@@ -6,15 +6,15 @@ import PBPKDiagram from '../introduction/PBPKDiagram';
 const storySteps = [
     {
         title: "A Mechanistic View of the Body",
-        description: "PBPK models create a virtual organism by linking major organs through the circulatory system. Each compartment is defined by its real-world volume and blood flow. This forms the foundation for predicting a drug's journey.",
+        description: "Traditional PBPK models create a virtual representation of an organism by linking major organs like the liver, kidney, and brain through the circulatory system. Each organ is a compartment defined by its real-world volume, blood flow, and how it partitions a drug between tissue and plasma. This detailed, bottom-up approach allows for the prediction of drug Absorption, Distribution, Metabolism, and Elimination (ADME) before a drug ever enters human trials, supporting critical decisions in early development.",
     },
     {
         title: "Simulating Drug Distribution",
-        description: "This bottom-up approach allows us to simulate drug Absorption, Distribution, Metabolism, and Elimination (ADME). The animation shows how a drug might distribute throughout the body, visiting different organs over time.",
+        description: "The animation shows how a drug might distribute throughout the body, visiting different organs over time. This bottom-up approach allows us to simulate drug Absorption, Distribution, Metabolism, and Elimination (ADME), forming the foundation for predicting a drug's journey.",
     },
     {
         title: "Beyond the Standard Model",
-        description: "True precision requires modeling specialized systems. Our framework enhances this foundation by integrating data for reproductive and thyroid tissues, which are critical for specific drugs and patient populations but often overlooked.",
+        description: "True precision requires modeling specialized systems. Our framework enhances this foundation by integrating data for reproductive and thyroid tissues. Our model includes specialized reproductive (green/pink) and thyroid (red) organs for enhanced precision, which are critical for specific drugs and patient populations.",
     }
 ];
 

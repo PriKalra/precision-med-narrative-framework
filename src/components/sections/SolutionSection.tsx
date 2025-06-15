@@ -7,17 +7,17 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
         <section id={id} className="py-20 min-h-screen">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Solution: A Unified Data & Modeling Ecosystem</h2>
-                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">Inspired by industry-leading initiatives like Data42, our solution is built on a unified data ecosystem. We shatter traditional silos by integrating diverse data—genomic, preclinical, clinical, and literature—into a single source of truth. This FAIR (Findable, Accessible, Interoperable, Reusable) data foundation empowers a new generation of AI-driven tools that build a cohesive, predictive, and automated drug development pipeline.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Solution: An Integrated AI-Powered Framework</h2>
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">To overcome the limitations of traditional models, we propose a synergistic framework that integrates three powerful computational technologies. This section explains how Graph Neural Networks (GNNs), Artificial Intelligence (AI), and Large Language Models (LLMs) work together to create a more dynamic, predictive, and intelligent PBPK system.</p>
                 </div>
 
                 <div className="space-y-16">
                     <FadeIn>
                         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
                             <div>
-                                <h3 className="text-2xl font-semibold mb-4">1. GNNs: Automated Molecular Parameterization</h3>
-                                <p className="text-gray-700 mb-4">Graph Neural Networks (GNNs) are the bridge from chemical structure to biological activity. By representing molecules as graphs, they learn to predict critical ADME properties directly from a SMILES string. This automates the once-laborious process of parameterizing our models, allowing us to rapidly screen and characterize new chemical entities against our vast integrated database of biological systems.</p>
-                                <p className="text-gray-700">This automated pipeline is the first step in constructing a "digital twin" for a new drug candidate.</p>
+                                <h3 className="text-2xl font-semibold mb-4">1. GNNs: The Molecular Architects</h3>
+                                <p className="text-gray-700 mb-4">GNNs are a specialized form of AI that excels at understanding data structured as graphs. We represent drug molecules as graphs—atoms are nodes and bonds are edges. The GNN can "read" this structure to predict a molecule's physicochemical and ADME properties (like permeability or clearance) directly from its chemical blueprint. This automates parameter generation and accelerates early drug discovery.</p>
+                                <p className="text-gray-700">GNNs also model the body itself as a graph of interconnected organs, learning how the network of organ interactions influences overall drug distribution.</p>
                             </div>
                             <div className="mt-10 lg:mt-0 p-4 bg-white rounded-xl shadow-lg">
                                 <div className="flex items-center justify-center h-48 space-x-4">
@@ -69,9 +69,9 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
                                 </div>
                             </div>
                             <div className="lg:order-first">
-                                <h3 className="text-2xl font-semibold mb-4">2. AI & Bioinformatics: The QSP Knowledge Engine</h3>
-                                <p className="text-gray-700 mb-4">Our AI/ML suite acts as a Quantitative Systems Pharmacology (QSP) engine, powered by the unified data platform. It moves beyond simple predictions by integrating bioinformatics—mining genomic, proteomic, and metabolomic data to understand the biological mechanisms of variability. This allows us to personalize model parameters for specific populations or even individuals.</p>
-                                <p className="text-gray-700">Large Language Models (LLMs) augment this by continuously scanning biomedical literature, identifying emerging safety signals, predicting novel drug-drug interactions (DDIs), and generating testable hypotheses, transforming our PBPK models into dynamic, learning systems.</p>
+                                <h3 className="text-2xl font-semibold mb-4">2. AI/LLMs: The Knowledge Engine</h3>
+                                <p className="text-gray-700 mb-4">We use a suite of AI and Machine Learning models to learn from diverse, high-dimensional data. These models can predict pharmacokinetic parameters from chemical structures, creating hybrid frameworks that forecast human PK profiles for new molecules. They excel in data-limited scenarios by integrating prior biological knowledge to guide their predictions.</p>
+                                <p className="text-gray-700">Large Language Models (LLMs) act as a reasoning layer, scanning vast biomedical literature to extract knowledge, predict complex drug-drug interactions (DDIs), and even generate hypotheses for new drug targets. They also translate complex model outputs into human-readable reports.</p>
                             </div>
                         </div>
                     </FadeIn>

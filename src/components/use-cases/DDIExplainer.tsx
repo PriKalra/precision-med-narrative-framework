@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 
 const DDIExplainer: React.FC = () => {
     const [drugA, setDrugA] = useState('');
     const [drugB, setDrugB] = useState('');
-    const [result, setResult] = useState("Enter two drug names and click 'Analyze Potential DDI' to see results.");
+    const [result, setResult] = useState("Leverage the power of Large Language Models to quickly assess potential drug-drug interactions. Input two common drug names, and our AI will provide a concise explanation of how they might interact, highlighting relevant mechanisms and clinical considerations.");
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
@@ -63,7 +62,7 @@ const DDIExplainer: React.FC = () => {
                 </button>
             </div>
             <div className={`min-h-[100px] bg-white p-4 rounded-md shadow-inner flex items-center justify-center ${isError ? 'text-red-500' : 'text-gray-900'} ${!result && !isLoading ? 'italic text-gray-500' : ''}`}>
-                {result || (isLoading ? '' : "Enter two drug names and click 'Analyze Potential DDI' to see results.")}
+                {isLoading ? '' : result}
             </div>
              {isLoading && (
                 <div className="text-center mt-4 text-blue-600 font-semibold">

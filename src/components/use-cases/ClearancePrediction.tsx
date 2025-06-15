@@ -21,7 +21,7 @@ const ClearancePrediction: React.FC = () => {
     <div ref={domRef} className="bg-slate-50 p-8 rounded-xl shadow-lg grid md:grid-cols-2 gap-8 items-center">
       <div>
         <h4 className="font-semibold text-lg mb-2">The HLM:HH Disconnect</h4>
-        <p className="text-sm text-gray-700">The visualization shows a typical scenario where unbound intrinsic clearance (CLint,u) measured in microsomes is significantly higher than in hepatocytes for the same compound. This can lead to inaccurate predictions of how quickly a drug is eliminated from the body. Choosing the correct value is critical for IVIVE (in vitro-in vivo extrapolation) and thus, for reliable DDI assessment.</p>
+        <p className="text-sm text-gray-700">A key issue is the "microsome-hepatocyte disconnect," where lab tests using liver microsomes (HLM) often predict higher clearance than tests with whole hepatocytes (HH), the more physiologically relevant system. Our AI models help reconcile this discrepancy, directly impacting the accuracy of drug-drug interaction (DDI) predictions by providing a more reliable estimation of a drug's true intrinsic clearance.</p>
       </div>
       <div className="flex justify-around items-end h-48">
         <div className="text-center">

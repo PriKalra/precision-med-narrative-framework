@@ -76,12 +76,12 @@ const PBPKDiagram: React.FC<PBPKDiagramProps> = ({ activeStep }) => {
                         </div>
                     ))}
                 </div>
-                <div className="mt-4 text-sm text-gray-500 transition-opacity duration-500 h-10 flex items-center justify-center">
+                <div className="mt-4 text-sm text-gray-500 transition-opacity duration-500 h-10 flex items-center justify-center text-center">
                     {activeStep === 2 
-                        ? "Highlighting specialized reproductive and thyroid organs."
+                        ? "Our model includes specialized reproductive and thyroid organs for enhanced precision."
                         : activeStep === 1 
                         ? "Simulating drug distribution across organs."
-                        : "Our model includes all major physiological systems."
+                        : "A mechanistic PBPK model links all major physiological systems."
                     }
                 </div>
             </div>

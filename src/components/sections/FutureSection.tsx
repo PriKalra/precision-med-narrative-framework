@@ -3,9 +3,9 @@ import React from 'react';
 import FadeIn from '../ui/FadeIn';
 
 const challenges = [
-  { title: 'Expanding the Data Ecosystem', icon: '💾', description: "The framework's power grows with its data. A key effort is continuously integrating new data modalities (e.g., imaging, real-world evidence) and enforcing FAIR principles to ensure all data is harmonized and accessible.", delay: 0 },
-  { title: 'Model Validation & Causal Inference', icon: '🔍', description: 'Predictive accuracy is not enough. We must rigorously validate models against clinical outcomes and develop methods for causal inference to ensure our "black box" AI provides trustworthy, biologically meaningful insights for regulatory acceptance.', delay: 200 },
-  { title: 'Scaling the Digital Twin', icon: '💻', description: 'Building and simulating population-scale digital twins requires immense computational resources. Future work involves optimizing algorithms and leveraging distributed computing to make these powerful tools accessible for real-time clinical decision support.', delay: 400 },
+  { title: 'Data Availability, Quality & Standardization', icon: '💾', description: "A persistent challenge is the scarcity of high-quality data for specific tissues. Enforcing industry standards like SEND and ADAM is crucial to harmonize data, making it machine-readable for AI/ML models and improving predictive accuracy.", delay: 0 },
+  { title: 'Model Validation, Interpretability & Generalizability', icon: '🔍', description: 'For regulatory acceptance and clinical translation, models must be rigorously validated and offer clear, interpretable, and biologically meaningful insights. Black-box predictions are insufficient; we need explainable reasoning.', delay: 200 },
+  { title: 'Computational Demands & Scalability', icon: '💻', description: 'Training large models requires immense computational resources. Future work must focus on computational efficiency and scalability to ensure these powerful tools are accessible and practical for real-world clinical decision support.', delay: 400 },
 ];
 
 const FutureSection: React.FC<{ id: string }> = ({ id }) => {
@@ -13,8 +13,8 @@ const FutureSection: React.FC<{ id: string }> = ({ id }) => {
         <section id={id} className="py-20 min-h-screen">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Future: Towards the Patient Digital Twin</h2>
-                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">This integrated approach is not just an improvement—it's a paradigm shift. The ultimate goal is to move beyond siloed models and create a holistic "digital twin": a dynamic, in-silico representation of an individual's physiology and disease state, which allows us to predict how they will respond to a therapy before it's ever administered.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">Challenges and Future Directions</h2>
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">Despite the immense potential, several significant challenges must be addressed to fully realize this framework's promise. The ultimate goal is to move beyond siloed models and create a holistic "digital twin": a dynamic, in-silico representation of an individual's physiology and disease state.</p>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8 text-center">
                     {challenges.map(challenge => (
@@ -29,16 +29,15 @@ const FutureSection: React.FC<{ id: string }> = ({ id }) => {
                 </div>
 
                 <FadeIn>
-                    <div className="mt-20 text-center">
-                        <h3 className="text-2xl font-bold text-gray-800">Unifying PBPK, QSP, and Clinical Development</h3>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">This framework dissolves the boundaries between PBPK (drug movement), QSP (biological systems), and PK/PD (drug effect). By creating a continuous feedback loop—where clinical data refines the models that, in turn, guide clinical strategy—we establish a learning healthcare system. The GNN-PBPK-AI ecosystem is the engine for this continuous translation from molecule to population and back to the individual.</p>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">This convergence will enable:</p>
-                        <ul className="list-disc list-inside text-left max-w-xl mx-auto mt-2 text-gray-700">
-                            <li><span className="font-semibold">Seamless Translation:</span> A digital thread connecting discovery, development, and patient care, reducing late-stage attrition.</li>
-                            <li><span className="font-semibold">Proactive Decision-Making:</span> Simulating trial outcomes and personalizing regimens based on a holistic view of exposure, efficacy, and safety.</li>
-                            <li><span className="font-semibold">True Precision Medicine:</span> Delivering the right drug, at the right dose, to the right patient, based on their unique biological blueprint.</li>
+                    <div className="mt-20 text-center bg-white p-8 rounded-xl shadow-lg">
+                        <h3 className="text-2xl font-bold text-gray-800">Towards a Unified Framework: PBPK, PK/PD, and QSP</h3>
+                        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">The future points towards a convergence of PBPK (drug movement), PK/PD (drug effect), and QSP (biological systems). Our integrated framework dissolves these traditional boundaries, creating a continuous feedback loop from molecule to population and back to the individual. This will enable:</p>
+                        <ul className="list-disc list-inside text-left max-w-xl mx-auto mt-4 text-gray-700 space-y-2">
+                            <li><span className="font-semibold">Continuous Translation:</span> Smoother transition of insights from in vitro to in vivo, preclinical to clinical, and population to individual.</li>
+                            <li><span className="font-semibold">Holistic Decision-Making:</span> Integrating drug exposure, efficacy, and safety across all stages for more informed, proactive decisions.</li>
+                            <li><span className="font-semibold">Reduced Silos:</span> Fostering interdisciplinary collaboration and a shared understanding of drug action from molecular to systemic levels.</li>
                         </ul>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">By operationalizing data into predictive, mechanistic insights, we can dramatically accelerate the journey of bringing transformative medicines to the patients who need them.</p>
+                        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-6">By operationalizing data into predictive, mechanistic insights, we can dramatically accelerate the journey of bringing transformative medicines to the patients who need them.</p>
                     </div>
                 </FadeIn>
             </div>

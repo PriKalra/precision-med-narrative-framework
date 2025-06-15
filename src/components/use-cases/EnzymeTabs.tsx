@@ -4,15 +4,15 @@ import React, { useState } from 'react';
 const tabData = {
   cyp3a: {
     title: 'CYP3A Family',
-    content: 'Found in the liver and intestine, CYP3A enzymes are responsible for metabolizing over 50% of prescription drugs. Their activity shows high variability between people due to genetics and can be a source of the HLM:HH disconnect. Predicting CYP3A-mediated interactions and understanding how varying *expression levels* impact them is a primary goal for DDI assessment, enabling more precise dosing.',
+    content: 'Found in the liver and intestine, CYP3A enzymes are responsible for metabolizing over 50% of prescription drugs. Their activity shows high variability between people due to genetics and can be a source of the HLM:HH disconnect. Predicting CYP3A-mediated interactions and understanding how varying expression levels impact them is a primary goal for DDI assessment, enabling more precise dosing.',
   },
   ugts: {
     title: 'UGTs (UDP-glucuronosyltransferases)',
-    content: 'These are key Phase II metabolism enzymes that make compounds more water-soluble for excretion. Their *expression and activity* are highly tissue- and species-dependent, leading to significant variations in unbound intrinsic clearance. Integrating these specific expression profiles improves cross-species scaling and DDI predictions related to glucuronidation.',
+    content: 'These are key Phase II metabolism enzymes that make compounds more water-soluble for excretion. Their expression and activity are highly tissue- and species-dependent, leading to significant variations in unbound intrinsic clearance. Integrating these specific expression profiles improves cross-species scaling and DDI predictions related to glucuronidation.',
   },
   mdr1: {
     title: 'MDR1 (P-glycoprotein)',
-    content: 'MDR1 is an efflux transporter that acts like a bouncer, pumping drugs out of cells. It\'s crucial in limiting drug absorption and preventing entry into the brain. Its function, substrate specificity, and *expression levels* can differ significantly across species. Accounting for these varied expression profiles is key to predicting transporter-mediated DDIs and tissue-specific drug concentrations.',
+    content: "MDR1 is an efflux transporter that acts like a bouncer, pumping drugs out of cells. It's crucial in limiting drug absorption and preventing entry into the brain. Its function, substrate specificity, and expression levels can differ significantly across species. Accounting for these varied expression profiles is key to predicting transporter-mediated DDIs and tissue-specific drug concentrations.",
   }
 };
 
