@@ -1,4 +1,3 @@
-
 import React from 'react';
 import FadeIn from '../ui/FadeIn';
 
@@ -7,8 +6,8 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
         <section id={id} className="py-20 min-h-screen snap-start flex items-center">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Solution: An Integrated AI-Powered Framework</h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">To overcome the limitations of traditional models, we propose a synergistic framework that integrates three powerful computational technologies. This section explains how Graph Neural Networks (GNNs), Artificial Intelligence (AI), and Large Language Models (LLMs) work together to create a more dynamic, predictive, and intelligent PBPK system.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Solution: A Synergistic MIDD Framework</h2>
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">To overcome the limitations of conventional models, we propose a framework that synergistically integrates advanced computational technologies. This section details how Graph Neural Networks (GNNs) provide molecular insights while Agentic AI orchestrates complex workflows, creating a dynamic, predictive, and intelligent system for MIDD.</p>
                 </div>
 
                 <div className="space-y-16">
@@ -16,8 +15,8 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
                         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
                             <div>
                                 <h3 className="text-2xl font-semibold mb-4">1. GNNs: The Molecular Architects</h3>
-                                <p className="text-muted-foreground mb-4">GNNs are a specialized form of AI that excels at understanding data structured as graphs. We represent drug molecules as graphs—atoms are nodes and bonds are edges. The GNN can "read" this structure to predict a molecule's physicochemical and ADME properties (like permeability or clearance) directly from its chemical blueprint. This automates parameter generation and accelerates early drug discovery.</p>
-                                <p className="text-muted-foreground">GNNs also model the body itself as a graph of interconnected organs, learning how the network of organ interactions influences overall drug distribution.</p>
+                                <p className="text-muted-foreground mb-4">Graph Neural Networks (GNNs) excel at processing data structured as graphs. By representing drug molecules as graphs—where atoms are nodes and bonds are edges—GNNs can predict physicochemical and ADME properties directly from a chemical structure. This accelerates model parameterization and automates a critical step in early drug discovery.</p>
+                                <p className="text-muted-foreground">Furthermore, GNNs can model the body as a graph of interconnected organs, learning how the physiological network influences drug distribution and pharmacokinetics.</p>
                             </div>
                             <div className="mt-10 lg:mt-0 p-4 bg-card rounded-xl shadow-lg">
                                 <div className="flex items-center justify-center h-48 space-x-4">
@@ -52,26 +51,26 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
                                         <p className="font-bold text-foreground">Genomics</p>
                                         <p className="font-bold text-foreground">Clinical Data</p>
                                         <p className="font-bold text-foreground">Literature</p>
-                                        <span className="text-xs font-semibold mt-2 block text-foreground">(Unified Data Platform)</span>
+                                        <span className="text-xs font-semibold mt-2 block text-foreground">(Multimodal Data)</span>
                                     </div>
                                     <span className="text-2xl text-gray-400">&rarr;</span>
                                     <div className="text-center">
-                                        <div className="p-4 bg-primary rounded-lg text-primary-foreground font-bold">AI / LLM</div>
-                                        <span className="text-sm font-semibold mt-2 block">Bioinformatics & QSP Engine</span>
+                                        <div className="p-4 bg-primary rounded-lg text-primary-foreground font-bold">Agentic AI</div>
+                                        <span className="text-sm font-semibold mt-2 block">Orchestration & Reasoning</span>
                                     </div>
                                     <span className="text-2xl text-gray-400">&rarr;</span>
                                     <div className="text-left text-sm font-mono text-muted-foreground">
-                                        <p className="text-foreground">Personalized<br/>Parameters</p>
-                                        <p className="text-foreground">DDI Risk</p>
+                                        <p className="text-foreground">Automated<br/>Workflows</p>
                                         <p className="text-foreground">New Hypotheses</p>
+                                        <p className="text-foreground">Refined Models</p>
                                         <span className="text-xs font-semibold mt-2 block text-foreground">(Actionable Insights)</span>
                                     </div>
                                 </div>
                             </div>
                             <div className="lg:order-first">
-                                <h3 className="text-2xl font-semibold mb-4">2. AI/LLMs: The Knowledge Engine</h3>
-                                <p className="text-muted-foreground mb-4">We use a suite of AI and Machine Learning models to learn from diverse, high-dimensional data. These models can predict pharmacokinetic parameters from chemical structures, creating hybrid frameworks that forecast human PK profiles for new molecules. They excel in data-limited scenarios by integrating prior biological knowledge to guide their predictions.</p>
-                                <p className="text-muted-foreground">Large Language Models (LLMs) act as a reasoning layer, scanning vast biomedical literature to extract knowledge, predict complex drug-drug interactions (DDIs), and even generate hypotheses for new drug targets. They also translate complex model outputs into human-readable reports.</p>
+                                <h3 className="text-2xl font-semibold mb-4">2. Agentic AI: The Cognitive & Automation Engine</h3>
+                                <p className="text-muted-foreground mb-4">Agentic AI provides the cognitive core of the framework. It automates complex workflows, from hypothesis generation to model parameterization. These systems employ Large Language Models for sophisticated reasoning but extend beyond them by using external tools and adaptive memory to execute multi-step tasks autonomously.</p>
+                                <p className="text-muted-foreground">This transforms the development process from a series of manual steps into a cohesive, self-optimizing pipeline. By orchestrating data analysis, simulation, and evaluation, Agentic AI enhances both operational efficiency and deep mechanistic understanding.</p>
                             </div>
                         </div>
                     </FadeIn>

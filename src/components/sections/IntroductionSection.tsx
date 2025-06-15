@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import FadeIn from '../ui/FadeIn';
 import PBPKDiagram from '../introduction/PBPKDiagram';
@@ -6,15 +5,15 @@ import PBPKDiagram from '../introduction/PBPKDiagram';
 const storySteps = [
     {
         title: "A Mechanistic View of the Body",
-        description: "Traditional PBPK models create a virtual representation of an organism by linking major organs like the liver, kidney, and brain through the circulatory system. Each organ is a compartment defined by its real-world volume, blood flow, and how it partitions a drug between tissue and plasma. This detailed, bottom-up approach allows for the prediction of drug Absorption, Distribution, Metabolism, and Elimination (ADME) before a drug ever enters human trials, supporting critical decisions in early development.",
+        description: "Physiologically Based Pharmacokinetic (PBPK) models create a virtual representation of an organism by linking major organs—liver, kidney, brain—through the circulatory system. Each organ is a compartment defined by physiological parameters like volume and blood flow. This bottom-up approach enables the prediction of a drug's Absorption, Distribution, Metabolism, and Elimination (ADME), supporting critical decisions in early development.",
     },
     {
-        title: "Simulating Drug Distribution",
-        description: "The animation shows how a drug might distribute throughout the body, visiting different organs over time. This bottom-up approach allows us to simulate drug Absorption, Distribution, Metabolism, and Elimination (ADME), forming the foundation for predicting a drug's journey.",
+        title: "Simulating Drug Disposition",
+        description: "The simulation illustrates how a drug distributes throughout the virtual organism, with concentrations changing in different organs over time. This quantitative characterization of drug disposition forms the mechanistic foundation for predicting a drug's journey and its potential effects, long before it is tested in humans.",
     },
     {
-        title: "Beyond the Standard Model",
-        description: "True precision requires modeling specialized systems. Our framework enhances this foundation by integrating data for reproductive and thyroid tissues. Our model includes specialized reproductive (green/pink) and thyroid (red) organs for enhanced precision, which are critical for specific drugs and patient populations.",
+        title: "Modeling Specialized Systems",
+        description: "Achieving true precision requires extending beyond standard models. This framework enhances the foundational PBPK structure by integrating models for specialized systems, such as reproductive and thyroid tissues. Incorporating these complexities is critical for assessing the safety and efficacy of specific drugs in distinct patient populations.",
     }
 ];
 
@@ -56,7 +55,7 @@ const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">The Foundation: Physiologically Based Pharmacokinetics (PBPK)</h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section introduces the core concept of PBPK modeling. PBPK models are mechanistic frameworks that simulate how a drug moves through the body. They represent the body as a series of interconnected organ compartments, each with specific physiological properties. This allows scientists to predict drug concentrations in various tissues over time, providing a powerful tool for drug development.</p>
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section introduces Physiologically Based Pharmacokinetic (PBPK) modeling, a foundational discipline within Model-Informed Drug Discovery and Development (MIDD). PBPK models are mechanistic frameworks that quantify drug behavior by simulating its movement through a virtual representation of an organism. By defining the body as a network of organ compartments with distinct physiological properties, these models predict drug concentration-time profiles in various tissues, providing a critical quantitative tool for drug development.</p>
                 </div>
                 
                 <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">

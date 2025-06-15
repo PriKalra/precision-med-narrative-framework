@@ -1,4 +1,3 @@
-
 import React from 'react';
 import FadeIn from '../ui/FadeIn';
 import SpeciesComparisonChart from '../use-cases/SpeciesComparisonChart';
@@ -14,7 +13,7 @@ const UseCasesSection: React.FC<{ id: string }> = ({ id }) => {
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">Framework in Action: Key Use Cases</h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section demonstrates the practical applications of the integrated GNN-PBPK-AI framework for advancing precision medicine. By combining mechanistic simulation with advanced AI, the system enables more personalized, efficient, and safer drug development. Explore the interactive visualizations below to see how the model addresses key challenges.</p>
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section demonstrates practical applications of the integrated MIDD framework, showcasing how the synergy between mechanistic simulation and Agentic AI enables more personalized, efficient, and safer drug development. The following use cases illustrate how this approach addresses key scientific and operational challenges in pharmacology.</p>
                 </div>
 
                 <div className="space-y-20">
@@ -34,8 +33,8 @@ const UseCasesSection: React.FC<{ id: string }> = ({ id }) => {
                         <EnzymeTabs />
                     </FadeIn>
                     <FadeIn>
-                        <h3 className="text-2xl font-semibold mb-2 text-center">Use Case 4: LLM-Powered Drug-Drug Interaction Explainer ✨</h3>
-                        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8">Leverage the power of Large Language Models to quickly assess potential drug-drug interactions. Input two common drug names, and our AI will provide a concise explanation of how they might interact, highlighting relevant mechanisms and clinical considerations. This demonstrates how LLMs can enhance clinical decision support.</p>
+                        <h3 className="text-2xl font-semibold mb-2 text-center">Use Case 4: Agentic AI for DDI Assessment ✨</h3>
+                        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8">This demonstrates a specialized task agent designed for Drug-Drug Interaction (DDI) assessment. By leveraging a Large Language Model fine-tuned on biomedical literature, the agent provides rapid, context-aware analysis of potential interactions. This exemplifies how Agentic AI can augment clinical decision support by automating knowledge extraction and synthesis, grounded in established pharmacological principles.</p>
                         <DDIExplainer />
                     </FadeIn>
                      <FadeIn>

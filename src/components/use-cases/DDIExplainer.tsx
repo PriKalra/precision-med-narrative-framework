@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 
 const DDIExplainer: React.FC = () => {
     const [drugA, setDrugA] = useState('');
     const [drugB, setDrugB] = useState('');
-    const [result, setResult] = useState("Leverage the power of Large Language Models to quickly assess potential drug-drug interactions. Input two common drug names, and our AI will provide a concise explanation of how they might interact, highlighting relevant mechanisms and clinical considerations.");
+    const [result, setResult] = useState("This tool demonstrates an Agentic AI task agent for DDI assessment. Input two drug names to receive a concise analysis of potential pharmacokinetic or pharmacodynamic interactions, based on information synthesized from biomedical literature and databases.");
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 

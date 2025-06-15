@@ -7,17 +7,17 @@ const complexities = [
   {
     title: 'Formulation Impact',
     icon: <TestTube2 className="w-12 h-12 text-primary mb-4" />,
-    description: "Current PBPK models often simplify the impact of complex drug formulations. Integrating the precise characteristics of novel formulations (e.g., sustained-release systems, nanoparticles) is crucial and requires deep expertise to parameterize how a drug's physical form dictates its initial disposition."
+    description: "Conventional PBPK models often simplify the impact of drug formulation. Integrating the precise characteristics of novel delivery systems (e.g., sustained-release, nanoparticles) is crucial and requires expertise to parameterize how a drug's physical form dictates its disposition."
   },
   {
     title: 'Nanomedicine & Complex Devices',
     icon: <Atom className="w-12 h-12 text-primary mb-4" />,
-    description: "Modeling nanomedicines and drugs from medical devices (e.g., drug-eluting stents) is uniquely challenging. The virtual twin must evolve to incorporate intricate biophysical interactions and device-specific release kinetics that go beyond traditional PBPK compartments."
+    description: "Modeling nanomedicines and drugs from medical devices (e.g., drug-eluting stents) is uniquely challenging. The virtual twin must incorporate intricate biophysical interactions and device-specific release kinetics that go beyond traditional PBPK compartments."
   },
   {
     title: 'Seamless Translational Continuum',
     icon: <GitMerge className="w-12 h-12 text-primary mb-4" />,
-    description: "The vision is a continuous predictive thread from preclinical data to individual patient management. This requires robust methods for scaling models across species and patient populations, using standardized data (like SEND/ADAM) to build a seamless translational bridge."
+    description: "The objective is a continuous predictive thread from preclinical data to individual patient management. This requires robust methods for scaling models across species and populations, using standardized data (e.g., SEND/ADaM) to build a seamless translational bridge."
   }
 ];
 

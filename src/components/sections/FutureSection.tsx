@@ -3,9 +3,9 @@ import React from 'react';
 import FadeIn from '../ui/FadeIn';
 
 const challenges = [
-  { title: 'Data Availability, Quality & Standardization', icon: '💾', description: "A persistent challenge is the scarcity of high-quality data. Enforcing industry standards like SEND and ADAM is crucial to harmonize data, making it machine-readable for AI/ML models and improving predictive accuracy.", delay: 0 },
-  { title: 'Model Validation, Interpretability & Generalizability', icon: '🔍', description: 'For regulatory acceptance and clinical translation, models must be rigorously validated and offer clear, interpretable insights. Black-box predictions are insufficient; we need explainable, biologically meaningful reasoning.', delay: 200 },
-  { title: 'Computational Demands & Scalability', icon: '💻', description: 'Training large models requires immense computational resources. Future work must focus on efficiency and scalability to ensure these powerful tools are accessible and practical for real-world clinical decision support.', delay: 400 },
+  { title: 'Data Quality & Standardization', icon: '💾', description: "A persistent challenge is the availability of high-quality, standardized data. Enforcing industry standards like SEND and ADaM is crucial for harmonizing data to make it machine-readable and improve the predictive accuracy of AI models.", delay: 0 },
+  { title: 'Model Validation & Interpretability', icon: '🔍', description: 'For regulatory acceptance and clinical adoption, models must be rigorously validated. "Black-box" predictions are insufficient; the framework must provide explainable, biologically meaningful reasoning for its outputs.', delay: 200 },
+  { title: 'Computational & Scalability Demands', icon: '💻', description: 'Training large-scale models requires immense computational resources. Future work must focus on algorithmic efficiency and scalability to ensure these powerful tools are practical for real-world clinical decision support.', delay: 400 },
 ];
 
 const FutureSection: React.FC<{ id: string }> = ({ id }) => {
@@ -30,27 +30,27 @@ const FutureSection: React.FC<{ id: string }> = ({ id }) => {
 
                 <FadeIn delay={600}>
                   <div className="mt-12 space-y-6 text-muted-foreground max-w-4xl mx-auto text-center">
-                    <p>The success of this framework hinges not just on its predictive power, but critically on addressing the "last mile" challenges of robust validation, enhanced interpretability, and building trust among regulatory bodies and clinical practitioners.</p>
+                    <p>The success of this framework hinges not just on its predictive power, but on addressing the "last mile" challenges of robust validation, enhanced interpretability, and building trust among regulatory bodies and clinical practitioners.</p>
                   </div>
                 </FadeIn>
 
                 <FadeIn>
                     <div className="mt-20 text-center bg-card p-8 rounded-xl shadow-lg">
-                        <h3 className="text-2xl font-bold text-foreground">Towards a Unified Framework: PBPK, PK/PD, and QSP</h3>
-                        <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">The future points towards a convergence of PBPK (drug movement), PK/PD (drug effect), and QSP (biological systems). Our integrated framework dissolves these traditional boundaries, creating a continuous feedback loop from molecule to population and back to the individual. This will enable:</p>
+                        <h3 className="text-2xl font-bold text-foreground">Towards a Unified Computational Pharmacology Framework</h3>
+                        <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">Future development points towards a convergence of PBPK (drug movement), PK/PD (drug effect), and QSP (biological systems). Our integrated framework dissolves these traditional boundaries, creating a continuous feedback loop from molecule to population and back to the individual. This will enable:</p>
                         <ul className="list-disc list-inside text-left max-w-xl mx-auto mt-4 text-muted-foreground space-y-2">
-                            <li><span className="font-semibold text-foreground">Continuous Translation:</span> Smoother transition of insights from in vitro to in vivo, preclinical to clinical, and population to individual.</li>
+                            <li><span className="font-semibold text-foreground">Continuous Translation:</span> Seamless transition of insights from in vitro to in vivo, preclinical to clinical, and population to individual.</li>
                             <li><span className="font-semibold text-foreground">Holistic Decision-Making:</span> Integrating drug exposure, efficacy, and safety across all stages for more informed, proactive decisions.</li>
                             <li><span className="font-semibold text-foreground">Reduced Silos:</span> Fostering interdisciplinary collaboration and a shared understanding of drug action from molecular to systemic levels.</li>
                         </ul>
-                        <p className="text-lg text-muted-foreground max-w-4xl mx-auto mt-6">This unified approach promises to dramatically streamline drug development. To achieve this, it is imperative that scientists from diverse disciplines—including assay specialists, omics scientists, pharmacologists, computational modelers, and formulations scientists—come together. This synergistic collaboration is the bedrock upon which the next generation of precision therapeutics will be built.</p>
+                        <p className="text-lg text-muted-foreground max-w-4xl mx-auto mt-6">This unified approach promises to dramatically streamline drug development. To achieve this, synergistic collaboration among assay specialists, omics scientists, pharmacologists, computational modelers, and formulations scientists is imperative. This is the bedrock upon which the next generation of precision therapeutics will be built.</p>
                     </div>
                 </FadeIn>
 
                 <FadeIn>
                   <div className="mt-20 text-center bg-transparent p-8 rounded-xl">
                       <h3 className="text-2xl font-bold text-foreground">Conclusion</h3>
-                      <p className="text-lg text-muted-foreground max-w-4xl mx-auto mt-4">The synergistic integration of these technologies represents a significant leap forward in computational pharmacology, enabling a truly personalized paradigm for drug therapy. Realizing this promise necessitates sustained, collaborative efforts to overcome challenges in data, validation, and interpretability, paving the way for a future where drug therapy is truly tailored to the unique biological profile of each individual.</p>
+                      <p className="text-lg text-muted-foreground max-w-4xl mx-auto mt-4">The integration of Agentic AI into Model-Informed Drug Discovery and Development represents a paradigm shift for the pharmaceutical industry. By augmenting mechanistic models with autonomous, adaptive, and collaborative AI, we can overcome the limitations of traditional, fragmented workflows. The framework presented here promises to accelerate timelines, enhance efficiency, and foster deeper mechanistic understanding. Realizing this vision requires a continued commitment to addressing challenges in data standardization, model validation, and regulatory science, paving the way for a future where precision medicine is not just an ambition, but a clinical reality.</p>
                   </div>
                 </FadeIn>
             </div>

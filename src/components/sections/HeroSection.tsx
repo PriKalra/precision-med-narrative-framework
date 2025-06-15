@@ -10,7 +10,7 @@ const HeroSection: React.FC = () => {
           <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-4">Advancing Precision Medicine</h1>
         </FadeIn>
         <FadeIn delay={200}>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">A new paradigm integrating Graph Neural Networks, AI, and PBPK modeling to revolutionize drug discovery and personalized therapy. This framework aligns strategically with leading pharmaceutical initiatives, such as those aiming to harness vast, interconnected multimodal datasets to accelerate the development of novel therapeutics for patients.</p>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">A new paradigm for Model-Informed Drug Discovery and Development (MIDD) leveraging the synergistic integration of Agentic AI, computational modeling, and mechanistic science. This framework automates complex workflows and enhances data interpretation to accelerate the development of novel therapeutics and advance personalized medicine.</p>
         </FadeIn>
       </div>
     </section>
