@@ -5,12 +5,12 @@ import FadeIn from '../ui/FadeIn';
 const challenges = [
   {
     title: 'Inter-Individual Variability',
-    description: 'No two people are the same. Genetic differences in metabolic enzymes, anatomical variations in organ size, age, and lifestyle factors like diet and smoking all create a unique pharmacokinetic profile for each individual. Traditional models often use "average" human parameters, failing to capture this diversity.',
+    description: 'Significant inter-individual variability arises from genetic differences in metabolic enzymes, anatomical variations in organ size, age, and lifestyle factors like diet and smoking, all creating a unique pharmacokinetic profile for each individual. Traditional models often use "average" human parameters, failing to capture this diversity.',
     delay: 0,
   },
   {
     title: 'Intra-Individual Variability',
-    description: "A person's physiology is not static. Hormonal fluctuations during the menstrual cycle, physiological shifts during pregnancy, and changes with aging can alter how a drug is processed. Modeling these dynamic, time-dependent changes is a significant hurdle for conventional PBPK.",
+    description: "An individual's physiology is dynamic; hormonal fluctuations during the menstrual cycle, physiological shifts during pregnancy, and changes with aging can alter how a drug is processed. Modeling these dynamic, time-dependent changes is a significant hurdle for conventional PBPK.",
     delay: 200,
   },
   {
