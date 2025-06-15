@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, LogarithmicScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, LogarithmicScale, BarElement, Title, Tooltip, Legend, TooltipItem } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, LogarithmicScale, BarElement, Title, Tooltip, Legend);
 
@@ -31,7 +31,21 @@ const SpeciesComparisonChart: React.FC = () => {
         responsive: true,
         maintainAspectRatio: false,
         scales: { y: { beginAtZero: true, type: 'logarithmic' as const, title: { display: true, text: 'Value (Log Scale)' } } },
-        plugins: { legend: { display: false } }
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: (context: TooltipItem<'bar'>) => {
+                        const label = context.chart.data.labels?.[context.dataIndex];
+                        const value = context.parsed.y;
+                        if (label && value !== null) {
+                            return `${label}: ${value}`;
+                        }
+                        return '';
+                    }
+                }
+            }
+        }
     };
 
     return (
@@ -50,6 +64,9 @@ const SpeciesComparisonChart: React.FC = () => {
             <div className="relative h-[350px] md:h-[400px]">
                 <Bar options={chartOptions} data={chartData} />
             </div>
+            <p className="text-xs text-gray-500 mt-4 text-center">
+                Note: The vertical axis uses a logarithmic scale to clearly display values that span several orders of magnitude. The values shown in tooltips are the actual linear scale values.
+            </p>
         </div>
     );
 };
