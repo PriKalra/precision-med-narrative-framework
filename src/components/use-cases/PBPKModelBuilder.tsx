@@ -78,8 +78,8 @@ const PBPKModelBuilder: React.FC = () => {
       <div className="grid md:grid-cols-2 gap-8 mt-6">
         <Card>
           <CardHeader>
-            <CardTitle>Drug Parameters (from SMILES)</CardTitle>
-            <CardDescription>Parameters calculated from SMILES via openchemlib.js</CardDescription>
+            <CardTitle>Drug Parameters (Drug-Side)</CardTitle>
+            <CardDescription>Auto-generated from molecular structure via GNN & openchemlib.js.</CardDescription>
           </CardHeader>
           <CardContent>
             {physchem ? (
@@ -96,8 +96,8 @@ const PBPKModelBuilder: React.FC = () => {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>System Parameters (Human)</CardTitle>
-            <CardDescription>Simulated NHANES Data</CardDescription>
+            <CardTitle>System Parameters (System-Side)</CardTitle>
+            <CardDescription>Curated data from our unified platform (e.g., from NHANES).</CardDescription>
           </CardHeader>
           <CardContent className="h-48 overflow-y-auto">
             <table className="w-full text-sm text-left">
