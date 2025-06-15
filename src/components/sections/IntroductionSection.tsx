@@ -1,93 +1,95 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import FadeIn from '../ui/FadeIn';
+import PBPKDiagram from '../introduction/PBPKDiagram';
 
-const organs = [
-    { name: 'Liver', color: 'blue' }, { name: 'Kidney', color: 'blue' },
-    { name: 'Brain', color: 'blue' }, { name: 'Lung', color: 'blue' },
-    { name: 'Heart', color: 'blue' }, { name: 'Gut', color: 'blue' },
-    { name: 'Spleen', color: 'blue' }, { name: 'Muscle', color: 'blue' },
-    { name: 'Thyroid', color: 'red' }, { name: 'Testes', color: 'green' },
-    { name: 'Prostate', color: 'green' }, { name: 'Ovaries', color: 'pink' },
-    { name: 'Uterus', color: 'pink' }, { name: 'Adipose', color: 'gray' },
-    { name: 'Skin', color: 'gray' }, { name: 'Blood', color: 'gray' },
+const storySteps = [
+    {
+        title: "A Mechanistic View of the Body",
+        description: "PBPK models create a virtual organism by linking major organs through the circulatory system. Each compartment is defined by its real-world volume and blood flow. This forms the foundation for predicting a drug's journey.",
+    },
+    {
+        title: "Simulating Drug Distribution",
+        description: "This bottom-up approach allows us to simulate drug Absorption, Distribution, Metabolism, and Elimination (ADME). The animation shows how a drug might distribute throughout the body, visiting different organs over time.",
+    },
+    {
+        title: "Beyond the Standard Model",
+        description: "True precision requires modeling specialized systems. Our framework enhances this foundation by integrating data for reproductive and thyroid tissues, which are critical for specific drugs and patient populations but often overlooked.",
+    }
 ];
 
-const organColorClasses = {
-    blue: 'bg-blue-100 text-blue-800',
-    red: 'bg-red-100 text-red-800',
-    green: 'bg-green-100 text-green-800',
-    pink: 'bg-pink-100 text-pink-800',
-    gray: 'bg-gray-200 text-gray-800',
-};
-
 const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
-    const [highlightedOrgan, setHighlightedOrgan] = useState(-1);
-    const diagramRef = useRef<HTMLDivElement>(null);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const [activeStep, setActiveStep] = useState(0);
+    const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
+        stepRefs.current = stepRefs.current.slice(0, storySteps.length);
+
         const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    if (!intervalRef.current) {
-                        intervalRef.current = setInterval(() => {
-                            setHighlightedOrgan(prev => (prev + 1) % organs.length);
-                        }, 1500);
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = stepRefs.current.indexOf(entry.target as HTMLDivElement);
+                        if (index > -1) {
+                            setActiveStep(index);
+                        }
                     }
-                } else {
-                    if (intervalRef.current) {
-                        clearInterval(intervalRef.current);
-                        intervalRef.current = null;
-                        setHighlightedOrgan(-1);
-                    }
-                }
-            }, { threshold: 0.5 }
+                });
+            },
+            { rootMargin: '-40% 0px -60% 0px', threshold: 0 }
         );
 
-        const currentDiagramRef = diagramRef.current;
-        if (currentDiagramRef) {
-            observer.observe(currentDiagramRef);
-        }
+        const currentRefs = stepRefs.current;
+        currentRefs.forEach((ref) => {
+            if (ref) observer.observe(ref);
+        });
 
         return () => {
-            if (currentDiagramRef) {
-                observer.unobserve(currentDiagramRef);
-            }
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-            }
+            currentRefs.forEach((ref) => {
+                if (ref) observer.unobserve(ref);
+            });
         };
     }, []);
 
     return (
-        <section id={id} className="py-20 min-h-screen">
+        <section id={id} className="py-20">
             <div className="container mx-auto px-6">
-                <div className="text-center mb-12">
+                <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">The Foundation: Physiologically Based Pharmacokinetics (PBPK)</h2>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">This section introduces the core concept of PBPK modeling. PBPK models are mechanistic frameworks that simulate how a drug moves through the body. They represent the body as a series of interconnected organ compartments, each with specific physiological properties. This allows scientists to predict drug concentrations in various tissues over time, providing a powerful tool for drug development.</p>
                 </div>
-                <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-                    <FadeIn>
-                        <h3 className="text-2xl font-semibold mb-4">A Mechanistic View of the Body</h3>
-                        <p className="text-gray-700 mb-4">Traditional PBPK models create a virtual representation of an organism by linking major organs like the liver, kidney, and brain through the circulatory system. Each organ is a compartment defined by its real-world volume, blood flow, and how it partitions a drug between tissue and plasma.</p>
-                        <p className="text-gray-700">This detailed, bottom-up approach allows for the prediction of drug Absorption, Distribution, Metabolism, and Elimination (ADME) before a drug ever enters human trials, supporting critical decisions in early development.</p>
-                    </FadeIn>
-                    <FadeIn>
-                        <div ref={diagramRef} id="pbpk-diagram" className="mt-10 lg:mt-0 p-4 bg-white rounded-xl shadow-lg">
-                            <div className="relative text-center font-semibold">
-                                <div className="text-xl mb-4 text-blue-600">16-Organ PBPK System</div>
-                                <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 text-xs sm:text-sm">
-                                    {organs.map((organ, index) => (
-                                        <div key={organ.name} className={`organ p-2 rounded-lg shadow transition-all duration-300 ease-in-out ${organColorClasses[organ.color as keyof typeof organColorClasses]} ${highlightedOrgan === index ? 'scale-110 -translate-y-1 shadow-blue-300' : ''}`}>
-                                            {organ.name}
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="mt-4 text-sm text-gray-500">Our model includes specialized reproductive (green/pink) and thyroid (red) organs for enhanced precision.</div>
+                
+                <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
+                    {/* Left Column: Scrolling Text */}
+                    <div className="relative">
+                        {storySteps.map((step, index) => (
+                            <div 
+                                key={index} 
+                                ref={el => stepRefs.current[index] = el}
+                                // Each step needs significant height to ensure proper scroll-triggering
+                                className="min-h-[70vh] flex items-center" 
+                            >
+                                <FadeIn>
+                                    <div className={`transition-opacity duration-500 ${activeStep === index ? 'opacity-100' : 'opacity-30'}`}>
+                                        <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
+                                        <p className="text-gray-700 text-lg leading-relaxed">{step.description}</p>
+                                    </div>
+                                </FadeIn>
                             </div>
-                        </div>
-                    </FadeIn>
+                        ))}
+                    </div>
+
+                    {/* Right Column: Sticky Visual */}
+                    {/* On mobile, this will stack naturally. On desktop, it becomes sticky. */}
+                    <div className="lg:sticky top-24 h-full">
+                       <div className="hidden lg:flex items-center justify-center h-full min-h-[70vh]">
+                            <PBPKDiagram activeStep={activeStep} />
+                       </div>
+                       {/* A simplified, non-sticky view for mobile, shown once. */}
+                       <div className="lg:hidden mt-8">
+                           <PBPKDiagram activeStep={2} />
+                       </div>
+                    </div>
                 </div>
             </div>
         </section>
