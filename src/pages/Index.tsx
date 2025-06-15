@@ -7,9 +7,10 @@ import IntroductionSection from '@/components/sections/IntroductionSection';
 import ChallengeSection from '@/components/sections/ChallengeSection';
 import SolutionSection from '@/components/sections/SolutionSection';
 import UseCasesSection from '@/components/sections/UseCasesSection';
+import ContentStrategySection from '@/components/sections/ContentStrategySection';
 import FutureSection from '@/components/sections/FutureSection';
 
-const sectionIds = ['introduction', 'the-challenge', 'the-solution', 'use-cases', 'future'];
+const sectionIds = ['introduction', 'the-challenge', 'the-solution', 'use-cases', 'content-strategy', 'future'];
 
 const Index = () => {
     const [activeSection, setActiveSection] = useState('');
@@ -49,6 +50,7 @@ const Index = () => {
                 <ChallengeSection id="the-challenge" />
                 <SolutionSection id="the-solution" />
                 <UseCasesSection id="use-cases" />
+                <ContentStrategySection id="content-strategy" />
                 <FutureSection id="future" />
             </main>
             <Footer />
