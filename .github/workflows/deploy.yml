@@ -16,9 +16,7 @@ permissions:
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+# ... keep existing code (concurrency block)
 
 jobs:
   deploy:
@@ -38,6 +36,8 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Add 404.html for SPA fallback
+        run: cp dist/index.html dist/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
