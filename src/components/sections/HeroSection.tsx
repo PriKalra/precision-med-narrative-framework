@@ -1,15 +1,16 @@
+
 import React from 'react';
 import FadeIn from '../ui/FadeIn';
 
 const HeroSection: React.FC = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center snap-start">
-      <div className="container mx-auto px-6 text-center">
+    <section id="hero" className="min-h-screen flex items-center justify-center text-center snap-start bg-transparent">
+      <div className="container mx-auto px-6">
         <FadeIn>
           <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-4">Advancing Precision Medicine</h1>
         </FadeIn>
         <FadeIn delay={200}>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">A new paradigm integrating Graph Neural Networks, AI, and PBPK modeling to revolutionize drug discovery and personalized therapy. This framework aligns strategically with leading pharmaceutical initiatives, which aim to leverage vast, interconnected multimodal datasets to accelerate the discovery and development of novel therapeutics for patients.</p>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">A new paradigm integrating Graph Neural Networks, AI, and PBPK modeling to revolutionize drug discovery and personalized therapy. This framework aligns strategically with leading pharmaceutical initiatives, such as those aiming to harness vast, interconnected multimodal datasets to accelerate the development of novel therapeutics for patients.</p>
         </FadeIn>
       </div>
     </section>

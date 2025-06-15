@@ -12,7 +12,7 @@ const tabData = {
   },
   mdr1: {
     title: 'MDR1 (P-glycoprotein)',
-    content: "MDR1 is an efflux transporter that actively extrudes drugs from cells. It's crucial in limiting drug absorption and preventing entry into the brain. Its function, substrate specificity, and expression levels can differ significantly across species. Accounting for these varied expression profiles is key to predicting transporter-mediated DDIs and tissue-specific drug concentrations.",
+    content: "MDR1 is an efflux transporter that acts like a bouncer, pumping drugs out of cells. It's crucial in limiting drug absorption and preventing entry into the brain. Its function, substrate specificity, and expression levels can differ significantly across species. Accounting for these varied expression profiles is key to predicting transporter-mediated DDIs and tissue-specific drug concentrations.",
   }
 };
 

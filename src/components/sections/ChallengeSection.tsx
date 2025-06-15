@@ -4,7 +4,7 @@ import FadeIn from '../ui/FadeIn';
 const challenges = [
   {
     title: 'Inter-Individual Variability',
-    description: 'Significant inter-individual variability arises from genetic differences in metabolic enzymes, anatomical variations in organ size, age, and lifestyle factors like diet and smoking, all creating a unique pharmacokinetic profile for each individual. Traditional models often use "average" human parameters, failing to capture this diversity.',
+    description: 'No two people are the same. Genetic differences in metabolic enzymes, anatomical variations in organ size, age, and lifestyle factors like diet and smoking all create a unique pharmacokinetic profile for each individual. Traditional models often use "average" human parameters, failing to capture this diversity.',
     delay: 0,
   },
   {
@@ -21,7 +21,7 @@ const challenges = [
 
 const ChallengeSection: React.FC<{ id: string }> = ({ id }) => {
   return (
-    <section id={id} className="py-20 min-h-screen snap-start flex items-center">
+    <section id={id} className="py-20 min-h-screen snap-start flex items-center bg-transparent">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">The Challenge: Biological Complexity</h2>

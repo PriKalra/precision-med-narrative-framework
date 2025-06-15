@@ -1,3 +1,4 @@
+
 import React from 'react';
 import FadeIn from '../ui/FadeIn';
 import SpeciesComparisonChart from '../use-cases/SpeciesComparisonChart';
@@ -5,10 +6,11 @@ import ClearancePrediction from '../use-cases/ClearancePrediction';
 import EnzymeTabs from '../use-cases/EnzymeTabs';
 import DDIExplainer from '../use-cases/DDIExplainer';
 import VirtualTwinVisual from '../use-cases/VirtualTwinVisual';
+import VirtualTwinComplexities from '../use-cases/VirtualTwinComplexities';
 
 const UseCasesSection: React.FC<{ id: string }> = ({ id }) => {
     return (
-        <section id={id} className="py-20 min-h-screen snap-start">
+        <section id={id} className="py-20 min-h-screen snap-start bg-transparent">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-3">Framework in Action: Key Use Cases</h2>
@@ -28,7 +30,7 @@ const UseCasesSection: React.FC<{ id: string }> = ({ id }) => {
                     </FadeIn>
                     <FadeIn>
                         <h3 className="text-2xl font-semibold mb-2 text-center">Use Case 3: Enzyme & Transporter Variability via Expression Profiles</h3>
-                        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8">Drug metabolism is driven by enzymes (like CYPs) and transporters (like MDR1). Their expression levels and activity vary hugely between individuals and species. Our model explicitly incorporates this quantitative data to improve predictive precision and better understand drug-drug interactions (DDIs). Click on the tabs to learn about key players.</p>
+                        <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">Drug metabolism is driven by enzymes (like CYPs) and transporters (like MDR1). Their expression levels and activity vary hugely between individuals and species. By integrating these unique expression profiles, the framework can more accurately predict DDI risk and guide personalized drug regimens. Click on the tabs to learn about key players.</p>
                         <EnzymeTabs />
                     </FadeIn>
                     <FadeIn>
@@ -38,8 +40,9 @@ const UseCasesSection: React.FC<{ id: string }> = ({ id }) => {
                     </FadeIn>
                      <FadeIn>
                         <h3 className="text-2xl font-semibold mb-2 text-center">Use Case 5: Real-time Personalized PBPK with Virtual Twins & Wearables</h3>
-                        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8">The ultimate frontier is the "virtual twin"—a dynamic model of an individual's physiology. This framework integrates real-time data from wearables (e.g., heart rate, activity) to continuously update and optimize the PBPK model. This allows for truly adaptive and personalized dosing strategies, tailored to a patient's immediate physiological state.</p>
+                        <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">The ultimate frontier is the "virtual twin"—a dynamic model that mirrors an individual's evolving physiology. This framework integrates real-time data from wearables to continuously optimize the PBPK model, enabling highly personalized dosing strategies tailored to a patient's immediate physiological context.</p>
                         <VirtualTwinVisual />
+                        <VirtualTwinComplexities />
                     </FadeIn>
                 </div>
             </div>
