@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import FadeIn from '../ui/FadeIn';
 import AgenticAIFlowchart from '../solution/AgenticAIFlowchart';
@@ -47,7 +46,7 @@ const storySteps = [
         ],
     },
     {
-        title: "7. Human-in-the-Loop Governance",
+        title: "7. Human-Centric Governance",
         description: [
             "While automation drives efficiency, human expertise remains central. The Human Oversight agent ensures that experts review critical outputs, validate model logic, and provide strategic direction. This collaborative model augments human intellect rather than replacing it.",
             "Finally, a Regulatory & Reporting agent automates the generation of compliance documents and publication-ready materials, ensuring that insights are captured and communicated effectively."
