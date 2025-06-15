@@ -29,8 +29,8 @@ const VirtualTwinVisual: React.FC = () => {
 
             {/* Personalized Outcome */}
             <div className="flex flex-col items-center text-center">
-                <div className="p-4 rounded-full bg-green-900/50">
-                    <HeartPulse className="w-12 h-12 text-green-500" />
+                <div className="p-4 rounded-full bg-secondary/20">
+                    <HeartPulse className="w-12 h-12 text-secondary" />
                 </div>
                 <h4 className="font-semibold mt-2">Optimized Dosing</h4>
                 <p className="text-sm text-muted-foreground max-w-xs">Personalized and adaptive drug therapy</p>

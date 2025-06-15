@@ -25,15 +25,15 @@ const ClearancePrediction: React.FC = () => {
       </div>
       <div className="flex justify-around items-end h-48">
         <div className="text-center">
-          <div className="w-16 h-24 bg-red-900/50 rounded-t-lg relative">
-            <div className={`absolute bottom-0 w-full bg-red-500 rounded-t-lg ${isVisible ? 'animate-fill' : ''}`} style={{ '--fill-height': '90%' } as React.CSSProperties} ></div>
+          <div className="w-16 h-24 bg-destructive/20 rounded-t-lg relative">
+            <div className={`absolute bottom-0 w-full bg-destructive rounded-t-lg ${isVisible ? 'animate-fill' : ''}`} style={{ '--fill-height': '90%' } as React.CSSProperties} ></div>
           </div>
           <p className="font-semibold mt-2">Microsomes (HLM)</p>
           <p className="text-sm text-muted-foreground">High CLint,u</p>
         </div>
         <div className="text-center">
-          <div className="w-16 h-24 bg-green-900/50 rounded-t-lg relative">
-            <div className={`absolute bottom-0 w-full bg-green-500 rounded-t-lg ${isVisible ? 'animate-fill' : ''}`} style={{ '--fill-height': '40%' } as React.CSSProperties}></div>
+          <div className="w-16 h-24 bg-secondary/20 rounded-t-lg relative">
+            <div className={`absolute bottom-0 w-full bg-secondary rounded-t-lg ${isVisible ? 'animate-fill' : ''}`} style={{ '--fill-height': '40%' } as React.CSSProperties}></div>
           </div>
           <p className="font-semibold mt-2">Hepatocytes (HH)</p>
           <p className="text-sm text-muted-foreground">Lower CLint,u</p>

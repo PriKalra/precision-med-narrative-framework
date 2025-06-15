@@ -6,10 +6,10 @@ import { Chart as ChartJS, CategoryScale, LinearScale, LogarithmicScale, BarElem
 ChartJS.register(CategoryScale, LinearScale, LogarithmicScale, BarElement, Title, Tooltip, Legend);
 
 const speciesData = {
-    human: { values: [70, 312, 2.6, 0.4, 1.6], color: 'rgba(59, 130, 246, 0.7)' },
-    monkey: { values: [7, 45, 3.66, 0.73, 1.6], color: 'rgba(239, 68, 68, 0.7)' },
-    rat: { values: [0.25, 5, 3.66, 0.73, 1.6], color: 'rgba(16, 185, 129, 0.7)' },
-    mouse: { values: [0.025, 0.5, 3.66, 0.73, 1.6], color: 'rgba(245, 158, 11, 0.7)' }
+    human: { values: [70, 312, 2.6, 0.4, 1.6], color: 'rgba(115, 41, 230, 0.7)' },
+    monkey: { values: [7, 45, 3.66, 0.73, 1.6], color: 'rgba(46, 184, 105, 0.7)' },
+    rat: { values: [0.25, 5, 3.66, 0.73, 1.6], color: 'rgba(166, 128, 224, 0.7)' },
+    mouse: { values: [0.025, 0.5, 3.66, 0.73, 1.6], color: 'rgba(90, 196, 137, 0.7)' }
 };
 const labels = ['Body Weight (kg)', 'Cardiac Output (L/h)', 'Liver (%BW)', 'Kidney (%BW)', 'Thyroid Blood Flow (%)'];
 
