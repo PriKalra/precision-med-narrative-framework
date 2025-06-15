@@ -30,11 +30,19 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Add 404.html for SPA fallback
-        run: cp dist/index.html dist/404.html
+        run: |
+          if [ -f dist/index.html ]; then
+            cp dist/index.html dist/404.html
+          else
+            echo "Error: dist/index.html not found"
+            exit 1
+          fi
+      - name: List dist contents
+        run: ls -la dist/
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
@@ -44,4 +52,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
