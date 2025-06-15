@@ -1,9 +1,9 @@
-# Welcome to your Lovable project
+# Welcome to mu Lovable project which is a part of the lovable AI showdown challenge
 
 ## Project Links
 
 **Live Webpage**: [Link to your published webpage](https://prikalra.github.io/precision-med-narrative-framework/)
-_After setting up GitHub Pages, your URL will be available in your repository's "Settings" > "Pages" tab following the first successful deployment._
+This webpage is a scrollytelling of various conversations I have had in the scientific community regarding AI in MIDD. This was created with lovable and it took me 4 hours to set it up and get it running while I took the time to run it and understand it. 
 
 **Lovable Editor**: [https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6](https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6)
 
