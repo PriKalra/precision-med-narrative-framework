@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -84,11 +85,16 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+        'fill-animation': {
+          '0%': { height: '0%' },
+          '100%': { height: 'var(--fill-height)' },
+        },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+        'fill': 'fill-animation 1.5s ease-out forwards',
 			}
 		}
 	},

@@ -1,0 +1,46 @@
+
+import React, { useState, useRef, useEffect } from 'react';
+import FadeIn from '../ui/FadeIn';
+
+const ClearancePrediction: React.FC = () => {
+  const [isVisible, setVisible] = useState(false);
+  const domRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => setVisible(entry.isIntersecting));
+    });
+    const { current } = domRef;
+    if (current) observer.observe(current);
+    return () => {
+      if (current) observer.unobserve(current);
+    };
+  }, []);
+
+  return (
+    <div ref={domRef} className="bg-slate-50 p-8 rounded-xl shadow-lg grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h4 className="font-semibold text-lg mb-2">The HLM:HH Disconnect</h4>
+        <p className="text-sm text-gray-700">The visualization shows a typical scenario where unbound intrinsic clearance (CLint,u) measured in microsomes is significantly higher than in hepatocytes for the same compound. This can lead to inaccurate predictions of how quickly a drug is eliminated from the body. Choosing the correct value is critical for IVIVE (in vitro-in vivo extrapolation) and thus, for reliable DDI assessment.</p>
+      </div>
+      <div className="flex justify-around items-end h-48">
+        <div className="text-center">
+          <div className="w-16 h-24 bg-red-300 rounded-t-lg relative">
+            <div className="absolute bottom-0 w-full bg-red-500 rounded-t-lg" style={{ '--fill-height': '90%', height: isVisible ? 'var(--fill-height)' : '0' } as React.CSSProperties} ></div>
+          </div>
+          <p className="font-semibold mt-2">Microsomes (HLM)</p>
+          <p className="text-sm text-gray-500">High CLint,u</p>
+        </div>
+        <div className="text-center">
+          <div className="w-16 h-24 bg-green-300 rounded-t-lg relative">
+            <div className="absolute bottom-0 w-full bg-green-500 rounded-t-lg" style={{ '--fill-height': '40%', height: isVisible ? 'var(--fill-height)' : '0' } as React.CSSProperties}></div>
+          </div>
+          <p className="font-semibold mt-2">Hepatocytes (HH)</p>
+          <p className="text-sm text-gray-500">Lower CLint,u</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ClearancePrediction;
