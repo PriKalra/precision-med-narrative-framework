@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, LogarithmicScale, BarElement, Title, Tooltip, Legend, TooltipItem } from 'chart.js';
 
@@ -16,7 +16,7 @@ const labels = ['Body Weight (kg)', 'Cardiac Output (L/h)', 'Liver (%BW)', 'Kidn
 const SpeciesComparisonChart: React.FC = () => {
     const [activeSpecies, setActiveSpecies] = useState<keyof typeof speciesData>('human');
 
-    const chartData = {
+    const chartData = useMemo(() => ({
         labels,
         datasets: [{
             label: `${activeSpecies.charAt(0).toUpperCase() + activeSpecies.slice(1)} Parameters`,
@@ -25,9 +25,9 @@ const SpeciesComparisonChart: React.FC = () => {
             borderColor: speciesData[activeSpecies].color.replace('0.7', '1'),
             borderWidth: 1
         }]
-    };
+    }), [activeSpecies]);
 
-    const chartOptions = {
+    const chartOptions = useMemo(() => ({
         responsive: true,
         maintainAspectRatio: false,
         scales: { 
@@ -58,7 +58,7 @@ const SpeciesComparisonChart: React.FC = () => {
                 }
             }
         }
-    };
+    }), []);
 
     return (
         <div className="bg-card p-4 sm:p-8 rounded-xl shadow-lg">

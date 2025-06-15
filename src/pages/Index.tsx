@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 import HeroSection from '@/components/sections/HeroSection';
-import IntroductionSection from '@/components/sections/IntroductionSection';
-import ChallengeSection from '@/components/sections/ChallengeSection';
-import SolutionSection from '@/components/sections/SolutionSection';
-import UseCasesSection from '@/components/sections/UseCasesSection';
-import FutureSection from '@/components/sections/FutureSection';
+
+const IntroductionSection = lazy(() => import('@/components/sections/IntroductionSection'));
+const ChallengeSection = lazy(() => import('@/components/sections/ChallengeSection'));
+const SolutionSection = lazy(() => import('@/components/sections/SolutionSection'));
+const UseCasesSection = lazy(() => import('@/components/sections/UseCasesSection'));
+const FutureSection = lazy(() => import('@/components/sections/FutureSection'));
+const Footer = lazy(() => import('@/components/layout/Footer'));
 
 const sectionIds = ['introduction', 'the-challenge', 'the-solution', 'use-cases', 'future'];
 
@@ -44,13 +46,17 @@ const Index = () => {
             <Header activeSection={activeSection} />
             <main>
                 <HeroSection />
-                <IntroductionSection id="introduction" />
-                <ChallengeSection id="the-challenge" />
-                <SolutionSection id="the-solution" />
-                <UseCasesSection id="use-cases" />
-                <FutureSection id="future" />
+                <Suspense fallback={<div className="w-full h-screen flex items-center justify-center text-primary">Loading...</div>}>
+                    <IntroductionSection id="introduction" />
+                    <ChallengeSection id="the-challenge" />
+                    <SolutionSection id="the-solution" />
+                    <UseCasesSection id="use-cases" />
+                    <FutureSection id="future" />
+                </Suspense>
             </main>
-            <Footer />
+            <Suspense fallback={null}>
+                <Footer />
+            </Suspense>
         </div>
     );
 };
