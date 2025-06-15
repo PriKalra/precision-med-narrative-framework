@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Bot, BrainCircuit, Database, FlaskConical, TestTube, FileText, UserCheck, Repeat, Workflow, Users, Milestone, Library } from 'lucide-react';
 
@@ -64,63 +63,65 @@ const AIFlowchart = ({ activeStep }) => {
                 icon={<Bot />} 
                 title="Conversational Agent" 
                 description="Processes natural language query"
-                isActive={isCurrent(3) || isVisible(4)}
-                isDimmed={activeStep > 3 && isVisible(3)}
+                isActive={isCurrent(2) || isVisible(3)}
+                isDimmed={activeStep > 2 && isVisible(2)}
             />
-            <Arrow isActive={isVisible(3)} />
+            <Arrow isActive={isVisible(2)} />
             <FlowchartNode 
                 icon={<Workflow />} 
                 title="Planning Agent" 
                 description="Orchestrates workflow"
-                isActive={isCurrent(3) || isVisible(4)}
-                isDimmed={activeStep > 3 && isVisible(3)}
+                isActive={isCurrent(2) || isVisible(3)}
+                isDimmed={activeStep > 2 && isVisible(2)}
             />
-            <Arrow isActive={isVisible(4)} />
+            <Arrow isActive={isVisible(3)} />
 
-            <div className={`grid grid-cols-2 gap-4 w-full transition-opacity duration-500 ${isVisible(4) ? 'opacity-100' : 'opacity-20'}`}>
-                <FlowchartNode icon={<Database />} title="Data Retrieval" isActive={isCurrent(4) || isVisible(5)} isDimmed={activeStep > 4 && isVisible(4)} />
-                <FlowchartNode icon={<Library />} title="Knowledge Extraction" isActive={isCurrent(4) || isVisible(5)} isDimmed={activeStep > 4 && isVisible(4)} />
-                <FlowchartNode icon={<FlaskConical />} title="Hypothesis Generation" isActive={isCurrent(4) || isVisible(5)} isDimmed={activeStep > 4 && isVisible(4)} />
-                <FlowchartNode icon={<BrainCircuit />} title="ML Parameter Prediction" isActive={isCurrent(4) || isVisible(5)} isDimmed={activeStep > 4 && isVisible(4)} />
+            <div className={`grid grid-cols-2 gap-4 w-full transition-opacity duration-500 ${isVisible(3) ? 'opacity-100' : 'opacity-20'}`}>
+                <FlowchartNode icon={<Database />} title="Data Retrieval" description="" isActive={isCurrent(3) || isVisible(4)} isDimmed={activeStep > 3 && isVisible(3)} />
+                <FlowchartNode icon={<Library />} title="Knowledge Extraction" description="" isActive={isCurrent(3) || isVisible(4)} isDimmed={activeStep > 3 && isVisible(3)} />
+                <FlowchartNode icon={<FlaskConical />} title="Hypothesis Generation" description="" isActive={isCurrent(3) || isVisible(4)} isDimmed={activeStep > 3 && isVisible(3)} />
+                <FlowchartNode icon={<BrainCircuit />} title="ML Parameter Prediction" description="" isActive={isCurrent(3) || isVisible(4)} isDimmed={activeStep > 3 && isVisible(3)} />
             </div>
 
-            <Arrow isActive={isVisible(5)} />
+            <Arrow isActive={isVisible(4)} />
 
             <FlowchartNode 
                 icon={<TestTube />} 
                 title="Simulation Agent" 
                 description="PBPK/PK/PD/QSP Models"
-                isActive={isCurrent(5) || isVisible(6)}
-                isDimmed={activeStep > 5 && isVisible(5)}
+                isActive={isCurrent(4) || isVisible(5)}
+                isDimmed={activeStep > 4 && isVisible(4)}
             />
 
-            <Arrow isActive={isVisible(6)} />
+            <Arrow isActive={isVisible(5)} />
 
             <div className="relative w-full flex justify-center">
                 <FlowchartNode 
                     icon={<Repeat />} 
                     title="Evaluation & Refinement Loop" 
                     description="Iterative optimization"
-                    isActive={isCurrent(6) || isVisible(7)}
-                    isDimmed={activeStep > 6 && isVisible(6)}
+                    isActive={isCurrent(5) || isVisible(6)}
+                    isDimmed={activeStep > 5 && isVisible(5)}
                     className="w-3/4"
                 />
             </div>
             
-            <Arrow isActive={isVisible(7)} />
+            <Arrow isActive={isVisible(6)} />
 
-            <div className={`grid grid-cols-2 gap-4 w-full transition-opacity duration-500 ${isVisible(7) ? 'opacity-100' : 'opacity-20'}`}>
+            <div className={`grid grid-cols-2 gap-4 w-full transition-opacity duration-500 ${isVisible(6) ? 'opacity-100' : 'opacity-20'}`}>
                 <FlowchartNode 
                     icon={<UserCheck />} 
                     title="Human Oversight" 
                     description="Expert review & approval"
-                    isActive={isCurrent(7) || isVisible(8)}
+                    isActive={isCurrent(6) || isVisible(7)}
+                    isDimmed={activeStep > 6 && isVisible(6)}
                 />
                 <FlowchartNode 
                     icon={<FileText />} 
                     title="Regulatory & Reporting" 
                     description="Automated documentation"
-                    isActive={isCurrent(7) || isVisible(8)}
+                    isActive={isCurrent(6) || isVisible(7)}
+                    isDimmed={activeStep > 6 && isVisible(6)}
                 />
             </div>
         </div>
@@ -148,4 +149,3 @@ const AgenticAIFlowchart: React.FC<{ activeStep: number }> = ({ activeStep }) =>
 };
 
 export default AgenticAIFlowchart;
-
