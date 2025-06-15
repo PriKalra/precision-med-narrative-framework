@@ -16,7 +16,9 @@ permissions:
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# ... keep existing code (concurrency block)
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
