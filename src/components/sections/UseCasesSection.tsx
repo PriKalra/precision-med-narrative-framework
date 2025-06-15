@@ -1,10 +1,10 @@
-
 import React from 'react';
 import FadeIn from '../ui/FadeIn';
 import SpeciesComparisonChart from '../use-cases/SpeciesComparisonChart';
 import ClearancePrediction from '../use-cases/ClearancePrediction';
 import EnzymeTabs from '../use-cases/EnzymeTabs';
 import DDIExplainer from '../use-cases/DDIExplainer';
+import PBPKModelBuilder from '../use-cases/PBPKModelBuilder';
 
 const UseCasesSection: React.FC<{ id: string }> = ({ id }) => {
     return (
@@ -35,6 +35,11 @@ const UseCasesSection: React.FC<{ id: string }> = ({ id }) => {
                         <h3 className="text-2xl font-semibold mb-2 text-center">Use Case 4: LLM-Powered Drug-Drug Interaction Explainer ✨</h3>
                         <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">Leverage the power of Large Language Models to quickly assess potential drug-drug interactions. Input two common drug names, and our AI will provide a concise explanation of how they might interact, highlighting relevant mechanisms and clinical considerations. This demonstrates how LLMs can enhance clinical decision support.</p>
                         <DDIExplainer />
+                    </FadeIn>
+                     <FadeIn>
+                        <h3 className="text-2xl font-semibold mb-2 text-center">Use Case 5: Interactive PBPK Model Builder</h3>
+                        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">This tool demonstrates the core data integration step of the framework. Enter a drug molecule's SMILES string to simulate its physicochemical parameterization via a GNN. These properties are then combined with physiological data (from sources like NHANES) to populate the foundational parameters of a PBPK model, ready for simulation.</p>
+                        <PBPKModelBuilder />
                     </FadeIn>
                 </div>
             </div>
