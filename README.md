@@ -1,8 +1,12 @@
+
 # Welcome to your Lovable project
 
-## Project info
+## Project Links
 
-**URL**: https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6
+**Live Webpage**: [Link to your published webpage](YOUR_PUBLISHED_URL)
+_To get this URL, click on **Share -> Publish** in your Lovable project._
+
+**Lovable Editor**: [https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6](https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6)
 
 ## How can I edit this code?
 
