@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 const DDIExplainer: React.FC = () => {
@@ -53,19 +54,19 @@ const DDIExplainer: React.FC = () => {
     };
 
     return (
-        <div className="bg-slate-50 p-4 sm:p-8 rounded-xl shadow-lg">
+        <div className="bg-card text-card-foreground p-4 sm:p-8 rounded-xl shadow-lg">
             <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center">
-                <input type="text" value={drugA} onChange={(e) => setDrugA(e.target.value)} placeholder="e.g., Warfarin" className="p-3 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 flex-grow max-w-sm"/>
-                <input type="text" value={drugB} onChange={(e) => setDrugB(e.target.value)} placeholder="e.g., Amiodarone" className="p-3 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 flex-grow max-w-sm"/>
-                <button onClick={handleAnalyze} disabled={isLoading} className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700 transition-colors transform hover:scale-105 active:scale-95 whitespace-nowrap disabled:bg-gray-400 disabled:cursor-not-allowed">
+                <input type="text" value={drugA} onChange={(e) => setDrugA(e.target.value)} placeholder="e.g., Warfarin" className="p-3 rounded-md bg-input border border-border text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring flex-grow max-w-sm"/>
+                <input type="text" value={drugB} onChange={(e) => setDrugB(e.target.value)} placeholder="e.g., Amiodarone" className="p-3 rounded-md bg-input border border-border text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring flex-grow max-w-sm"/>
+                <button onClick={handleAnalyze} disabled={isLoading} className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-md shadow-lg hover:bg-primary/90 transition-colors transform hover:scale-105 active:scale-95 whitespace-nowrap disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed">
                     {isLoading ? 'Analyzing...' : 'Analyze Potential DDI ✨'}
                 </button>
             </div>
-            <div className={`min-h-[100px] bg-white p-4 rounded-md shadow-inner flex items-center justify-center ${isError ? 'text-red-500' : 'text-gray-900'} ${!result && !isLoading ? 'italic text-gray-500' : ''}`}>
+            <div className={`min-h-[100px] bg-background p-4 rounded-md shadow-inner flex items-center justify-center ${isError ? 'text-destructive' : 'text-foreground'} ${!result && !isLoading ? 'italic text-muted-foreground' : ''}`}>
                 {isLoading ? '' : result}
             </div>
              {isLoading && (
-                <div className="text-center mt-4 text-blue-600 font-semibold">
+                <div className="text-center mt-4 text-primary font-semibold">
                     Analyzing... please wait.
                 </div>
             )}
