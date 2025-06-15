@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
-import { Molecule } from 'openchemlib/full';
+import * as OCL from 'openchemlib/full';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { physiologicalData, OrganData } from '@/data/physiologicalData';
+import { physiologicalData } from '@/data/physiologicalData';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Terminal } from "lucide-react"
 
@@ -29,7 +29,7 @@ const PBPKModelBuilder: React.FC = () => {
     // Simulate async operation
     setTimeout(() => {
       try {
-        const mol = Molecule.fromSmiles(smiles);
+        const mol = OCL.Molecule.fromSmiles(smiles);
         const formulaData = mol.getMolecularFormula();
         
         const properties: PhyschemProps = {
@@ -74,7 +74,7 @@ const PBPKModelBuilder: React.FC = () => {
         <Card>
           <CardHeader>
             <CardTitle>Drug Parameters (from SMILES)</CardTitle>
-            <CardDescription>Simulated GNN/RDKit Output</CardDescription>
+            <CardDescription>Parameters calculated from SMILES via openchemlib.js</CardDescription>
           </CardHeader>
           <CardContent>
             {physchem ? (
