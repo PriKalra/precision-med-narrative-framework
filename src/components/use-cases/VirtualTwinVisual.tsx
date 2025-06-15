@@ -18,8 +18,8 @@ const VirtualTwinVisual: React.FC = () => {
             {/* PBPK Virtual Twin */}
             <div className="flex flex-col items-center text-center">
                 <div className="relative">
-                    <BrainCircuit className="w-20 h-20 text-indigo-500" />
-                    <div className="absolute top-0 left-0 w-full h-full animate-pulse rounded-full bg-indigo-500/10 -z-10"></div>
+                    <BrainCircuit className="w-20 h-20 text-primary" />
+                    <div className="absolute top-0 left-0 w-full h-full animate-pulse rounded-full bg-primary/10 -z-10"></div>
                 </div>
                 <h4 className="font-semibold mt-2">PBPK Virtual Twin</h4>
                 <p className="text-sm text-muted-foreground max-w-xs">Dynamic model adapts to physiological changes</p>
