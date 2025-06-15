@@ -26,14 +26,14 @@ const ClearancePrediction: React.FC = () => {
       <div className="flex justify-around items-end h-48">
         <div className="text-center">
           <div className="w-16 h-24 bg-red-300 rounded-t-lg relative">
-            <div className="absolute bottom-0 w-full bg-red-500 rounded-t-lg" style={{ '--fill-height': '90%', height: isVisible ? 'var(--fill-height)' : '0' } as React.CSSProperties} ></div>
+            <div className={`absolute bottom-0 w-full bg-red-500 rounded-t-lg ${isVisible ? 'animate-fill' : ''}`} style={{ '--fill-height': '90%' } as React.CSSProperties} ></div>
           </div>
           <p className="font-semibold mt-2">Microsomes (HLM)</p>
           <p className="text-sm text-gray-500">High CLint,u</p>
         </div>
         <div className="text-center">
           <div className="w-16 h-24 bg-green-300 rounded-t-lg relative">
-            <div className="absolute bottom-0 w-full bg-green-500 rounded-t-lg" style={{ '--fill-height': '40%', height: isVisible ? 'var(--fill-height)' : '0' } as React.CSSProperties}></div>
+            <div className={`absolute bottom-0 w-full bg-green-500 rounded-t-lg ${isVisible ? 'animate-fill' : ''}`} style={{ '--fill-height': '40%' } as React.CSSProperties}></div>
           </div>
           <p className="font-semibold mt-2">Hepatocytes (HH)</p>
           <p className="text-sm text-gray-500">Lower CLint,u</p>

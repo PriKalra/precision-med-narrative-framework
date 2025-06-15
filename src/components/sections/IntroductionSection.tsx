@@ -24,24 +24,39 @@ const organColorClasses = {
 const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
     const [highlightedOrgan, setHighlightedOrgan] = useState(-1);
     const diagramRef = useRef<HTMLDivElement>(null);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    const interval = setInterval(() => {
-                        setHighlightedOrgan(prev => (prev + 1) % organs.length);
-                    }, 1500);
-                    return () => clearInterval(interval);
+                    if (!intervalRef.current) {
+                        intervalRef.current = setInterval(() => {
+                            setHighlightedOrgan(prev => (prev + 1) % organs.length);
+                        }, 1500);
+                    }
                 } else {
-                    setHighlightedOrgan(-1);
+                    if (intervalRef.current) {
+                        clearInterval(intervalRef.current);
+                        intervalRef.current = null;
+                        setHighlightedOrgan(-1);
+                    }
                 }
             }, { threshold: 0.5 }
         );
 
-        if (diagramRef.current) observer.observe(diagramRef.current);
+        const currentDiagramRef = diagramRef.current;
+        if (currentDiagramRef) {
+            observer.observe(currentDiagramRef);
+        }
+
         return () => {
-            if (diagramRef.current) observer.unobserve(diagramRef.current);
+            if (currentDiagramRef) {
+                observer.unobserve(currentDiagramRef);
+            }
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
         };
     }, []);
 
