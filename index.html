@@ -140,15 +140,55 @@
 
         <!-- Solution Section -->
         <section id="solution" class="scrolly-section bg-blue-50">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">The Solution: Agentic AI Integration</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                        Combining mechanistic PBPK models with autonomous AI agents for enhanced drug discovery.
-                    </p>
+            <div class="step-container">
+                <div class="step-text">
+                    <div class="step" data-step="0">
+                        <h2 class="text-3xl font-bold mb-4">The Solution: Agentic AI Integration</h2>
+                        <p class="text-lg text-gray-600 mb-6">
+                            Graph Neural Networks (GNNs) transform molecular structures (SMILES) into predicted ADME properties, providing crucial parameters for PBPK models.
+                        </p>
+                    </div>
+                    <div class="step" data-step="1">
+                        <h3 class="text-2xl font-semibold mb-4">Human Expert Input</h3>
+                        <p class="text-gray-600 mb-4">
+                            A pharmacologist defines the problem using natural language, setting the research question and constraints.
+                        </p>
+                    </div>
+                    <div class="step" data-step="2">
+                        <h3 class="text-2xl font-semibold mb-4">AI Agent Coordination</h3>
+                        <p class="text-gray-600 mb-4">
+                            Multiple specialized agents work together: conversational processing, workflow planning, and task coordination.
+                        </p>
+                    </div>
+                    <div class="step" data-step="3">
+                        <h3 class="text-2xl font-semibold mb-4">Parallel Task Execution</h3>
+                        <p class="text-gray-600 mb-4">
+                            Data retrieval, knowledge extraction, hypothesis generation, and ML parameter prediction happen simultaneously.
+                        </p>
+                    </div>
+                    <div class="step" data-step="4">
+                        <h3 class="text-2xl font-semibold mb-4">PBPK Simulation</h3>
+                        <p class="text-gray-600 mb-4">
+                            The simulation agent runs comprehensive PBPK/PK/PD/QSP models with AI-predicted parameters.
+                        </p>
+                    </div>
+                    <div class="step" data-step="5">
+                        <h3 class="text-2xl font-semibold mb-4">Iterative Refinement</h3>
+                        <p class="text-gray-600 mb-4">
+                            Continuous evaluation and optimization loop improves predictions and model accuracy.
+                        </p>
+                    </div>
+                    <div class="step" data-step="6">
+                        <h3 class="text-2xl font-semibold mb-4">Human Oversight & Reporting</h3>
+                        <p class="text-gray-600 mb-4">
+                            Expert review ensures scientific validity while automated documentation supports regulatory compliance.
+                        </p>
+                    </div>
                 </div>
-                <div id="solution-flowchart" class="max-w-4xl mx-auto">
-                    <!-- AI Flowchart visualization -->
+                <div class="step-visualization">
+                    <div id="solution-flowchart" class="sticky-viz">
+                        <!-- AI Flowchart visualization -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -166,25 +206,140 @@
                 <div class="space-y-20">
                     <!-- Use Case 1: Species Extrapolation -->
                     <div class="use-case">
-                        <h3 class="text-2xl font-semibold mb-4">Multi-Species Extrapolation</h3>
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Multi-Species Extrapolation</h3>
                         <div id="species-chart" class="chart-container">
-                            <canvas id="speciesComparisonChart"></canvas>
+                            <div class="flex justify-center space-x-2 mb-4">
+                                <button class="species-btn px-4 py-2 rounded-md font-semibold shadow transition-colors bg-blue-600 text-white" data-species="human">Human</button>
+                                <button class="species-btn px-4 py-2 rounded-md font-semibold shadow transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300" data-species="monkey">Monkey</button>
+                                <button class="species-btn px-4 py-2 rounded-md font-semibold shadow transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300" data-species="rat">Rat</button>
+                                <button class="species-btn px-4 py-2 rounded-md font-semibold shadow transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300" data-species="mouse">Mouse</button>
+                            </div>
+                            <canvas id="speciesComparisonChart" width="400" height="300"></canvas>
+                            <p class="text-xs text-gray-500 mt-4 text-center">
+                                Note: The vertical axis uses a logarithmic scale to clearly display values that span several orders of magnitude.
+                            </p>
                         </div>
                     </div>
                     
                     <!-- Use Case 2: Clearance Prediction -->
                     <div class="use-case">
-                        <h3 class="text-2xl font-semibold mb-4">Advanced Clearance Prediction</h3>
-                        <div id="clearance-visualization" class="bg-gray-50 p-6 rounded-xl">
-                            <p class="text-gray-600 mb-4">AI models help reconcile the "microsome-hepatocyte disconnect" for more accurate DDI predictions.</p>
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Advanced Clearance Prediction</h3>
+                        <div id="clearance-visualization" class="bg-gray-50 p-8 rounded-xl shadow-lg grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h4 class="font-semibold text-lg mb-2">The HLM:HH Disconnect</h4>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    A key issue is the "microsome-hepatocyte disconnect," where lab tests using liver microsomes (HLM) often predict higher clearance than tests with whole hepatocytes (HH), the more physiologically relevant system.
+                                </p>
+                                <p class="text-sm text-gray-600">
+                                    Our AI models help reconcile this discrepancy, directly impacting DDI predictions by providing a more reliable estimation of a drug's true intrinsic clearance.
+                                </p>
+                            </div>
+                            <div class="flex justify-around items-end h-48" id="clearance-bars">
+                                <div class="text-center">
+                                    <div class="w-16 h-24 bg-red-200 rounded-t-lg relative">
+                                        <div class="clearance-fill absolute bottom-0 w-full bg-red-500 rounded-t-lg" style="height: 90%;"></div>
+                                    </div>
+                                    <p class="font-semibold mt-2">Microsomes (HLM)</p>
+                                    <p class="text-sm text-gray-600">High CLint,u</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-16 h-24 bg-blue-200 rounded-t-lg relative">
+                                        <div class="clearance-fill absolute bottom-0 w-full bg-blue-500 rounded-t-lg" style="height: 40%;"></div>
+                                    </div>
+                                    <p class="font-semibold mt-2">Hepatocytes (HH)</p>
+                                    <p class="text-sm text-gray-600">Lower CLint,u</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Use Case 3: DDI Explainer -->
+                    <div class="use-case">
+                        <h3 class="text-2xl font-semibold mb-6 text-center">AI-Powered Drug-Drug Interaction Assessment</h3>
+                        <div id="ddi-explainer" class="bg-white p-8 rounded-xl shadow-lg">
+                            <div class="flex flex-col sm:flex-row gap-4 mb-6 justify-center">
+                                <input type="text" id="drug-a" placeholder="e.g., Warfarin" class="p-3 rounded-md border border-gray-300 flex-grow max-w-sm">
+                                <input type="text" id="drug-b" placeholder="e.g., Amiodarone" class="p-3 rounded-md border border-gray-300 flex-grow max-w-sm">
+                                <button id="analyze-ddi" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700 transition-colors whitespace-nowrap">
+                                    Analyze Potential DDI ✨
+                                </button>
+                            </div>
+                            <div id="ddi-result" class="min-h-[100px] bg-gray-50 p-4 rounded-md shadow-inner flex items-center justify-center text-gray-600 italic">
+                                This tool demonstrates an Agentic AI task agent for DDI assessment. Input two drug names to receive a concise analysis of potential pharmacokinetic or pharmacodynamic interactions.
+                            </div>
+                        </div>
+
+                        <!-- Enzyme Tabs -->
+                        <div class="mt-8 bg-white p-8 rounded-xl shadow-lg">
+                            <div class="flex flex-wrap justify-center border-b border-gray-200">
+                                <button class="enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors bg-blue-50 text-blue-600 border-b-2 border-blue-600" data-enzyme="cyp3a">CYP3A</button>
+                                <button class="enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors text-gray-600 hover:bg-gray-50" data-enzyme="ugts">UGTs</button>
+                                <button class="enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors text-gray-600 hover:bg-gray-50" data-enzyme="mdr1">MDR1</button>
+                            </div>
+                            <div class="pt-4" id="enzyme-content">
+                                <h4 class="font-bold text-lg mb-2">CYP3A Family</h4>
+                                <p class="text-gray-600">Found in the liver and intestine, CYP3A enzymes are responsible for metabolizing over 50% of prescription drugs. Their activity shows high variability between people due to genetics and can be a source of the HLM:HH disconnect.</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Use Case 3: Virtual Twins -->
+                    <!-- Use Case 4: Virtual Twins -->
                     <div class="use-case">
-                        <h3 class="text-2xl font-semibold mb-4">Virtual Twins & Real-time Personalization</h3>
-                        <div id="virtual-twin-demo" class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl">
-                            <p class="text-gray-600">Dynamic models that mirror individual physiology using real-time wearable data.</p>
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Virtual Twins & Real-time Personalization</h3>
+                        <div id="virtual-twin-demo" class="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl shadow-lg">
+                            <div class="flex flex-col md:flex-row items-center justify-center gap-8 w-full">
+                                <!-- Wearable Data Source -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mb-2">⌚</div>
+                                    <h4 class="font-semibold">Wearable Devices</h4>
+                                    <p class="text-sm text-gray-600 max-w-xs">Real-time data stream (Heart Rate, Activity, Sleep)</p>
+                                </div>
+
+                                <div class="text-2xl text-gray-400">→</div>
+                                
+                                <!-- PBPK Virtual Twin -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="relative">
+                                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl">🧠</div>
+                                        <div class="absolute top-0 left-0 w-full h-full animate-pulse rounded-full bg-blue-200 -z-10"></div>
+                                    </div>
+                                    <h4 class="font-semibold mt-2">PBPK Virtual Twin</h4>
+                                    <p class="text-sm text-gray-600 max-w-xs">Dynamic model adapts to physiological changes</p>
+                                </div>
+                                
+                                <div class="text-2xl text-gray-400">→</div>
+
+                                <!-- Personalized Outcome -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="p-4 rounded-full bg-purple-100">
+                                        <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white text-xl">💊</div>
+                                    </div>
+                                    <h4 class="font-semibold mt-2">Optimized Dosing</h4>
+                                    <p class="text-sm text-gray-600 max-w-xs">Personalized and adaptive drug therapy</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Virtual Twin Complexities -->
+                        <div class="mt-12">
+                            <h4 class="text-xl font-semibold mb-6 text-center">Addressing Complexities in Virtual Twin Integration</h4>
+                            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 text-left">
+                                <div class="p-6 bg-white rounded-xl shadow-lg h-full flex flex-col items-center text-center">
+                                    <div class="text-4xl text-blue-600 mb-4">🧪</div>
+                                    <h5 class="font-semibold text-lg mb-3">Formulation Impact</h5>
+                                    <p class="text-gray-600 text-sm">Conventional PBPK models often simplify the impact of drug formulation. Integrating the precise characteristics of novel delivery systems is crucial.</p>
+                                </div>
+                                <div class="p-6 bg-white rounded-xl shadow-lg h-full flex flex-col items-center text-center">
+                                    <div class="text-4xl text-blue-600 mb-4">⚛️</div>
+                                    <h5 class="font-semibold text-lg mb-3">Nanomedicine & Complex Devices</h5>
+                                    <p class="text-gray-600 text-sm">Modeling nanomedicines and drugs from medical devices requires intricate biophysical interactions beyond traditional PBPK compartments.</p>
+                                </div>
+                                <div class="p-6 bg-white rounded-xl shadow-lg h-full flex flex-col items-center text-center">
+                                    <div class="text-4xl text-blue-600 mb-4">🔄</div>
+                                    <h5 class="font-semibold text-lg mb-3">Seamless Translational Continuum</h5>
+                                    <p class="text-gray-600 text-sm">A continuous predictive thread from preclinical data to individual patient management using standardized data formats.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

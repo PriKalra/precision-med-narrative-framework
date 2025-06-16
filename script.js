@@ -4,6 +4,7 @@ class PrecisionMedicineApp {
     constructor() {
         this.scrollama = scrollama();
         this.currentStep = 0;
+        this.solutionStep = 0;
         this.organs = [
             { name: 'Liver', group: 'metabolic' },
             { name: 'Kidney', group: 'metabolic' },
@@ -23,16 +24,42 @@ class PrecisionMedicineApp {
             { name: 'Blood', group: 'other' }
         ];
         
+        this.speciesData = {
+            human: { values: [70, 312, 2.6, 0.4, 1.6], color: 'rgba(115, 41, 230, 0.7)' },
+            monkey: { values: [7, 45, 3.66, 0.73, 1.6], color: 'rgba(46, 184, 105, 0.7)' },
+            rat: { values: [0.25, 5, 3.66, 0.73, 1.6], color: 'rgba(166, 128, 224, 0.7)' },
+            mouse: { values: [0.025, 0.5, 3.66, 0.73, 1.6], color: 'rgba(90, 196, 137, 0.7)' }
+        };
+
+        this.enzymeData = {
+            cyp3a: {
+                title: 'CYP3A Family',
+                content: 'Found in the liver and intestine, CYP3A enzymes are responsible for metabolizing over 50% of prescription drugs. Their activity shows high variability between people due to genetics and can be a source of the HLM:HH disconnect. Predicting CYP3A-mediated interactions and understanding how varying expression levels impact them is a primary goal for DDI assessment, enabling more precise dosing.'
+            },
+            ugts: {
+                title: 'UGTs (UDP-glucuronosyltransferases)',
+                content: 'These are key Phase II metabolism enzymes that make compounds more water-soluble for excretion. Their expression and activity are highly tissue- and species-dependent, leading to significant variations in unbound intrinsic clearance. Integrating these specific expression profiles improves cross-species scaling and DDI predictions related to glucuronidation.'
+            },
+            mdr1: {
+                title: 'MDR1 (P-glycoprotein)',
+                content: "MDR1 is an efflux transporter that acts like a bouncer, pumping drugs out of cells. It's crucial in limiting drug absorption and preventing entry into the brain. Its function, substrate specificity, and expression levels can differ significantly across species. Accounting for these varied expression profiles is key to predicting transporter-mediated DDIs and tissue-specific drug concentrations."
+            }
+        };
+        
         this.init();
     }
 
     init() {
         this.setupScrollytelling();
         this.createPBPKDiagram();
+        this.createSolutionFlowchart();
         this.createSpeciesChart();
+        this.setupDDIExplainer();
+        this.setupEnzymeTabs();
         this.setupNavigation();
         this.setupScrollIndicator();
         this.setupAnimations();
+        this.animateClearanceBars();
     }
 
     setupScrollytelling() {
@@ -58,7 +85,7 @@ class PrecisionMedicineApp {
 
     handleStepEnter(response) {
         const stepIndex = +response.element.dataset.step;
-        this.currentStep = stepIndex;
+        const section = response.element.closest('section');
         
         // Update active step
         document.querySelectorAll('.step').forEach(step => {
@@ -66,8 +93,14 @@ class PrecisionMedicineApp {
         });
         response.element.classList.add('active');
         
-        // Update PBPK diagram based on step
-        this.updatePBPKDiagram(stepIndex);
+        // Handle different sections
+        if (section.id === 'introduction') {
+            this.currentStep = stepIndex;
+            this.updatePBPKDiagram(stepIndex);
+        } else if (section.id === 'solution') {
+            this.solutionStep = stepIndex;
+            this.updateSolutionFlowchart(stepIndex);
+        }
     }
 
     handleStepExit(response) {
@@ -141,6 +174,362 @@ class PrecisionMedicineApp {
         }
     }
 
+    createSolutionFlowchart() {
+        const container = document.getElementById('solution-flowchart');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="w-full flex justify-center items-center">
+                <div class="relative w-full max-w-lg h-[70vh]">
+                    <div id="gnn-visual" class="absolute inset-0 transition-all duration-700 ease-in-out opacity-100 scale-100">
+                        <div class="flex items-center justify-center h-full">
+                            <div class="p-4 bg-white rounded-xl shadow-lg w-full max-w-lg">
+                                <div class="flex items-center justify-center h-48 space-x-4">
+                                    <span class="text-sm font-mono text-center text-gray-600">Molecule<br/>(SMILES)</span>
+                                    <span class="text-2xl text-gray-400">→</span>
+                                    <div class="text-center">
+                                        <div class="relative w-24 h-24 animate-pulse">
+                                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-blue-600 rounded-full"></div>
+                                            <div class="absolute top-2 left-2 w-4 h-4 bg-blue-400 rounded-full"></div>
+                                            <div class="absolute bottom-2 right-2 w-4 h-4 bg-blue-400 rounded-full"></div>
+                                            <div class="absolute top-2 right-2 w-4 h-4 bg-blue-400 rounded-full"></div>
+                                            <div class="absolute bottom-2 left-2 w-4 h-4 bg-blue-400 rounded-full"></div>
+                                        </div>
+                                        <span class="text-sm font-semibold mt-2 block">GNN Model</span>
+                                    </div>
+                                    <span class="text-2xl text-gray-400">→</span>
+                                    <div class="text-left text-sm font-mono text-gray-600">
+                                        <p>Vss: 1.5 L/kg</p>
+                                        <p>CL: 20 mL/min</p>
+                                        <p>Papp: 10e-6</p>
+                                        <span class="text-xs font-semibold mt-2 block text-gray-900">(Predicted ADME)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ai-flowchart" class="absolute inset-0 transition-all duration-700 ease-in-out opacity-0 scale-95 pointer-events-none">
+                        <div class="flex items-center justify-center h-full">
+                            <div class="w-full max-w-md mx-auto p-4 space-y-2 font-sans text-xs flex flex-col items-center" id="flowchart-container">
+                                <!-- Flowchart will be built here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        this.buildAIFlowchart();
+    }
+
+    buildAIFlowchart() {
+        const container = document.getElementById('flowchart-container');
+        if (!container) return;
+
+        const flowchartSteps = [
+            { icon: '👥', title: 'Human Expert Input', desc: 'Pharmacologist defines problem' },
+            { icon: '🤖', title: 'Conversational Agent', desc: 'Processes natural language query' },
+            { icon: '⚙️', title: 'Planning Agent', desc: 'Orchestrates workflow' },
+            { icon: '🗄️', title: 'Data Retrieval', desc: '' },
+            { icon: '📚', title: 'Knowledge Extraction', desc: '' },
+            { icon: '🧪', title: 'Hypothesis Generation', desc: '' },
+            { icon: '🧠', title: 'ML Parameter Prediction', desc: '' },
+            { icon: '🧪', title: 'Simulation Agent', desc: 'PBPK/PK/PD/QSP Models' },
+            { icon: '🔄', title: 'Evaluation & Refinement Loop', desc: 'Iterative optimization' },
+            { icon: '✅', title: 'Human Oversight', desc: 'Expert review & approval' },
+            { icon: '📄', title: 'Regulatory & Reporting', desc: 'Automated documentation' }
+        ];
+
+        let html = '';
+        flowchartSteps.forEach((step, index) => {
+            const isGrid = index >= 3 && index <= 6;
+            
+            if (index === 3) {
+                html += '<div class="grid grid-cols-2 gap-4 w-full transition-opacity duration-500 opacity-20" id="parallel-tasks">';
+            }
+            
+            html += `
+                <div class="flowchart-node p-3 border rounded-lg transition-all duration-500 transform bg-gray-50 shadow opacity-100" data-step="${index}">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-lg shrink-0">${step.icon}</span>
+                        <div>
+                            <h4 class="font-semibold text-sm text-gray-600">${step.title}</h4>
+                            ${step.desc ? `<p class="text-xs text-gray-500">${step.desc}</p>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            if (index === 6) {
+                html += '</div>';
+            }
+            
+            if (index < flowchartSteps.length - 1 && (index < 3 || index > 6)) {
+                html += '<div class="flex justify-center items-center h-8 transition-opacity duration-500 opacity-20"><span class="text-gray-400">↓</span></div>';
+            }
+            
+            if (index === 8) {
+                html += '<div class="grid grid-cols-2 gap-4 w-full transition-opacity duration-500 opacity-20" id="final-tasks">';
+            }
+            
+            if (index === 10) {
+                html += '</div>';
+            }
+        });
+
+        container.innerHTML = html;
+    }
+
+    updateSolutionFlowchart(stepIndex) {
+        const gnnVisual = document.getElementById('gnn-visual');
+        const aiFlowchart = document.getElementById('ai-flowchart');
+        const flowchartNodes = document.querySelectorAll('.flowchart-node');
+        
+        if (stepIndex === 0) {
+            // Show GNN visual
+            gnnVisual.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+            gnnVisual.classList.add('opacity-100', 'scale-100');
+            aiFlowchart.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+            aiFlowchart.classList.remove('opacity-100', 'scale-100');
+        } else {
+            // Show AI flowchart
+            gnnVisual.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+            gnnVisual.classList.remove('opacity-100', 'scale-100');
+            aiFlowchart.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+            aiFlowchart.classList.add('opacity-100', 'scale-100');
+            
+            // Activate steps based on current step
+            const activeSteps = this.getActiveFlowchartSteps(stepIndex);
+            
+            flowchartNodes.forEach((node, index) => {
+                const isActive = activeSteps.includes(index);
+                if (isActive) {
+                    node.classList.add('bg-blue-50', 'border-blue-300');
+                    node.classList.remove('bg-gray-50');
+                    node.querySelector('h4').classList.add('text-blue-800');
+                    node.querySelector('h4').classList.remove('text-gray-600');
+                } else {
+                    node.classList.remove('bg-blue-50', 'border-blue-300');
+                    node.classList.add('bg-gray-50');
+                    node.querySelector('h4').classList.remove('text-blue-800');
+                    node.querySelector('h4').classList.add('text-gray-600');
+                }
+            });
+            
+            // Show/hide parallel task groups
+            const parallelTasks = document.getElementById('parallel-tasks');
+            const finalTasks = document.getElementById('final-tasks');
+            
+            if (stepIndex >= 3) {
+                parallelTasks?.classList.remove('opacity-20');
+                parallelTasks?.classList.add('opacity-100');
+            }
+            
+            if (stepIndex >= 6) {
+                finalTasks?.classList.remove('opacity-20');
+                finalTasks?.classList.add('opacity-100');
+            }
+        }
+    }
+
+    getActiveFlowchartSteps(stepIndex) {
+        switch(stepIndex) {
+            case 1: return [0, 1, 2];
+            case 2: return [0, 1, 2];
+            case 3: return [3, 4, 5, 6];
+            case 4: return [7];
+            case 5: return [8];
+            case 6: return [9, 10];
+            default: return [];
+        }
+    }
+
+    createSpeciesChart() {
+        const ctx = document.getElementById('speciesComparisonChart');
+        if (!ctx) return;
+
+        this.currentSpecies = 'human';
+        this.speciesChart = null;
+        this.updateSpeciesChart();
+        
+        // Add event listeners for species buttons
+        document.querySelectorAll('.species-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const species = e.target.dataset.species;
+                this.currentSpecies = species;
+                this.updateSpeciesChart();
+                
+                // Update button states
+                document.querySelectorAll('.species-btn').forEach(b => {
+                    b.classList.remove('bg-blue-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+                });
+                e.target.classList.add('bg-blue-600', 'text-white');
+                e.target.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+            });
+        });
+    }
+
+    updateSpeciesChart() {
+        const ctx = document.getElementById('speciesComparisonChart');
+        if (!ctx) return;
+
+        if (this.speciesChart) {
+            this.speciesChart.destroy();
+        }
+
+        const labels = ['Body Weight (kg)', 'Cardiac Output (L/h)', 'Liver (%BW)', 'Kidney (%BW)', 'Thyroid Blood Flow (%)'];
+        const speciesInfo = this.speciesData[this.currentSpecies];
+
+        this.speciesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: `${this.currentSpecies.charAt(0).toUpperCase() + this.currentSpecies.slice(1)} Parameters`,
+                    data: speciesInfo.values,
+                    backgroundColor: speciesInfo.color,
+                    borderColor: speciesInfo.color.replace('0.7', '1'),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        type: 'logarithmic',
+                        title: { display: true, text: 'Value (Log Scale)', color: '#9ca3af' },
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                    },
+                    x: {
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                const label = context.chart.data.labels[context.dataIndex];
+                                const value = context.parsed.y;
+                                return `${label}: ${value}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    setupDDIExplainer() {
+        const analyzeBtn = document.getElementById('analyze-ddi');
+        const drugAInput = document.getElementById('drug-a');
+        const drugBInput = document.getElementById('drug-b');
+        const resultDiv = document.getElementById('ddi-result');
+
+        if (!analyzeBtn) return;
+
+        analyzeBtn.addEventListener('click', async () => {
+            const drugA = drugAInput.value.trim();
+            const drugB = drugBInput.value.trim();
+
+            if (!drugA || !drugB) {
+                resultDiv.textContent = "Please enter names for both drugs.";
+                resultDiv.classList.add('text-red-600');
+                return;
+            }
+
+            analyzeBtn.textContent = 'Analyzing...';
+            analyzeBtn.disabled = true;
+            resultDiv.classList.remove('text-red-600', 'italic');
+            resultDiv.textContent = 'Analyzing potential drug-drug interactions...';
+
+            // Simulate API call delay
+            setTimeout(() => {
+                const mockResult = this.generateMockDDIResult(drugA, drugB);
+                resultDiv.textContent = mockResult;
+                analyzeBtn.textContent = 'Analyze Potential DDI ✨';
+                analyzeBtn.disabled = false;
+            }, 2000);
+        });
+    }
+
+    generateMockDDIResult(drugA, drugB) {
+        const commonInteractions = {
+            'warfarin': {
+                'amiodarone': 'Amiodarone inhibits CYP2C9 and CYP3A4, potentially increasing warfarin levels and bleeding risk. Monitor INR closely and consider dose reduction.',
+                'aspirin': 'Additive anticoagulant effects increase bleeding risk. Both drugs affect platelet function and coagulation cascade.',
+            },
+            'digoxin': {
+                'amiodarone': 'Amiodarone inhibits P-glycoprotein, increasing digoxin levels. Reduce digoxin dose by 50% and monitor levels.',
+                'verapamil': 'Verapamil inhibits P-glycoprotein transport, increasing digoxin bioavailability and risk of toxicity.',
+            }
+        };
+
+        const drugALower = drugA.toLowerCase();
+        const drugBLower = drugB.toLowerCase();
+
+        if (commonInteractions[drugALower]?.[drugBLower]) {
+            return commonInteractions[drugALower][drugBLower];
+        }
+        if (commonInteractions[drugBLower]?.[drugALower]) {
+            return commonInteractions[drugBLower][drugALower];
+        }
+
+        return `Based on current knowledge, there are no well-documented major interactions between ${drugA} and ${drugB}. However, consider monitoring for additive effects if both drugs affect similar physiological systems. Always consult current drug interaction databases for the most up-to-date information.`;
+    }
+
+    setupEnzymeTabs() {
+        const enzymeTabs = document.querySelectorAll('.enzyme-tab');
+        const enzymeContent = document.getElementById('enzyme-content');
+
+        if (!enzymeTabs.length) return;
+
+        enzymeTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                const enzyme = e.target.dataset.enzyme;
+                const enzymeInfo = this.enzymeData[enzyme];
+
+                // Update tab states
+                enzymeTabs.forEach(t => {
+                    t.classList.remove('bg-blue-50', 'text-blue-600', 'border-b-2', 'border-blue-600');
+                    t.classList.add('text-gray-600', 'hover:bg-gray-50');
+                });
+                e.target.classList.add('bg-blue-50', 'text-blue-600', 'border-b-2', 'border-blue-600');
+                e.target.classList.remove('text-gray-600', 'hover:bg-gray-50');
+
+                // Update content
+                enzymeContent.innerHTML = `
+                    <h4 class="font-bold text-lg mb-2">${enzymeInfo.title}</h4>
+                    <p class="text-gray-600">${enzymeInfo.content}</p>
+                `;
+            });
+        });
+    }
+
+    animateClearanceBars() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fills = entry.target.querySelectorAll('.clearance-fill');
+                    fills.forEach(fill => {
+                        fill.style.transition = 'height 1.5s ease-out';
+                        fill.style.height = fill.style.height || '0%';
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const clearanceBars = document.getElementById('clearance-bars');
+        if (clearanceBars) {
+            observer.observe(clearanceBars);
+        }
+    }
+
     startOrganCycling() {
         this.stopOrganCycling(); // Clear any existing interval
         let currentOrgan = 0;
@@ -162,71 +551,6 @@ class PrecisionMedicineApp {
             clearInterval(this.organCycleInterval);
             this.organCycleInterval = null;
         }
-    }
-
-    createSpeciesChart() {
-        const ctx = document.getElementById('speciesComparisonChart');
-        if (!ctx) return;
-
-        const speciesData = {
-            labels: ['Body Weight (kg)', 'Liver Volume (L)', 'Cardiac Output (L/min)', 'Renal Clearance (mL/min)'],
-            datasets: [
-                {
-                    label: 'Mouse',
-                    data: [0.025, 0.001, 0.01, 0.2],
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                    borderColor: 'rgba(59, 130, 246, 1)',
-                    borderWidth: 2
-                },
-                {
-                    label: 'Rat',
-                    data: [0.25, 0.01, 0.08, 1.5],
-                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                    borderColor: 'rgba(16, 185, 129, 1)',
-                    borderWidth: 2
-                },
-                {
-                    label: 'Monkey',
-                    data: [5, 0.2, 1.2, 40],
-                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
-                    borderColor: 'rgba(245, 158, 11, 1)',
-                    borderWidth: 2
-                },
-                {
-                    label: 'Human',
-                    data: [70, 1.8, 5.6, 120],
-                    backgroundColor: 'rgba(239, 68, 68, 0.2)',
-                    borderColor: 'rgba(239, 68, 68, 1)',
-                    borderWidth: 2
-                }
-            ]
-        };
-
-        new Chart(ctx, {
-            type: 'radar',
-            data: speciesData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        ticks: {
-                            display: false
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Physiological Parameters Across Species (Normalized)'
-                    }
-                }
-            }
-        });
     }
 
     setupNavigation() {
@@ -313,6 +637,9 @@ class PrecisionMedicineApp {
         this.stopOrganCycling();
         if (this.scrollama) {
             this.scrollama.destroy();
+        }
+        if (this.speciesChart) {
+            this.speciesChart.destroy();
         }
     }
 }
