@@ -5,52 +5,45 @@ import AgenticAIFlowchart from '../solution/AgenticAIFlowchart';
 
 const storySteps = [
     {
-        title: "1. Graph Neural Networks: Molecular Intelligence",
+        title: "Agentic AI: Autonomous Intelligence",
         description: [
-            "Graph Neural Networks (GNNs) represent a paradigm shift in molecular property prediction, treating drug molecules as mathematical graphs where atoms become nodes and chemical bonds become edges. This graph-theoretic approach enables direct learning from molecular topology, capturing structural features that traditional descriptors miss.",
-            "The conceptual framework leverages message-passing algorithms to propagate information across molecular substructures, enabling prediction of ADME properties (Vss, CLh, Papp, fu) directly from SMILES strings. This automated parameterization could theoretically accelerate virtual screening workflows by orders of magnitude."
+            "Agentic AI represents sophisticated artificial intelligence systems designed to operate autonomously, adapt in real-time to dynamic environments, and solve complex, multi-step problems. Unlike traditional automation, these systems possess autonomy, sophisticated reasoning capabilities, extensive tool use, and adaptive memory systems.",
+            "The defining characteristics include independent task initiation, contextual decision-making, integration with external tools and databases, and continuous learning from past experiences."
         ],
     },
     {
-        title: "2. Agentic AI: Autonomous Scientific Reasoning",
+        title: "Multi-Agent Architecture",
         description: [
-            "Agentic AI extends beyond simple language models to create autonomous systems capable of scientific reasoning, tool usage, and adaptive learning. These theoretical agents would possess memory systems for context retention, planning capabilities for multi-step problem decomposition, and the ability to interact with external databases and simulation tools.",
-            "The conceptual framework envisions specialized agents for different aspects of drug development—from hypothesis generation to model validation—working collaboratively under human oversight to accelerate discovery timelines while maintaining scientific rigor."
+            "Agentic AI systems employ multiple specialized agents that collaborate to perform complex tasks. A Conversational Agent processes natural language queries from researchers, while a Planning Agent decomposes high-level objectives into structured workflows.",
+            "This modular approach enables efficient task distribution and allows for human review and approval at critical decision points, maintaining scientific rigor and ethical oversight."
         ],
     },
     {
-        title: "3. Natural Language Interface: Domain Expert Integration",
+        title: "Data Integration and Knowledge Extraction",
         description: [
-            "The proposed workflow begins with natural language query interpretation, allowing pharmacologists to pose research questions in domain-specific terminology. A specialized conversational agent, fine-tuned on biomedical literature, would parse complex queries involving drug-drug interactions, clearance mechanisms, or population pharmacokinetics.",
-            "An orchestration agent would then decompose high-level objectives into executable workflows, creating transparent, auditable plans that maintain the connection between scientific intent and computational execution."
+            "Specialized agents perform parallel data retrieval from internal databases, public literature, and biomedical knowledge graphs. Knowledge Extraction agents process and contextualize diverse information sources, while Hypothesis Generation agents synthesize this data to propose novel drug targets or repurposing candidates.",
+            "Machine Learning agents simultaneously predict ADME parameters using Graph Neural Networks and other algorithms, accelerating model parameterization."
         ],
     },
     {
-        title: "4. Knowledge Integration: From Data to Insights",
+        title: "Mechanistic Simulation Platform",
         description: [
-            "Specialized agents would mine disparate data sources—from ChEMBL and PubChem to proprietary databases—while knowledge extraction agents build contextual understanding from biomedical ontologies and literature. This multi-source integration addresses the data fragmentation challenge in pharmaceutical research.",
-            "A hypothesis generation agent would synthesize this information to propose novel drug targets, mechanism-based DDI predictions, or repurposing opportunities. Simultaneously, machine learning agents would predict missing ADME parameters using QSAR/QSPR models, creating a comprehensive parameter space for mechanistic modeling."
+            "The Simulation Agent executes complex PBPK, PK/PD, and QSP models to predict drug disposition, efficacy, and toxicity. These mechanistic models provide quantitative predictions of drug behavior across multiple biological scales, from molecular interactions to organ-level responses.",
+            "This platform enables in silico experimentation and virtual trial capabilities, reducing reliance on costly physical experiments."
         ],
     },
     {
-        title: "5. Mechanistic Simulation: In Silico Experimentation",
+        title: "Iterative Optimization Loop",
         description: [
-            "The simulation engine represents the mechanistic core, executing PBPK, PK/PD, and quantitative systems pharmacology (QSP) models with AI-predicted parameters. This hybrid approach combines the interpretability of mechanistic models with the predictive power of machine learning.",
-            "The theoretical framework would enable large-scale virtual trials, exploring parameter uncertainty through Monte Carlo simulation and sensitivity analysis to identify critical knowledge gaps and de-risk development decisions."
+            "An Evaluation Agent assesses simulation results against predefined criteria including efficacy, safety, and mechanistic coherence. The Refinement Agent processes this feedback to formulate structured improvements for subsequent iterations.",
+            "This continuous optimization loop transforms drug development from a linear process into a dynamic, self-improving system that adapts based on real-time data and outcomes."
         ],
     },
     {
-        title: "6. Adaptive Learning: Self-Improving Systems",
+        title: "Human-Centered Control",
         description: [
-            "A continuous learning loop would enable the system to improve prediction accuracy through Bayesian model updating and active learning strategies. Evaluation agents would assess simulation results against efficacy, safety, and feasibility criteria, while refinement agents provide structured feedback for system optimization.",
-            "This adaptive capability theoretically enables the framework to learn from both successes and failures, continuously refining its understanding of drug disposition and response mechanisms."
-        ],
-    },
-    {
-        title: "7. Human-Centric Governance: Augmented Intelligence",
-        description: [
-            "Despite automation capabilities, human expertise remains central to the conceptual framework. Expert validation agents would ensure critical decisions undergo human review, maintaining scientific oversight and ethical responsibility in the development process.",
-            "Documentation agents would automatically generate regulatory submissions, study reports, and publication materials, ensuring that insights are captured in formats suitable for peer review and regulatory evaluation. This human-AI collaboration model aims to augment rather than replace scientific expertise."
+            "Human Oversight agents ensure expert review of critical outputs, validation of model logic, and strategic direction. This collaborative model augments human expertise rather than replacing it, maintaining scientific accountability and regulatory compliance.",
+            "Regulatory and Reporting agents automate documentation generation while ensuring adherence to industry standards and compliance requirements."
         ],
     },
 ];
@@ -92,41 +85,36 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
         <section id={id} className="py-20 min-h-screen snap-start">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">Conceptual Framework: AI-Enhanced MIDD</h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section presents a theoretical framework integrating Graph Neural Networks and Agentic AI with mechanistic pharmacological modeling. The proposed system represents a conceptual approach to addressing current limitations in drug development through autonomous, adaptive computational workflows.</p>
-                    <div className="mt-4 inline-block bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 px-3 py-1 rounded text-sm">
-                        Theoretical Framework • Research Concept
-                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">Agentic AI Integration in MIDD</h2>
+                    <p className="text-lg text-muted-foreground max-w-4xl mx-auto">The synergistic integration of Agentic AI with MIDD creates a transformative computational pharmacology platform. This architecture enables autonomous hypothesis generation, intelligent experimental design, accelerated model parameterization, and continuous optimization of drug development workflows through mechanistic simulation and iterative refinement.</p>
                 </div>
                 
                 <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
-                    {/* Left Column: Scrolling Text */}
                     <div className="relative">
                         {storySteps.map((step, index) => (
                             <div 
                                 key={index} 
                                 ref={el => stepRefs.current[index] = el}
-                                className="min-h-[80vh] flex items-center" 
+                                className="min-h-[70vh] flex items-center" 
                             >
                                 <FadeIn>
                                     <div className={`transition-opacity duration-500 ${activeStep === index ? 'opacity-100' : 'opacity-30'}`}>
                                         <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
-                                        <div className="space-y-4 text-foreground/80 text-lg leading-relaxed">
-                                            {step.description.map((p, i) => <p key={i}>{p}</p>)}
-                                        </div>
+                                        {step.description.map((paragraph, pIndex) => (
+                                            <p key={pIndex} className="text-foreground/80 text-lg leading-relaxed mb-4 last:mb-0">{paragraph}</p>
+                                        ))}
                                     </div>
                                 </FadeIn>
                             </div>
                         ))}
                     </div>
 
-                    {/* Right Column: Sticky Visual */}
                     <div className="lg:sticky top-24 h-full">
-                       <div className="hidden lg:flex items-center justify-center h-full min-h-[80vh]">
+                       <div className="hidden lg:flex items-center justify-center h-full min-h-[70vh]">
                             <AgenticAIFlowchart activeStep={activeStep} />
                        </div>
                        <div className="lg:hidden mt-8">
-                           <AgenticAIFlowchart activeStep={storySteps.length - 1} />
+                           <AgenticAIFlowchart activeStep={5} />
                        </div>
                     </div>
                 </div>

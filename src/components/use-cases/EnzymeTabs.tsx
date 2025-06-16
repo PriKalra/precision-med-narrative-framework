@@ -1,34 +1,53 @@
 
 import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
-const tabData = {
+interface EnzymeData {
+  title: string;
+  content: string;
+}
+
+const enzymeData: Record<string, EnzymeData> = {
   cyp3a: {
-    title: 'CYP3A Family',
-    content: 'Found in the liver and intestine, CYP3A enzymes are responsible for metabolizing over 50% of prescription drugs. Their activity shows high variability between people due to genetics and can be a source of the HLM:HH disconnect. Predicting CYP3A-mediated interactions and understanding how varying expression levels impact them is a primary goal for DDI assessment, enabling more precise dosing.',
+    title: 'CYP3A4/5 Enzyme Family',
+    content: 'The CYP3A subfamily represents the most abundant cytochrome P450 enzymes in human liver and intestine, metabolizing approximately 50% of clinically used drugs. CYP3A4 exhibits substantial inter-individual variability (10-100 fold) due to genetic polymorphisms, induction/inhibition by comedications, and environmental factors. This variability significantly impacts drug clearance predictions and contributes to the microsome-hepatocyte disconnect in in vitro-in vivo extrapolation studies.'
   },
   ugts: {
-    title: 'UGTs (UDP-glucuronosyltransferases)',
-    content: 'These are key Phase II metabolism enzymes that make compounds more water-soluble for excretion. Their expression and activity are highly tissue- and species-dependent, leading to significant variations in unbound intrinsic clearance. Integrating these specific expression profiles improves cross-species scaling and DDI predictions related to glucuronidation.',
+    title: 'UDP-Glucuronosyltransferases (UGTs)',
+    content: 'UGT enzymes catalyze Phase II glucuronidation reactions, enhancing drug hydrophilicity for renal and biliary elimination. UGT expression demonstrates significant tissue-, species-, and genetic-dependent variation, particularly affecting drugs like acetaminophen, morphine, and SN-38. Population-specific UGT expression profiles are critical for accurate cross-species scaling and prediction of glucuronidation-mediated drug interactions in diverse patient populations.'
   },
   mdr1: {
     title: 'MDR1 (P-glycoprotein)',
-    content: "MDR1 is an efflux transporter that acts like a bouncer, pumping drugs out of cells. It's crucial in limiting drug absorption and preventing entry into the brain. Its function, substrate specificity, and expression levels can differ significantly across species. Accounting for these varied expression profiles is key to predicting transporter-mediated DDIs and tissue-specific drug concentrations.",
+    content: 'MDR1 is an ATP-dependent efflux transporter that limits drug absorption and facilitates elimination across biological barriers including intestine, liver, kidney, and blood-brain barrier. Substrate specificity and expression levels vary significantly across species and individuals due to genetic polymorphisms and regulatory mechanisms. Accurate MDR1 activity prediction is essential for modeling tissue drug concentrations and transporter-mediated drug interactions, particularly for CNS-active compounds.'
   }
 };
 
 const EnzymeTabs: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<keyof typeof tabData>('cyp3a');
+  const [activeTab, setActiveTab] = useState('cyp3a');
 
   return (
-    <div className="bg-card p-4 sm:p-8 rounded-xl shadow-lg">
-      <div className="flex flex-wrap justify-center border-b border-border">
-        <button onClick={() => setActiveTab('cyp3a')} className={`px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'cyp3a' ? 'tab-active' : 'text-muted-foreground hover:bg-secondary'}`}>CYP3A</button>
-        <button onClick={() => setActiveTab('ugts')} className={`px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'ugts' ? 'tab-active' : 'text-muted-foreground hover:bg-secondary'}`}>UGTs</button>
-        <button onClick={() => setActiveTab('mdr1')} className={`px-4 py-2 -mb-px font-semibold rounded-t transition-colors ${activeTab === 'mdr1' ? 'tab-active' : 'text-muted-foreground hover:bg-secondary'}`}>MDR1</button>
+    <div className="bg-card p-8 rounded-xl shadow-lg">
+      <div className="flex flex-wrap justify-center border-b border-border mb-6">
+        {Object.entries(enzymeData).map(([key, data]) => (
+          <Button
+            key={key}
+            variant={activeTab === key ? "default" : "ghost"}
+            onClick={() => setActiveTab(key)}
+            className={`px-4 py-2 rounded-t-lg border-b-2 transition-colors ${
+              activeTab === key 
+                ? 'border-primary bg-primary/10' 
+                : 'border-transparent hover:bg-muted'
+            }`}
+          >
+            {key === 'cyp3a' && 'CYP3A'}
+            {key === 'ugts' && 'UGTs'}
+            {key === 'mdr1' && 'MDR1'}
+          </Button>
+        ))}
       </div>
       <div className="pt-4">
-        <h4 className="font-bold text-lg mb-2">{tabData[activeTab].title}</h4>
-        <p className="text-muted-foreground">{tabData[activeTab].content}</p>
+        <h4 className="font-bold text-lg mb-3 text-foreground">{enzymeData[activeTab].title}</h4>
+        <p className="text-muted-foreground leading-relaxed">{enzymeData[activeTab].content}</p>
       </div>
     </div>
   );
