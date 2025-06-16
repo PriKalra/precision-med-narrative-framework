@@ -1,76 +1,108 @@
-# Welcome to your Lovable project
 
-## Project Links
+# Advancing Precision Medicine: The GNN-PBPK-AI Framework
 
-**Live Webpage**: [Link to your published webpage](https://prikalra.github.io/precision-med-narrative-framework/)
-_After setting up GitHub Pages, your URL will be available in your repository's "Settings" > "Pages" tab following the first successful deployment._
+## Live Demo
+🌐 **Live Website**: [https://prikalra.github.io/precision-med-narrative-framework/](https://prikalra.github.io/precision-med-narrative-framework/)
 
-**Lovable Editor**: [https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6](https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6)
+## Overview
+An interactive scrollytelling experience showcasing the integration of Agentic AI with Model-Informed Drug Discovery and Development (MIDD). This project demonstrates how computational modeling and mechanistic science can advance personalized medicine.
 
-## How can I edit this code?
+## Features
+✨ **Professional Scrollytelling** using Scrollama.js  
+🎯 **Interactive PBPK Visualizations** with dynamic organ highlighting  
+📊 **Species Comparison Charts** using Chart.js  
+🎨 **Responsive Design** optimized for all devices  
+⚡ **Zero Build Process** - pure HTML/CSS/JS for reliable GitHub Pages deployment  
+📱 **Mobile-Optimized** scrollytelling experience  
 
-There are several ways of editing your application.
+## Technology Stack
+- **Scrollama.js** - Industry-standard scrollytelling library (used by NY Times, The Pudding)
+- **Chart.js** - Interactive data visualizations
+- **Tailwind CSS** - Utility-first CSS framework
+- **D3.js** - Data-driven document manipulation
+- **Vanilla JavaScript** - No framework dependencies
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+## Project Structure
+```
+├── index.html          # Main HTML file with complete structure
+├── styles.css          # Custom CSS for scrollytelling and animations
+├── script.js           # JavaScript for interactivity and scroll handling
+├── .github/workflows/
+│   └── deploy.yml      # Simplified GitHub Pages deployment
+└── README.md           # Project documentation
 ```
 
-**Edit a file directly in GitHub**
+## Key Components
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 1. Hero Section
+- Compelling introduction to precision medicine
+- Gradient background with fade-in animations
 
-**Use GitHub Codespaces**
+### 2. Scrollytelling Sections
+- **Introduction**: PBPK fundamentals with interactive organ diagram
+- **Challenge**: Biological complexity in drug development
+- **Solution**: Agentic AI integration approach
+- **Use Cases**: Practical applications and examples
+- **Future**: Challenges and directions
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 3. Interactive Visualizations
+- **16-Organ PBPK System**: Dynamic highlighting based on scroll position
+- **Species Comparison**: Radar chart showing physiological differences
+- **Drug Distribution Animation**: Simulated pharmacokinetic modeling
 
-## What technologies are used for this project?
+## Local Development
+1. Clone the repository
+2. Open `index.html` in your browser
+3. For live reloading during development, use a simple HTTP server:
+   ```bash
+   python -m http.server 8000
+   # or
+   npx serve .
+   ```
 
-This project is built with:
+## Deployment
+The project uses GitHub Pages with a simple workflow:
+- Automatically deploys on push to `main` branch
+- No build process required
+- Direct file serving for maximum reliability
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Domain-Specific Content
+The project demonstrates pharmaceutical model-informed drug discovery concepts including:
+- **PBPK Modeling**: Physiologically-based pharmacokinetic simulation
+- **ADME Prediction**: Absorption, Distribution, Metabolism, Elimination
+- **Species Extrapolation**: Translating animal studies to human predictions
+- **Drug-Drug Interactions**: AI-powered interaction assessment
+- **Virtual Patient Twins**: Personalized modeling with real-time data
 
-## How can I deploy this project?
+## Performance Optimizations
+- Lazy-loaded animations and interactions
+- Optimized scroll event handling
+- Minimal external dependencies
+- Responsive image and chart loading
+- Smooth scroll behavior with hardware acceleration
 
-Simply open [Lovable](https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6) and click on Share -> Publish.
+## Browser Support
+- Modern browsers with ES6+ support
+- Mobile Safari and Chrome optimized
+- Progressive enhancement for older browsers
 
-## Can I connect a custom domain to my Lovable project?
+## Contributing
+This project showcases static scrollytelling techniques. Key areas for enhancement:
+- Additional interactive visualizations
+- Enhanced mobile experience
+- More pharmaceutical use cases
+- Advanced animation sequences
 
-Yes, you can!
+## Inspiration
+Built following best practices from leading data journalism organizations:
+- The New York Times interactive graphics
+- The Pudding's scrollytelling articles
+- Reuters visual storytelling
+- Scientific visualization standards
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## License
+This project is open source and available under the MIT License.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
+
+*Demonstrating the future of precision medicine through interactive storytelling.*

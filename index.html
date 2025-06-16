@@ -1,28 +1,242 @@
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advancing Precision Medicine: The GNN-PBPK-AI Framework</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <meta name="description" content="A new paradigm for Model-Informed Drug Discovery and Development">
+    <meta name="author" content="Precision Medicine Initiative">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Scrollama.js -->
+    <script src="https://unpkg.com/scrollama"></script>
+    <script src="https://unpkg.com/d3@7"></script>
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Poppins', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <!-- Header -->
+    <header id="main-header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-md border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-lg font-bold text-blue-600">GNN-PBPK Framework</div>
+            <div class="hidden md:flex space-x-6 text-gray-600">
+                <a href="#introduction" class="hover:text-blue-600 transition-colors nav-link">Introduction</a>
+                <a href="#challenge" class="hover:text-blue-600 transition-colors nav-link">The Challenge</a>
+                <a href="#solution" class="hover:text-blue-600 transition-colors nav-link">The Solution</a>
+                <a href="#use-cases" class="hover:text-blue-600 transition-colors nav-link">Use Cases</a>
+                <a href="#future" class="hover:text-blue-600 transition-colors nav-link">Future</a>
+            </div>
+        </nav>
+    </header>
 
-    <meta property="og:title" content="Advancing Precision Medicine: The GNN-PBPK-AI Framework" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center text-center bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-4 fade-in">
+                Advancing Precision Medicine
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto fade-in-delay">
+                A new paradigm for Model-Informed Drug Discovery and Development (MIDD) leveraging the synergistic integration of Agentic AI, computational modeling, and mechanistic science.
+            </p>
+        </div>
+    </section>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+    <!-- Scrollytelling Container -->
+    <main id="scrolly">
+        <!-- Introduction Section -->
+        <section id="introduction" class="scrolly-section">
+            <div class="step-container">
+                <div class="step-text">
+                    <div class="step" data-step="0">
+                        <h2 class="text-3xl font-bold mb-4">The Foundation: PBPK Modeling</h2>
+                        <p class="text-lg text-gray-600 mb-6">
+                            Physiologically Based Pharmacokinetic (PBPK) models create a virtual representation of an organism by linking major organs through the circulatory system.
+                        </p>
+                    </div>
+                    <div class="step" data-step="1">
+                        <h3 class="text-2xl font-semibold mb-4">A Mechanistic View of the Body</h3>
+                        <p class="text-gray-600 mb-4">
+                            Each organ is a compartment defined by physiological parameters like volume and blood flow. This bottom-up approach enables prediction of drug ADME.
+                        </p>
+                    </div>
+                    <div class="step" data-step="2">
+                        <h3 class="text-2xl font-semibold mb-4">Simulating Drug Disposition</h3>
+                        <p class="text-gray-600 mb-4">
+                            Watch how a drug distributes throughout the virtual organism, with concentrations changing in different organs over time.
+                        </p>
+                    </div>
+                    <div class="step" data-step="3">
+                        <h3 class="text-2xl font-semibold mb-4">Specialized Systems</h3>
+                        <p class="text-gray-600 mb-4">
+                            Our framework enhances PBPK by integrating specialized reproductive and thyroid tissues for enhanced precision.
+                        </p>
+                    </div>
+                </div>
+                <div class="step-visualization">
+                    <div id="pbpk-diagram" class="sticky-viz">
+                        <!-- PBPK Diagram will be dynamically updated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+        <!-- Challenge Section -->
+        <section id="challenge" class="scrolly-section bg-white">
+            <div class="container mx-auto px-6 py-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">The Challenge: Biological Complexity</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Traditional PBPK models struggle with the immense variability between and within individuals.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="challenge-card bg-gray-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-3">Inter-Individual Variability</h3>
+                        <p class="text-gray-600">Genetic differences, anatomical variations, age, and lifestyle factors create unique pharmacokinetic profiles.</p>
+                    </div>
+                    <div class="challenge-card bg-gray-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-3">Intra-Individual Variability</h3>
+                        <p class="text-gray-600">Dynamic physiological changes over time alter how drugs are processed in the body.</p>
+                    </div>
+                    <div class="challenge-card bg-gray-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-3">Data Scarcity</h3>
+                        <p class="text-gray-600">Limited comprehensive data for specific tissues creates modeling bottlenecks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section id="solution" class="scrolly-section bg-blue-50">
+            <div class="container mx-auto px-6 py-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">The Solution: Agentic AI Integration</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Combining mechanistic PBPK models with autonomous AI agents for enhanced drug discovery.
+                    </p>
+                </div>
+                <div id="solution-flowchart" class="max-w-4xl mx-auto">
+                    <!-- AI Flowchart visualization -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases Section -->
+        <section id="use-cases" class="scrolly-section bg-white">
+            <div class="container mx-auto px-6 py-20">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Framework in Action</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Practical applications demonstrating the power of integrated MIDD framework.
+                    </p>
+                </div>
+                
+                <div class="space-y-20">
+                    <!-- Use Case 1: Species Extrapolation -->
+                    <div class="use-case">
+                        <h3 class="text-2xl font-semibold mb-4">Multi-Species Extrapolation</h3>
+                        <div id="species-chart" class="chart-container">
+                            <canvas id="speciesComparisonChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Use Case 2: Clearance Prediction -->
+                    <div class="use-case">
+                        <h3 class="text-2xl font-semibold mb-4">Advanced Clearance Prediction</h3>
+                        <div id="clearance-visualization" class="bg-gray-50 p-6 rounded-xl">
+                            <p class="text-gray-600 mb-4">AI models help reconcile the "microsome-hepatocyte disconnect" for more accurate DDI predictions.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Use Case 3: Virtual Twins -->
+                    <div class="use-case">
+                        <h3 class="text-2xl font-semibold mb-4">Virtual Twins & Real-time Personalization</h3>
+                        <div id="virtual-twin-demo" class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl">
+                            <p class="text-gray-600">Dynamic models that mirror individual physiology using real-time wearable data.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Section -->
+        <section id="future" class="scrolly-section bg-gradient-to-br from-purple-50 to-blue-50">
+            <div class="container mx-auto px-6 py-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Challenges and Future Directions</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Addressing key challenges to fully realize precision medicine potential.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 text-center mb-16">
+                    <div class="future-card bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-4xl mb-4">💾</div>
+                        <h3 class="font-semibold text-xl mb-3">Data Quality & Standardization</h3>
+                        <p class="text-gray-600">Enforcing industry standards for machine-readable, high-quality data.</p>
+                    </div>
+                    <div class="future-card bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <h3 class="font-semibold text-xl mb-3">Model Validation & Interpretability</h3>
+                        <p class="text-gray-600">Providing explainable, biologically meaningful reasoning for regulatory acceptance.</p>
+                    </div>
+                    <div class="future-card bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-4xl mb-4">💻</div>
+                        <h3 class="font-semibold text-xl mb-3">Computational Scalability</h3>
+                        <p class="text-gray-600">Optimizing algorithms for practical clinical decision support.</p>
+                    </div>
+                </div>
+
+                <div class="text-center bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">Towards Unified Computational Pharmacology</h3>
+                    <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                        The future points towards convergence of PBPK, PK/PD, and QSP, creating a continuous feedback loop from molecule to population and back to the individual.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2025 GNN-PBPK Framework Initiative. All rights reserved.</p>
+            <p class="text-gray-400 mt-1">This interactive report demonstrates the "Advancing Precision Medicine" framework.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
