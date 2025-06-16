@@ -5,52 +5,45 @@ import AgenticAIFlowchart from '../solution/AgenticAIFlowchart';
 
 const storySteps = [
     {
-        title: "1. GNNs: The Molecular Architects",
+        title: "Agentic AI: Autonomous Intelligence",
         description: [
-            "Graph Neural Networks (GNNs) excel at processing data structured as graphs. By representing drug molecules as graphs—where atoms are nodes and bonds are edges—GNNs can predict physicochemical and ADME properties directly from a chemical structure.",
-            "This capability accelerates model parameterization and automates a critical, time-consuming step in early drug discovery, enabling rapid screening of virtual compounds."
+            "Agentic AI represents sophisticated artificial intelligence systems designed to operate autonomously, adapt in real-time to dynamic environments, and solve complex, multi-step problems. Unlike traditional automation, these systems possess autonomy, sophisticated reasoning capabilities, extensive tool use, and adaptive memory systems.",
+            "The defining characteristics include independent task initiation, contextual decision-making, integration with external tools and databases, and continuous learning from past experiences."
         ],
     },
     {
-        title: "2. Agentic AI: The Cognitive Engine",
+        title: "Multi-Agent Architecture",
         description: [
-            "Agentic AI provides the cognitive core of the framework, automating complex workflows from hypothesis generation to model validation. These systems employ Large Language Models for sophisticated reasoning but extend beyond them by using external tools and adaptive memory to execute multi-step tasks autonomously.",
-            "This transforms the development process from a series of manual steps into a cohesive, self-optimizing pipeline."
+            "Agentic AI systems employ multiple specialized agents that collaborate to perform complex tasks. A Conversational Agent processes natural language queries from researchers, while a Planning Agent decomposes high-level objectives into structured workflows.",
+            "This modular approach enables efficient task distribution and allows for human review and approval at critical decision points, maintaining scientific rigor and ethical oversight."
         ],
     },
     {
-        title: "3. The Core Workflow: From Query to Plan",
+        title: "Data Integration and Knowledge Extraction",
         description: [
-            "The process begins with a human expert defining a research question. A Conversational Agent interprets this natural language query, translating it into a structured task.",
-            "A Planning Agent then takes over, decomposing the high-level objective into a detailed, step-by-step workflow. This plan is presented back to the expert for review and approval, ensuring human-centric control from the outset."
+            "Specialized agents perform parallel data retrieval from internal databases, public literature, and biomedical knowledge graphs. Knowledge Extraction agents process and contextualize diverse information sources, while Hypothesis Generation agents synthesize this data to propose novel drug targets or repurposing candidates.",
+            "Machine Learning agents simultaneously predict ADME parameters using Graph Neural Networks and other algorithms, accelerating model parameterization."
         ],
     },
     {
-        title: "4. Data Foundation & Hypothesis Generation",
+        title: "Mechanistic Simulation Platform",
         description: [
-            "Once the plan is approved, specialized agents are dispatched. Data Retrieval agents mine internal databases and public literature, while Knowledge Extraction agents build context from biomedical knowledge graphs.",
-            "A Hypothesis Generation agent then synthesizes this information to propose novel drug targets or repurposing candidates. Concurrently, a Machine Learning agent predicts key ADME parameters, feeding crucial data into the system."
+            "The Simulation Agent executes complex PBPK, PK/PD, and QSP models to predict drug disposition, efficacy, and toxicity. These mechanistic models provide quantitative predictions of drug behavior across multiple biological scales, from molecular interactions to organ-level responses.",
+            "This platform enables in silico experimentation and virtual trial capabilities, reducing reliance on costly physical experiments."
         ],
     },
     {
-        title: "5. Mechanistic Simulation at Scale",
+        title: "Iterative Optimization Loop",
         description: [
-            "The heart of the framework is the Simulation Agent. It takes the generated hypotheses and predicted parameters to execute complex PBPK, PK/PD, or QSP models.",
-            "These in silico experiments predict drug disposition, efficacy, and potential toxicity, providing a deep mechanistic understanding of how a candidate compound will behave in a biological system."
+            "An Evaluation Agent assesses simulation results against predefined criteria including efficacy, safety, and mechanistic coherence. The Refinement Agent processes this feedback to formulate structured improvements for subsequent iterations.",
+            "This continuous optimization loop transforms drug development from a linear process into a dynamic, self-improving system that adapts based on real-time data and outcomes."
         ],
     },
     {
-        title: "6. The Self-Optimizing Loop",
+        title: "Human-Centered Control",
         description: [
-            "Results from the simulation are passed to an Evaluation Agent, which assesses them against criteria like efficacy, safety, and novelty. Its findings are fed to a Refinement Agent.",
-            "This agent formulates structured feedback to other agents, creating a closed loop of continuous improvement. This iterative process allows the system to autonomously learn, adapt, and optimize its strategies over time."
-        ],
-    },
-    {
-        title: "7. Human-in-the-Loop Governance",
-        description: [
-            "While automation drives efficiency, human expertise remains central. The Human Oversight agent ensures that experts review critical outputs, validate model logic, and provide strategic direction. This collaborative model augments human intellect rather than replacing it.",
-            "Finally, a Regulatory & Reporting agent automates the generation of compliance documents and publication-ready materials, ensuring that insights are captured and communicated effectively."
+            "Human Oversight agents ensure expert review of critical outputs, validation of model logic, and strategic direction. This collaborative model augments human expertise rather than replacing it, maintaining scientific accountability and regulatory compliance.",
+            "Regulatory and Reporting agents automate documentation generation while ensuring adherence to industry standards and compliance requirements."
         ],
     },
 ];
@@ -92,39 +85,36 @@ const SolutionSection: React.FC<{ id: string }> = ({ id }) => {
         <section id={id} className="py-20 min-h-screen snap-start">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Solution: A Synergistic MIDD Framework</h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">To overcome the limitations of conventional models, this framework synergistically integrates advanced computational technologies. It uses Graph Neural Networks (GNNs) for molecular insights and Agentic AI to orchestrate complex workflows, creating a dynamic, predictive, and intelligent system for MIDD.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">Agentic AI Integration in MIDD</h2>
+                    <p className="text-lg text-muted-foreground max-w-4xl mx-auto">The synergistic integration of Agentic AI with MIDD creates a transformative computational pharmacology platform. This architecture enables autonomous hypothesis generation, intelligent experimental design, accelerated model parameterization, and continuous optimization of drug development workflows through mechanistic simulation and iterative refinement.</p>
                 </div>
                 
                 <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
-                    {/* Left Column: Scrolling Text */}
                     <div className="relative">
                         {storySteps.map((step, index) => (
                             <div 
                                 key={index} 
                                 ref={el => stepRefs.current[index] = el}
-                                className="min-h-[80vh] flex items-center" 
+                                className="min-h-[70vh] flex items-center" 
                             >
                                 <FadeIn>
                                     <div className={`transition-opacity duration-500 ${activeStep === index ? 'opacity-100' : 'opacity-30'}`}>
                                         <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
-                                        <div className="space-y-4 text-foreground/80 text-lg leading-relaxed">
-                                            {step.description.map((p, i) => <p key={i}>{p}</p>)}
-                                        </div>
+                                        {step.description.map((paragraph, pIndex) => (
+                                            <p key={pIndex} className="text-foreground/80 text-lg leading-relaxed mb-4 last:mb-0">{paragraph}</p>
+                                        ))}
                                     </div>
                                 </FadeIn>
                             </div>
                         ))}
                     </div>
 
-                    {/* Right Column: Sticky Visual */}
                     <div className="lg:sticky top-24 h-full">
-                       <div className="hidden lg:flex items-center justify-center h-full min-h-[80vh]">
+                       <div className="hidden lg:flex items-center justify-center h-full min-h-[70vh]">
                             <AgenticAIFlowchart activeStep={activeStep} />
                        </div>
-                       {/* A simplified, non-sticky view for mobile, shown once. */}
                        <div className="lg:hidden mt-8">
-                           <AgenticAIFlowchart activeStep={storySteps.length - 1} />
+                           <AgenticAIFlowchart activeStep={5} />
                        </div>
                     </div>
                 </div>

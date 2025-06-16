@@ -1,19 +1,29 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import FadeIn from '../ui/FadeIn';
 import PBPKDiagram from '../introduction/PBPKDiagram';
 
 const storySteps = [
     {
-        title: "A Mechanistic View of the Body",
-        description: "Physiologically Based Pharmacokinetic (PBPK) models create a virtual representation of an organism by linking major organs—liver, kidney, brain—through the circulatory system. Each organ is a compartment defined by physiological parameters like volume and blood flow. This bottom-up approach enables the prediction of a drug's Absorption, Distribution, Metabolism, and Elimination (ADME), supporting critical decisions in early development.",
+        title: "MIDD: Quantitative Drug Development",
+        description: [
+            "Model-Informed Drug Discovery and Development (MIDD) represents a pivotal scientific discipline that quantifies drug behavior within biological systems. This interdisciplinary approach integrates computational modeling techniques including pharmacokinetics (PK), pharmacodynamics (PD), exposure-response modeling, and Physiologically-Based Pharmacokinetic (PBPK) modeling.",
+            "PBPK models provide mechanistic frameworks by integrating drug physicochemical properties with physiological characteristics of biological systems, enabling a priori simulation of drug concentration-time profiles in specific organs and tissues."
+        ],
     },
     {
-        title: "Simulating Drug Disposition",
-        description: "The simulation illustrates how a drug distributes throughout the virtual organism, with concentrations changing in different organs over time. This quantitative characterization of drug disposition forms the mechanistic foundation for predicting a drug's journey and its potential effects, long before it is tested in humans.",
+        title: "Regulatory Recognition and Clinical Impact",
+        description: [
+            "The FDA explicitly defines MIDD as 'quantifying information by developing mathematical models based on full use of all available data, from sources such as in vitro, preclinical and clinical studies.' This recognition underscores MIDD's critical role in informing clinical trial designs and dosing recommendations.",
+            "Quantitative Systems Pharmacology (QSP) models extend this capability by elucidating drug mechanisms of action across multiple biological scales, from molecular interactions to organ-level networks, facilitating personalized treatment strategies."
+        ],
     },
     {
-        title: "Modeling Specialized Systems",
-        description: "Achieving true precision requires extending beyond standard models. This framework enhances the foundational PBPK structure by integrating models for specialized systems, such as reproductive and thyroid tissues. Incorporating these complexities is critical for assessing the safety and efficacy of specific drugs in distinct patient populations.",
+        title: "Current Limitations and Challenges",
+        description: [
+            "Traditional MIDD workflows face inherent limitations including fragmented applications lacking strategic consistency across the drug development pipeline. Conventional PBPK models rely on predefined equations and fixed assumptions, preventing full capture of biological variability and dynamic interactions.",
+            "Additional challenges include data scarcity for complex physiological systems, pronounced inter-individual variability, and the computational complexity required for accurate model parameterization and validation."
+        ],
     }
 ];
 
@@ -54,37 +64,34 @@ const IntroductionSection: React.FC<{ id: string }> = ({ id }) => {
         <section id={id} className="py-20 min-h-screen snap-start">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3">The Foundation: Physiologically Based Pharmacokinetics (PBPK)</h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">This section introduces Physiologically Based Pharmacokinetic (PBPK) modeling, a foundational discipline within Model-Informed Drug Discovery and Development (MIDD). PBPK models are mechanistic frameworks that quantify drug behavior by simulating its movement through a virtual representation of an organism. By defining the body as a network of organ compartments with distinct physiological properties, these models predict drug concentration-time profiles in various tissues, providing a critical quantitative tool for drug development.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3">Model-Informed Drug Discovery and Development</h2>
+                    <p className="text-lg text-muted-foreground max-w-4xl mx-auto">MIDD represents a quantitative approach to pharmaceutical development, leveraging computational models to predict drug behavior and optimize therapeutic strategies. This mechanistic foundation enables informed decision-making throughout the development pipeline, from target identification to personalized dosing strategies.</p>
                 </div>
                 
                 <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
-                    {/* Left Column: Scrolling Text */}
                     <div className="relative">
                         {storySteps.map((step, index) => (
                             <div 
                                 key={index} 
                                 ref={el => stepRefs.current[index] = el}
-                                // Each step needs significant height to ensure proper scroll-triggering
                                 className="min-h-[70vh] flex items-center" 
                             >
                                 <FadeIn>
                                     <div className={`transition-opacity duration-500 ${activeStep === index ? 'opacity-100' : 'opacity-30'}`}>
                                         <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
-                                        <p className="text-foreground/80 text-lg leading-relaxed">{step.description}</p>
+                                        {step.description.map((paragraph, pIndex) => (
+                                            <p key={pIndex} className="text-foreground/80 text-lg leading-relaxed mb-4 last:mb-0">{paragraph}</p>
+                                        ))}
                                     </div>
                                 </FadeIn>
                             </div>
                         ))}
                     </div>
 
-                    {/* Right Column: Sticky Visual */}
-                    {/* On mobile, this will stack naturally. On desktop, it becomes sticky. */}
                     <div className="lg:sticky top-24 h-full">
                        <div className="hidden lg:flex items-center justify-center h-full min-h-[70vh]">
                             <PBPKDiagram activeStep={activeStep} />
                        </div>
-                       {/* A simplified, non-sticky view for mobile, shown once. */}
                        <div className="lg:hidden mt-8">
                            <PBPKDiagram activeStep={2} />
                        </div>
