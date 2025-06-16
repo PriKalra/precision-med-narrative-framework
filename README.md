@@ -1,9 +1,9 @@
-# Welcome to my Lovable AI showdown project
+# Welcome to your Lovable project
 
 ## Project Links
 
 **Live Webpage**: [Link to your published webpage](https://prikalra.github.io/precision-med-narrative-framework/)
-I am usually lost with github commits and pages deployment. With a react commit, it was a further learning curve. I do not think this deployment is perfect, but over the course of 5-6 hours of trying to make this work- I learnt a lot about React js and about Github actions yml and the pages deployment of static websites. Overall, it was a fun project with a learning curve, that caused me to forget sleep until 2 am on a sunday night. 
+_After setting up GitHub Pages, your URL will be available in your repository's "Settings" > "Pages" tab following the first successful deployment._
 
 **Lovable Editor**: [https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6](https://lovable.dev/projects/a4052341-4a8f-4650-a893-92bfe0a163e6)
 
