@@ -4,24 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advancing Precision Medicine: The GNN-PBPK-AI Framework</title>
-    <meta name="description" content="A new paradigm for Model-Informed Drug Discovery and Development">
-    <meta name="author" content="Precision Medicine Initiative">
+    <title>Advancing Precision Medicine: Agentic AI in GNN-Enhanced PBPK Modeling</title>
+    <meta name="description" content="A new paradigm integrating Graph Neural Networks, AI, and PBPK modeling to revolutionize drug discovery and personalized therapy">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Scrollama.js -->
-    <script src="https://unpkg.com/scrollama"></script>
-    <script src="https://unpkg.com/d3@7"></script>
-    
-    <!-- Chart.js for visualizations -->
+    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Custom Tailwind Config -->
     <script>
@@ -29,369 +22,899 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        'sans': ['Poppins', 'system-ui', 'sans-serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
                     },
                     colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                        }
+                        'beige': '#FDFBF5',
+                        'slate': '#2F4F4F',
+                        'teal': '#20688a',
+                        'teal-bg': '#4682B4',
+                        'coral-light': '#FFA07A',
+                        'coral-highlight': '#E57373',
+                    },
+                    animation: {
+                        'fill': 'fillAnimation 1.5s ease-out forwards',
+                        'organ-highlight': 'organHighlight 0.5s ease-in-out forwards',
                     }
                 }
             }
         }
     </script>
     
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #FDFBF5;
+            color: #333333;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .text-slate { color: #2F4F4F; }
+        .text-teal { color: #20688a; }
+        .bg-teal { background-color: #4682B4; }
+        .border-teal { border-color: #4682B4; }
+        .bg-coral-light { background-color: #FFA07A; }
+        .highlight-coral { background-color: #E57373; }
+        
+        .content-card {
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.07);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        
+        .organ {
+            padding: 0.75rem;
+            margin: 0.25rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .organ-general { 
+            background-color: #E3F2FD; 
+            border: 2px solid #2196F3; 
+            color: #1565C0; 
+        }
+        .organ-thyroid { 
+            background-color: #FCE4EC; 
+            border: 2px solid #E91E63; 
+            color: #C2185B; 
+        }
+        .organ-reproductive-m { 
+            background-color: #E8F5E8; 
+            border: 2px solid #4CAF50; 
+            color: #2E7D32; 
+        }
+        .organ-reproductive-f { 
+            background-color: #F3E5F5; 
+            border: 2px solid #9C27B0; 
+            color: #7B1FA2; 
+        }
+        
+        .organ.highlighted {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes fillAnimation {
+            from { width: 0%; }
+            to { width: var(--fill-width); }
+        }
+        
+        @keyframes organHighlight {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .clearance-bar {
+            height: 60px;
+            background-color: #E3F2FD;
+            border: 2px solid #2196F3;
+            border-radius: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clearance-fill {
+            height: 100%;
+            border-radius: 0.375rem;
+            transition: width 1.5s ease-out;
+            width: 0%;
+        }
+        
+        .hlm-fill { background-color: #E57373; }
+        .hh-fill { background-color: #4682B4; }
+        
+        .agent-node {
+            padding: 1rem;
+            margin: 0.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .agent-human { 
+            background-color: #E8F5E8; 
+            border: 2px solid #4CAF50; 
+            color: #2E7D32; 
+        }
+        .agent-ai { 
+            background-color: #E3F2FD; 
+            border: 2px solid #2196F3; 
+            color: #1565C0; 
+        }
+        .agent-process { 
+            background-color: #FFF3E0; 
+            border: 2px solid #FF9800; 
+            color: #E65100; 
+        }
+        
+        .feedback-loop {
+            border: 2px dashed #9C27B0;
+            border-radius: 1rem;
+            padding: 1rem;
+            background-color: rgba(156, 39, 176, 0.05);
+        }
+        
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #666;
+            margin: 0.5rem auto;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 2px solid #4682B4;
+            background-color: white;
+            color: #4682B4;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background-color: #4682B4;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin-top: 1rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
-    <!-- Header -->
-    <header id="main-header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-md border-b border-gray-200">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="text-lg font-bold text-blue-600">GNN-PBPK Framework</div>
-            <div class="hidden md:flex space-x-6 text-gray-600">
-                <a href="#introduction" class="hover:text-blue-600 transition-colors nav-link">Introduction</a>
-                <a href="#challenge" class="hover:text-blue-600 transition-colors nav-link">The Challenge</a>
-                <a href="#solution" class="hover:text-blue-600 transition-colors nav-link">The Solution</a>
-                <a href="#use-cases" class="hover:text-blue-600 transition-colors nav-link">Use Cases</a>
-                <a href="#future" class="hover:text-blue-600 transition-colors nav-link">Future</a>
+<body>
+    <!-- Navigation Header -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-teal">Precision Medicine Framework</h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#hero" class="text-slate hover:text-teal transition-colors">Home</a>
+                    <a href="#foundation" class="text-slate hover:text-teal transition-colors">Foundation</a>
+                    <a href="#challenge" class="text-slate hover:text-teal transition-colors">Challenge</a>
+                    <a href="#solution" class="text-slate hover:text-teal transition-colors">Solution</a>
+                    <a href="#framework" class="text-slate hover:text-teal transition-colors">Framework</a>
+                    <a href="#outlook" class="text-slate hover:text-teal transition-colors">Outlook</a>
+                </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center text-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div class="container mx-auto px-6">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-4 fade-in">
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-20">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h1 class="text-5xl md:text-7xl font-bold text-teal mb-6 fade-in">
                 Advancing Precision Medicine
             </h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto fade-in-delay">
-                A new paradigm for Model-Informed Drug Discovery and Development (MIDD) leveraging the synergistic integration of Agentic AI, computational modeling, and mechanistic science.
+            <p class="text-xl md:text-2xl text-slate mb-8 fade-in" style="transition-delay: 0.2s;">
+                A new paradigm integrating Graph Neural Networks, AI, and PBPK modeling to revolutionize drug discovery and personalized therapy
             </p>
+            <div class="fade-in" style="transition-delay: 0.4s;">
+                <a href="#foundation" class="inline-block bg-teal text-white px-8 py-4 rounded-lg font-semibold hover:bg-opacity-90 transition-all">
+                    Explore the Framework
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Scrollytelling Container -->
-    <main id="scrolly">
-        <!-- Introduction Section -->
-        <section id="introduction" class="scrolly-section">
-            <div class="step-container">
-                <div class="step-text">
-                    <div class="step" data-step="0">
-                        <h2 class="text-3xl font-bold mb-4">The Foundation: PBPK Modeling</h2>
-                        <p class="text-lg text-gray-600 mb-6">
-                            Physiologically Based Pharmacokinetic (PBPK) models create a virtual representation of an organism by linking major organs through the circulatory system.
-                        </p>
-                    </div>
-                    <div class="step" data-step="1">
-                        <h3 class="text-2xl font-semibold mb-4">A Mechanistic View of the Body</h3>
-                        <p class="text-gray-600 mb-4">
-                            Each organ is a compartment defined by physiological parameters like volume and blood flow. This bottom-up approach enables prediction of drug ADME.
-                        </p>
-                    </div>
-                    <div class="step" data-step="2">
-                        <h3 class="text-2xl font-semibold mb-4">Simulating Drug Disposition</h3>
-                        <p class="text-gray-600 mb-4">
-                            Watch how a drug distributes throughout the virtual organism, with concentrations changing in different organs over time.
-                        </p>
-                    </div>
-                    <div class="step" data-step="3">
-                        <h3 class="text-2xl font-semibold mb-4">Specialized Systems</h3>
-                        <p class="text-gray-600 mb-4">
-                            Our framework enhances PBPK by integrating specialized reproductive and thyroid tissues for enhanced precision.
-                        </p>
-                    </div>
-                </div>
-                <div class="step-visualization">
-                    <div id="pbpk-diagram" class="sticky-viz">
-                        <!-- PBPK Diagram will be dynamically updated here -->
-                    </div>
-                </div>
+    <!-- Foundation Section -->
+    <section id="foundation" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-teal mb-6">
+                    The Foundation: Physiologically Based Pharmacokinetics
+                </h2>
+                <p class="text-xl text-slate max-w-4xl mx-auto">
+                    PBPK modeling provides a mechanistic framework for understanding drug disposition by linking major organs through the circulatory system, enabling prediction of drug behavior across diverse biological systems.
+                </p>
             </div>
-        </section>
 
-        <!-- Challenge Section -->
-        <section id="challenge" class="scrolly-section bg-white">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">The Challenge: Biological Complexity</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                        Traditional PBPK models struggle with the immense variability between and within individuals.
-                    </p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="challenge-card bg-gray-50 p-6 rounded-xl">
-                        <h3 class="text-xl font-semibold mb-3">Inter-Individual Variability</h3>
-                        <p class="text-gray-600">Genetic differences, anatomical variations, age, and lifestyle factors create unique pharmacokinetic profiles.</p>
-                    </div>
-                    <div class="challenge-card bg-gray-50 p-6 rounded-xl">
-                        <h3 class="text-xl font-semibold mb-3">Intra-Individual Variability</h3>
-                        <p class="text-gray-600">Dynamic physiological changes over time alter how drugs are processed in the body.</p>
-                    </div>
-                    <div class="challenge-card bg-gray-50 p-6 rounded-xl">
-                        <h3 class="text-xl font-semibold mb-3">Data Scarcity</h3>
-                        <p class="text-gray-600">Limited comprehensive data for specific tissues creates modeling bottlenecks.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Solution Section -->
-        <section id="solution" class="scrolly-section bg-blue-50">
-            <div class="step-container">
-                <div class="step-text">
-                    <div class="step" data-step="0">
-                        <h2 class="text-3xl font-bold mb-4">The Solution: Agentic AI Integration</h2>
-                        <p class="text-lg text-gray-600 mb-6">
-                            Graph Neural Networks (GNNs) transform molecular structures (SMILES) into predicted ADME properties, providing crucial parameters for PBPK models.
-                        </p>
-                    </div>
-                    <div class="step" data-step="1">
-                        <h3 class="text-2xl font-semibold mb-4">Human Expert Input</h3>
-                        <p class="text-gray-600 mb-4">
-                            A pharmacologist defines the problem using natural language, setting the research question and constraints.
-                        </p>
-                    </div>
-                    <div class="step" data-step="2">
-                        <h3 class="text-2xl font-semibold mb-4">AI Agent Coordination</h3>
-                        <p class="text-gray-600 mb-4">
-                            Multiple specialized agents work together: conversational processing, workflow planning, and task coordination.
-                        </p>
-                    </div>
-                    <div class="step" data-step="3">
-                        <h3 class="text-2xl font-semibold mb-4">Parallel Task Execution</h3>
-                        <p class="text-gray-600 mb-4">
-                            Data retrieval, knowledge extraction, hypothesis generation, and ML parameter prediction happen simultaneously.
-                        </p>
-                    </div>
-                    <div class="step" data-step="4">
-                        <h3 class="text-2xl font-semibold mb-4">PBPK Simulation</h3>
-                        <p class="text-gray-600 mb-4">
-                            The simulation agent runs comprehensive PBPK/PK/PD/QSP models with AI-predicted parameters.
-                        </p>
-                    </div>
-                    <div class="step" data-step="5">
-                        <h3 class="text-2xl font-semibold mb-4">Iterative Refinement</h3>
-                        <p class="text-gray-600 mb-4">
-                            Continuous evaluation and optimization loop improves predictions and model accuracy.
-                        </p>
-                    </div>
-                    <div class="step" data-step="6">
-                        <h3 class="text-2xl font-semibold mb-4">Human Oversight & Reporting</h3>
-                        <p class="text-gray-600 mb-4">
-                            Expert review ensures scientific validity while automated documentation supports regulatory compliance.
-                        </p>
-                    </div>
-                </div>
-                <div class="step-visualization">
-                    <div id="solution-flowchart" class="sticky-viz">
-                        <!-- AI Flowchart visualization -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Cases Section -->
-        <section id="use-cases" class="scrolly-section bg-white">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Framework in Action</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                        Practical applications demonstrating the power of integrated MIDD framework.
-                    </p>
+            <div class="content-card fade-in mb-12">
+                <h3 class="text-2xl font-semibold text-teal mb-4">A Mechanistic View of the Body</h3>
+                <p class="text-slate mb-6">
+                    Each organ represents a distinct compartment characterized by physiological parameters including blood flow rates, tissue volumes, and partition coefficients. This bottom-up approach enables prediction of drug absorption, distribution, metabolism, and excretion (ADME) properties based on fundamental biological principles.
+                </p>
+                
+                <h4 class="text-xl font-semibold text-teal mb-4">16-Organ PBPK System</h4>
+                <div id="organ-diagram" class="grid grid-cols-4 md:grid-cols-8 gap-2 max-w-4xl mx-auto mb-6">
+                    <div class="organ organ-general" data-organ="liver">Liver</div>
+                    <div class="organ organ-general" data-organ="kidney">Kidney</div>
+                    <div class="organ organ-general" data-organ="brain">Brain</div>
+                    <div class="organ organ-general" data-organ="lung">Lung</div>
+                    <div class="organ organ-general" data-organ="heart">Heart</div>
+                    <div class="organ organ-general" data-organ="gut">Gut</div>
+                    <div class="organ organ-general" data-organ="spleen">Spleen</div>
+                    <div class="organ organ-general" data-organ="muscle">Muscle</div>
+                    <div class="organ organ-thyroid" data-organ="thyroid">Thyroid</div>
+                    <div class="organ organ-reproductive-m" data-organ="testes">Testes</div>
+                    <div class="organ organ-reproductive-m" data-organ="prostate">Prostate</div>
+                    <div class="organ organ-reproductive-f" data-organ="ovaries">Ovaries</div>
+                    <div class="organ organ-reproductive-f" data-organ="uterus">Uterus</div>
+                    <div class="organ organ-general" data-organ="adipose">Adipose</div>
+                    <div class="organ organ-general" data-organ="skin">Skin</div>
+                    <div class="organ organ-general" data-organ="blood">Blood</div>
                 </div>
                 
-                <div class="space-y-20">
-                    <!-- Use Case 1: Species Extrapolation -->
-                    <div class="use-case">
-                        <h3 class="text-2xl font-semibold mb-6 text-center">Multi-Species Extrapolation</h3>
-                        <div id="species-chart" class="chart-container">
-                            <div class="flex justify-center space-x-2 mb-4">
-                                <button class="species-btn px-4 py-2 rounded-md font-semibold shadow transition-colors bg-blue-600 text-white" data-species="human">Human</button>
-                                <button class="species-btn px-4 py-2 rounded-md font-semibold shadow transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300" data-species="monkey">Monkey</button>
-                                <button class="species-btn px-4 py-2 rounded-md font-semibold shadow transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300" data-species="rat">Rat</button>
-                                <button class="species-btn px-4 py-2 rounded-md font-semibold shadow transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300" data-species="mouse">Mouse</button>
-                            </div>
-                            <canvas id="speciesComparisonChart" width="400" height="300"></canvas>
-                            <p class="text-xs text-gray-500 mt-4 text-center">
-                                Note: The vertical axis uses a logarithmic scale to clearly display values that span several orders of magnitude.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- Use Case 2: Clearance Prediction -->
-                    <div class="use-case">
-                        <h3 class="text-2xl font-semibold mb-6 text-center">Advanced Clearance Prediction</h3>
-                        <div id="clearance-visualization" class="bg-gray-50 p-8 rounded-xl shadow-lg grid md:grid-cols-2 gap-8 items-center">
-                            <div>
-                                <h4 class="font-semibold text-lg mb-2">The HLM:HH Disconnect</h4>
-                                <p class="text-sm text-gray-600 mb-4">
-                                    A key issue is the "microsome-hepatocyte disconnect," where lab tests using liver microsomes (HLM) often predict higher clearance than tests with whole hepatocytes (HH), the more physiologically relevant system.
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    Our AI models help reconcile this discrepancy, directly impacting DDI predictions by providing a more reliable estimation of a drug's true intrinsic clearance.
-                                </p>
-                            </div>
-                            <div class="flex justify-around items-end h-48" id="clearance-bars">
-                                <div class="text-center">
-                                    <div class="w-16 h-24 bg-red-200 rounded-t-lg relative">
-                                        <div class="clearance-fill absolute bottom-0 w-full bg-red-500 rounded-t-lg" style="height: 90%;"></div>
-                                    </div>
-                                    <p class="font-semibold mt-2">Microsomes (HLM)</p>
-                                    <p class="text-sm text-gray-600">High CLint,u</p>
-                                </div>
-                                <div class="text-center">
-                                    <div class="w-16 h-24 bg-blue-200 rounded-t-lg relative">
-                                        <div class="clearance-fill absolute bottom-0 w-full bg-blue-500 rounded-t-lg" style="height: 40%;"></div>
-                                    </div>
-                                    <p class="font-semibold mt-2">Hepatocytes (HH)</p>
-                                    <p class="text-sm text-gray-600">Lower CLint,u</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Use Case 3: DDI Explainer -->
-                    <div class="use-case">
-                        <h3 class="text-2xl font-semibold mb-6 text-center">AI-Powered Drug-Drug Interaction Assessment</h3>
-                        <div id="ddi-explainer" class="bg-white p-8 rounded-xl shadow-lg">
-                            <div class="flex flex-col sm:flex-row gap-4 mb-6 justify-center">
-                                <input type="text" id="drug-a" placeholder="e.g., Warfarin" class="p-3 rounded-md border border-gray-300 flex-grow max-w-sm">
-                                <input type="text" id="drug-b" placeholder="e.g., Amiodarone" class="p-3 rounded-md border border-gray-300 flex-grow max-w-sm">
-                                <button id="analyze-ddi" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700 transition-colors whitespace-nowrap">
-                                    Analyze Potential DDI ✨
-                                </button>
-                            </div>
-                            <div id="ddi-result" class="min-h-[100px] bg-gray-50 p-4 rounded-md shadow-inner flex items-center justify-center text-gray-600 italic">
-                                This tool demonstrates an Agentic AI task agent for DDI assessment. Input two drug names to receive a concise analysis of potential pharmacokinetic or pharmacodynamic interactions.
-                            </div>
-                        </div>
-
-                        <!-- Enzyme Tabs -->
-                        <div class="mt-8 bg-white p-8 rounded-xl shadow-lg">
-                            <div class="flex flex-wrap justify-center border-b border-gray-200">
-                                <button class="enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors bg-blue-50 text-blue-600 border-b-2 border-blue-600" data-enzyme="cyp3a">CYP3A</button>
-                                <button class="enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors text-gray-600 hover:bg-gray-50" data-enzyme="ugts">UGTs</button>
-                                <button class="enzyme-tab px-4 py-2 -mb-px font-semibold rounded-t transition-colors text-gray-600 hover:bg-gray-50" data-enzyme="mdr1">MDR1</button>
-                            </div>
-                            <div class="pt-4" id="enzyme-content">
-                                <h4 class="font-bold text-lg mb-2">CYP3A Family</h4>
-                                <p class="text-gray-600">Found in the liver and intestine, CYP3A enzymes are responsible for metabolizing over 50% of prescription drugs. Their activity shows high variability between people due to genetics and can be a source of the HLM:HH disconnect.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Use Case 4: Virtual Twins -->
-                    <div class="use-case">
-                        <h3 class="text-2xl font-semibold mb-6 text-center">Virtual Twins & Real-time Personalization</h3>
-                        <div id="virtual-twin-demo" class="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl shadow-lg">
-                            <div class="flex flex-col md:flex-row items-center justify-center gap-8 w-full">
-                                <!-- Wearable Data Source -->
-                                <div class="flex flex-col items-center text-center">
-                                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl mb-2">⌚</div>
-                                    <h4 class="font-semibold">Wearable Devices</h4>
-                                    <p class="text-sm text-gray-600 max-w-xs">Real-time data stream (Heart Rate, Activity, Sleep)</p>
-                                </div>
-
-                                <div class="text-2xl text-gray-400">→</div>
-                                
-                                <!-- PBPK Virtual Twin -->
-                                <div class="flex flex-col items-center text-center">
-                                    <div class="relative">
-                                        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl">🧠</div>
-                                        <div class="absolute top-0 left-0 w-full h-full animate-pulse rounded-full bg-blue-200 -z-10"></div>
-                                    </div>
-                                    <h4 class="font-semibold mt-2">PBPK Virtual Twin</h4>
-                                    <p class="text-sm text-gray-600 max-w-xs">Dynamic model adapts to physiological changes</p>
-                                </div>
-                                
-                                <div class="text-2xl text-gray-400">→</div>
-
-                                <!-- Personalized Outcome -->
-                                <div class="flex flex-col items-center text-center">
-                                    <div class="p-4 rounded-full bg-purple-100">
-                                        <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white text-xl">💊</div>
-                                    </div>
-                                    <h4 class="font-semibold mt-2">Optimized Dosing</h4>
-                                    <p class="text-sm text-gray-600 max-w-xs">Personalized and adaptive drug therapy</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Virtual Twin Complexities -->
-                        <div class="mt-12">
-                            <h4 class="text-xl font-semibold mb-6 text-center">Addressing Complexities in Virtual Twin Integration</h4>
-                            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 text-left">
-                                <div class="p-6 bg-white rounded-xl shadow-lg h-full flex flex-col items-center text-center">
-                                    <div class="text-4xl text-blue-600 mb-4">🧪</div>
-                                    <h5 class="font-semibold text-lg mb-3">Formulation Impact</h5>
-                                    <p class="text-gray-600 text-sm">Conventional PBPK models often simplify the impact of drug formulation. Integrating the precise characteristics of novel delivery systems is crucial.</p>
-                                </div>
-                                <div class="p-6 bg-white rounded-xl shadow-lg h-full flex flex-col items-center text-center">
-                                    <div class="text-4xl text-blue-600 mb-4">⚛️</div>
-                                    <h5 class="font-semibold text-lg mb-3">Nanomedicine & Complex Devices</h5>
-                                    <p class="text-gray-600 text-sm">Modeling nanomedicines and drugs from medical devices requires intricate biophysical interactions beyond traditional PBPK compartments.</p>
-                                </div>
-                                <div class="p-6 bg-white rounded-xl shadow-lg h-full flex flex-col items-center text-center">
-                                    <div class="text-4xl text-blue-600 mb-4">🔄</div>
-                                    <h5 class="font-semibold text-lg mb-3">Seamless Translational Continuum</h5>
-                                    <p class="text-gray-600 text-sm">A continuous predictive thread from preclinical data to individual patient management using standardized data formats.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-sm text-slate text-center">
+                    <p><span class="inline-block w-4 h-4 bg-blue-200 border-2 border-blue-500 rounded mr-2"></span>General Organs</p>
+                    <p><span class="inline-block w-4 h-4 bg-pink-200 border-2 border-pink-500 rounded mr-2"></span>Thyroid System</p>
+                    <p><span class="inline-block w-4 h-4 bg-green-200 border-2 border-green-500 rounded mr-2"></span>Male Reproductive</p>
+                    <p><span class="inline-block w-4 h-4 bg-purple-200 border-2 border-purple-500 rounded mr-2"></span>Female Reproductive</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Future Section -->
-        <section id="future" class="scrolly-section bg-gradient-to-br from-purple-50 to-blue-50">
-            <div class="container mx-auto px-6 py-20">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Challenges and Future Directions</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                        Addressing key challenges to fully realize precision medicine potential.
+    <!-- Challenge Section -->
+    <section id="challenge" class="py-20 bg-white bg-opacity-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-teal mb-6">
+                    The Grand Challenge: Overcoming Biological Complexity
+                </h2>
+                <p class="text-xl text-slate max-w-4xl mx-auto">
+                    Traditional PBPK models face significant limitations when confronting the immense variability and dynamic nature of biological systems.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="content-card fade-in">
+                    <h3 class="text-xl font-semibold text-teal mb-4">Inter- & Intra-Individual Variability</h3>
+                    <p class="text-slate">
+                        Genetic polymorphisms in drug-metabolizing enzymes, anatomical variations, age-related physiological changes, and lifestyle factors create unique pharmacokinetic profiles. Dynamic physiological states including menstrual cycles, pregnancy, and disease progression further complicate predictive modeling.
                     </p>
+                </div>
+
+                <div class="content-card fade-in" style="transition-delay: 0.2s;">
+                    <h3 class="text-xl font-semibold text-teal mb-4">Data Scarcity & Standardization</h3>
+                    <p class="text-slate">
+                        High-quality, standardized data remains critical for AI model training. <strong>SEND (Standard for Exchange of Nonclinical Data)</strong> protocols for preclinical studies and <strong>ADAM (Analysis Data Model)</strong> standards for clinical pharmacology datasets ensure data integrity and improve predictive accuracy across computational platforms.
+                    </p>
+                </div>
+
+                <div class="content-card fade-in" style="transition-delay: 0.4s;">
+                    <h3 class="text-xl font-semibold text-teal mb-4">Gaps in Advanced Therapeutics Modeling</h3>
+                    <p class="text-slate">
+                        Complex formulations including nanomedicines, sustained-release systems, and drug-device combinations require integration of formulation science principles. These advanced delivery systems exhibit unique pharmacokinetic behaviors that traditional PBPK models struggle to capture accurately.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-teal mb-6">
+                    The Unified Solution: An Integrated AI-Powered Framework
+                </h2>
+                <p class="text-xl text-slate max-w-4xl mx-auto">
+                    Synergistic integration of Graph Neural Networks, Large Language Models, and Agentic AI systems creates a transformative computational pharmacology platform.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="content-card fade-in">
+                    <h3 class="text-2xl font-semibold text-teal mb-4">
+                        🧬 Graph Neural Networks: The Molecular Architects
+                    </h3>
+                    <p class="text-slate mb-4">
+                        GNNs excel at molecular representation learning, transforming chemical structures into predictive models for ADME and physicochemical properties. By modeling inter-organ connectivity as biological networks, GNNs capture complex relationships between physiological systems.
+                    </p>
+                    <ul class="text-slate space-y-2">
+                        <li>• Molecular property prediction from chemical structures</li>
+                        <li>• Network-based modeling of organ interactions</li>
+                        <li>• Dynamic learning from pharmacokinetic data</li>
+                        <li>• Integration with mechanistic PBPK frameworks</li>
+                    </ul>
+                </div>
+
+                <div class="content-card fade-in" style="transition-delay: 0.2s;">
+                    <h3 class="text-2xl font-semibold text-teal mb-4">
+                        🤖 AI & Large Language Models: The Knowledge Engine
+                    </h3>
+                    <p class="text-slate mb-4">
+                        LLMs serve as sophisticated knowledge extraction and reasoning engines, processing vast biomedical literature while generating human-readable insights. Advanced AI systems enable predictive parameterization and hypothesis generation across the drug development pipeline.
+                    </p>
+                    <ul class="text-slate space-y-2">
+                        <li>• Automated knowledge extraction from literature</li>
+                        <li>• Drug-drug interaction prediction and assessment</li>
+                        <li>• Hypothesis generation for novel therapeutic targets</li>
+                        <li>• Generation of regulatory-compliant reports</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section id="framework" class="py-20 bg-white bg-opacity-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-teal mb-6">
+                    Framework in Action: Key Use Cases
+                </h2>
+                <p class="text-xl text-slate max-w-4xl mx-auto">
+                    Practical applications demonstrating the transformative power of integrated computational pharmacology across drug development stages.
+                </p>
+            </div>
+
+            <!-- Use Case 1: Multi-Species Extrapolation -->
+            <div class="content-card fade-in mb-12">
+                <h3 class="text-2xl font-semibold text-teal mb-4">Use Case 1: Multi-Species Extrapolation</h3>
+                <p class="text-slate mb-6">
+                    PBPK models enable systematic scaling of preclinical findings from animal models to human populations by accounting for species-specific physiological differences in organ weights, blood flows, and metabolic capacities.
+                </p>
+                
+                <div class="mb-6">
+                    <div class="flex flex-wrap gap-2 justify-center mb-4">
+                        <button class="species-btn tab-button active" data-species="human">Human</button>
+                        <button class="species-btn tab-button" data-species="monkey">Monkey</button>
+                        <button class="species-btn tab-button" data-species="rat">Rat</button>
+                        <button class="species-btn tab-button" data-species="mouse">Mouse</button>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="speciesChart"></canvas>
+                    </div>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8 text-center mb-16">
-                    <div class="future-card bg-white p-6 rounded-xl shadow-lg">
-                        <div class="text-4xl mb-4">💾</div>
-                        <h3 class="font-semibold text-xl mb-3">Data Quality & Standardization</h3>
-                        <p class="text-gray-600">Enforcing industry standards for machine-readable, high-quality data.</p>
+                <p class="text-sm text-slate text-center">
+                    Interactive comparison of key physiological parameters across preclinical species and humans, demonstrating the complexity of cross-species extrapolation in drug development.
+                </p>
+            </div>
+
+            <!-- Use Case 2: Advanced Clearance Prediction -->
+            <div class="content-card fade-in mb-12">
+                <h3 class="text-2xl font-semibold text-teal mb-4">Use Case 2: Advanced Clearance Prediction & DDI Assessment</h3>
+                <p class="text-slate mb-6">
+                    A critical challenge in drug development involves accurately predicting intrinsic clearance and understanding the disconnect between in vitro systems. The HLM:HH disconnect represents a fundamental limitation where liver microsome assays predict higher clearance than hepatocyte systems.
+                </p>
+                
+                <h4 class="text-lg font-semibold text-teal mb-4">The HLM:HH Disconnect</h4>
+                <div id="clearance-graphic" class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="text-center">
+                        <h5 class="font-semibold mb-2">HLM (Microsomes)</h5>
+                        <div class="clearance-bar">
+                            <div class="clearance-fill hlm-fill" style="--fill-width: 90%;"></div>
+                        </div>
+                        <p class="text-sm text-slate mt-2">Higher predicted CLint,u</p>
                     </div>
-                    <div class="future-card bg-white p-6 rounded-xl shadow-lg">
-                        <div class="text-4xl mb-4">🔍</div>
-                        <h3 class="font-semibold text-xl mb-3">Model Validation & Interpretability</h3>
-                        <p class="text-gray-600">Providing explainable, biologically meaningful reasoning for regulatory acceptance.</p>
-                    </div>
-                    <div class="future-card bg-white p-6 rounded-xl shadow-lg">
-                        <div class="text-4xl mb-4">💻</div>
-                        <h3 class="font-semibold text-xl mb-3">Computational Scalability</h3>
-                        <p class="text-gray-600">Optimizing algorithms for practical clinical decision support.</p>
+                    <div class="text-center">
+                        <h5 class="font-semibold mb-2">HH (Hepatocytes)</h5>
+                        <div class="clearance-bar">
+                            <div class="clearance-fill hh-fill" style="--fill-width: 55%;"></div>
+                        </div>
+                        <p class="text-sm text-slate mt-2">More physiologically relevant CLint,u</p>
                     </div>
                 </div>
+                
+                <p class="text-slate">
+                    Advanced AI models help reconcile this discrepancy by integrating multiple data sources and accounting for cellular context, directly impacting drug-drug interaction predictions and dose optimization strategies.
+                </p>
+            </div>
 
-                <div class="text-center bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-bold mb-4">Towards Unified Computational Pharmacology</h3>
-                    <p class="text-lg text-gray-600 max-w-4xl mx-auto">
-                        The future points towards convergence of PBPK, PK/PD, and QSP, creating a continuous feedback loop from molecule to population and back to the individual.
-                    </p>
+            <!-- Use Case 3: Enzyme & Transporter Variability -->
+            <div class="content-card fade-in mb-12">
+                <h3 class="text-2xl font-semibold text-teal mb-4">Use Case 3: Enzyme & Transporter Variability</h3>
+                <p class="text-slate mb-6">
+                    Understanding enzyme and transporter expression levels across tissues and species is crucial for accurate DDI prediction and cross-species scaling. Variable expression profiles significantly impact intrinsic clearance predictions and therapeutic outcomes.
+                </p>
+                
+                <div class="enzyme-tabs">
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button class="enzyme-tab tab-button active" data-tab="cyp3a">CYP3A Family</button>
+                        <button class="enzyme-tab tab-button" data-tab="ugts">UGTs</button>
+                        <button class="enzyme-tab tab-button" data-tab="mdr1">MDR1</button>
+                    </div>
+                    
+                    <div id="cyp3a-content" class="tab-content active">
+                        <h4 class="font-semibold text-teal mb-2">CYP3A Family</h4>
+                        <p class="text-slate">
+                            Found in the liver and intestine, CYP3A enzymes metabolize over 50% of prescription drugs. Their activity shows high variability due to genetics and can be a source of the HLM:HH disconnect. Predicting CYP3A-mediated interactions by integrating expression level data is a primary goal for DDI assessment.
+                        </p>
+                    </div>
+                    
+                    <div id="ugts-content" class="tab-content">
+                        <h4 class="font-semibold text-teal mb-2">UGTs (UDP-glucuronosyltransferases)</h4>
+                        <p class="text-slate">
+                            These are key Phase II metabolism enzymes that make compounds more water-soluble for excretion. Their expression and activity are highly tissue- and species-dependent, leading to significant variations in unbound intrinsic clearance. Integrating these specific expression profiles improves cross-species scaling and DDI predictions related to glucuronidation.
+                        </p>
+                    </div>
+                    
+                    <div id="mdr1-content" class="tab-content">
+                        <h4 class="font-semibold text-teal mb-2">MDR1 (P-glycoprotein)</h4>
+                        <p class="text-slate">
+                            MDR1 is an efflux transporter that pumps drugs out of cells, limiting absorption and brain entry. Its function and expression levels differ significantly across species. Accounting for these varied profiles is key to predicting transporter-mediated DDIs and tissue-specific drug concentrations.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+
+            <!-- Use Case 4: Agentic AI Framework -->
+            <div class="content-card fade-in mb-12" id="agentic-ai-usecase">
+                <h3 class="text-2xl font-semibold text-teal mb-4">Use Case 4: An Agentic AI Framework for MIDD</h3>
+                <p class="text-slate mb-8">
+                    Specialized AI agents collaborate in Model-Informed Drug Development, creating an autonomous yet human-supervised workflow that spans from hypothesis generation to regulatory documentation.
+                </p>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex flex-col items-center space-y-4">
+                        <div class="agent-node agent-human">
+                            <div class="text-2xl mb-2">👨‍🔬</div>
+                            <div class="font-semibold">Human Expert Input & Oversight</div>
+                        </div>
+                        
+                        <div class="arrow-down"></div>
+                        
+                        <div class="agent-node agent-ai">
+                            <div class="text-2xl mb-2">🤖</div>
+                            <div class="font-semibold">Conversational & Planning Agent</div>
+                        </div>
+                        
+                        <div class="arrow-down"></div>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 w-full">
+                            <div class="agent-node agent-process">
+                                <div class="text-2xl mb-2">📊</div>
+                                <div class="font-semibold">Data Retrieval & Standardization (SEND/ADAM)</div>
+                            </div>
+                            <div class="agent-node agent-ai">
+                                <div class="text-2xl mb-2">🧬</div>
+                                <div class="font-semibold">Hypothesis Generation Agent</div>
+                            </div>
+                        </div>
+                        
+                        <div class="arrow-down"></div>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 w-full">
+                            <div class="agent-node agent-ai">
+                                <div class="text-2xl mb-2">🧪</div>
+                                <div class="font-semibold">Parameter Prediction Agent (GNN/ML)</div>
+                            </div>
+                            <div class="agent-node agent-process">
+                                <div class="text-2xl mb-2">💻</div>
+                                <div class="font-semibold">Simulation Agent (PBPK/QSP Models)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="arrow-down"></div>
+                        
+                        <div class="feedback-loop w-full">
+                            <div class="text-center mb-4">
+                                <div class="text-lg font-semibold text-purple-700">🔄 Feedback & Refinement Loop</div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="agent-node agent-ai">
+                                    <div class="text-2xl mb-2">📈</div>
+                                    <div class="font-semibold">Evaluation & Reporting Agent</div>
+                                </div>
+                                <div class="agent-node agent-process">
+                                    <div class="text-2xl mb-2">⚙️</div>
+                                    <div class="font-semibold">Refinement & Optimization Agent</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="arrow-down"></div>
+                        
+                        <div class="agent-node agent-human">
+                            <div class="text-2xl mb-2">✅</div>
+                            <div class="font-semibold">Final Review & Validation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 5: Virtual Twins -->
+            <div class="content-card fade-in mb-12">
+                <h3 class="text-2xl font-semibold text-teal mb-4">Use Case 5: Real-time Personalized PBPK with Virtual Twins & Wearables</h3>
+                <p class="text-slate mb-6">
+                    "Virtual twins" represent computer-simulated models of individual patients, integrating real-time physiological data from wearable devices with validated PBPK platforms to enable personalized dosing optimization and therapeutic monitoring.
+                </p>
+                
+                <h4 class="text-lg font-semibold text-teal mb-4">Addressing Complexities in Virtual Twin Integration</h4>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white bg-opacity-60 p-4 rounded-lg">
+                        <h5 class="font-semibold text-teal mb-2">Formulation Impact</h5>
+                        <p class="text-slate text-sm">
+                            Modeling complex drug formulations including sustained-release systems and nanomedicines requires close collaboration with <strong>formulation scientists</strong> to capture release kinetics and bioavailability factors.
+                        </p>
+                    </div>
+                    <div class="bg-white bg-opacity-60 p-4 rounded-lg">
+                        <h5 class="font-semibold text-teal mb-2">Nanomedicine & Device Integration</h5>
+                        <p class="text-slate text-sm">
+                            Nanomedicines and drug-eluting medical devices present unique pharmacokinetic challenges requiring specialized modeling approaches beyond traditional PBPK frameworks.
+                        </p>
+                    </div>
+                    <div class="bg-white bg-opacity-60 p-4 rounded-lg">
+                        <h5 class="font-semibold text-teal mb-2">Translational Continuum</h5>
+                        <p class="text-slate text-sm">
+                            Seamless scaling from preclinical to clinical to individual patient requires robust validation methodologies. <strong>SEND and ADAM</strong> standards provide the foundational data quality needed for this continuum.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outlook Section -->
+    <section id="outlook" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-teal mb-6">
+                    Strategic Outlook & The Path Forward
+                </h2>
+                <p class="text-xl text-slate max-w-4xl mx-auto">
+                    The future of computational pharmacology lies in the convergence of diverse scientific disciplines and the strategic deployment of AI-powered platforms.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="content-card fade-in">
+                    <h3 class="text-2xl font-semibold text-teal mb-4">A Call for Interdisciplinary Convergence</h3>
+                    <p class="text-slate mb-4">
+                        Success requires seamless collaboration among diverse scientific disciplines, each contributing essential expertise to the holistic understanding of drug behavior and therapeutic outcomes.
+                    </p>
+                    <ul class="text-slate space-y-2">
+                        <li>• <strong>High-throughput assay specialists</strong> - Generate systematic experimental data</li>
+                        <li>• <strong>Omics scientists</strong> - Provide molecular-level insights</li>
+                        <li>• <strong>Pharmacologists</strong> - Interpret biological mechanisms</li>
+                        <li>• <strong>Computational modelers</strong> - Develop predictive frameworks</li>
+                        <li>• <strong>Formulation scientists</strong> - Design optimal delivery systems</li>
+                    </ul>
+                </div>
+
+                <div class="content-card fade-in" style="transition-delay: 0.2s;">
+                    <h3 class="text-2xl font-semibold text-teal mb-4">The Competitive Imperative</h3>
+                    <p class="text-slate mb-4">
+                        Centralized, securely governed data platforms combined with Agentic AI frameworks are becoming key differentiators in pharmaceutical R&D, enabling organizations to accelerate innovation while maintaining regulatory compliance.
+                    </p>
+                    <ul class="text-slate space-y-2">
+                        <li>• Integrated data governance and quality assurance</li>
+                        <li>• Automated regulatory documentation workflows</li>
+                        <li>• Real-time decision support systems</li>
+                        <li>• Scalable computational infrastructure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section id="conclusion" class="py-20 bg-white bg-opacity-50">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="content-card fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-teal mb-6">Conclusion</h2>
+                <p class="text-lg text-slate mb-6">
+                    The integration of Graph Neural Networks, Agentic AI systems, and mechanistic PBPK modeling represents a transformative paradigm shift in precision medicine. This unified computational framework promises to accelerate drug development timelines, enhance therapeutic precision, and ultimately improve patient outcomes through data-driven, mechanistically-informed decision making.
+                </p>
+                <p class="text-lg text-slate">
+                    Success will require continued collaboration across scientific disciplines, investment in standardized data infrastructure, and commitment to rigorous validation methodologies. The future of pharmaceutical innovation lies in our ability to seamlessly integrate human expertise with advanced AI capabilities.
+                </p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-6">
-        <div class="container mx-auto px-6 text-center text-sm">
-            <p>&copy; 2025 GNN-PBPK Framework Initiative. All rights reserved.</p>
-            <p class="text-gray-400 mt-1">This interactive report demonstrates the "Advancing Precision Medicine" framework.</p>
+    <footer class="py-12 bg-slate text-white">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-lg mb-2">© 2024 Precision Medicine Framework Initiative</p>
+            <p class="text-sm opacity-75">Advancing computational pharmacology through integrated AI systems</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Global variables
+        let speciesChart;
+        let organAnimationInterval;
+        
+        // Species data for chart
+        const speciesData = {
+            human: {
+                label: 'Human',
+                data: [70, 312, 2.6, 0.4, 2.0, 1.6],
+                backgroundColor: 'rgba(70, 130, 180, 0.8)',
+                borderColor: 'rgba(70, 130, 180, 1)'
+            },
+            monkey: {
+                label: 'Monkey',
+                data: [7, 45, 3.1, 0.5, 2.1, 1.5],
+                backgroundColor: 'rgba(76, 175, 80, 0.8)',
+                borderColor: 'rgba(76, 175, 80, 1)'
+            },
+            rat: {
+                label: 'Rat',
+                data: [0.25, 5, 3.7, 0.73, 2.0, 1.6],
+                backgroundColor: 'rgba(255, 152, 0, 0.8)',
+                borderColor: 'rgba(255, 152, 0, 1)'
+            },
+            mouse: {
+                label: 'Mouse',
+                data: [0.025, 0.5, 3.8, 1.2, 2.0, 1.7],
+                backgroundColor: 'rgba(156, 39, 176, 0.8)',
+                borderColor: 'rgba(156, 39, 176, 1)'
+            }
+        };
+        
+        const chartLabels = [
+            'Body Weight (kg)',
+            'Cardiac Output (L/h)',
+            'Liver (%BW)',
+            'Kidney (%BW)',
+            'Brain (%BW)',
+            'Thyroid Blood Flow (%)'
+        ];
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFadeInObserver();
+            initializeOrganAnimation();
+            initializeSpeciesChart();
+            initializeClearanceAnimation();
+            initializeEnzymeTabs();
+            initializeSmoothScrolling();
+        });
+
+        // Fade-in animation observer
+        function initializeFadeInObserver() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Organ diagram animation
+        function initializeOrganAnimation() {
+            const organDiagram = document.getElementById('organ-diagram');
+            const organs = organDiagram.querySelectorAll('.organ');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startOrganHighlighting(organs);
+                    } else {
+                        stopOrganHighlighting();
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(organDiagram);
+        }
+
+        function startOrganHighlighting(organs) {
+            let currentIndex = 0;
+            
+            organAnimationInterval = setInterval(() => {
+                // Remove highlight from all organs
+                organs.forEach(organ => organ.classList.remove('highlighted'));
+                
+                // Highlight current organ
+                if (organs[currentIndex]) {
+                    organs[currentIndex].classList.add('highlighted');
+                }
+                
+                currentIndex = (currentIndex + 1) % organs.length;
+            }, 800);
+        }
+
+        function stopOrganHighlighting() {
+            if (organAnimationInterval) {
+                clearInterval(organAnimationInterval);
+                // Remove all highlights
+                document.querySelectorAll('.organ').forEach(organ => {
+                    organ.classList.remove('highlighted');
+                });
+            }
+        }
+
+        // Species chart initialization
+        function initializeSpeciesChart() {
+            const ctx = document.getElementById('speciesChart').getContext('2d');
+            
+            speciesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [speciesData.human]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Physiological Parameters Across Species'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            type: 'logarithmic',
+                            title: {
+                                display: true,
+                                text: 'Value (Log Scale)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Physiological Parameters'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Add event listeners to species buttons
+            document.querySelectorAll('.species-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const species = this.dataset.species;
+                    updateSpeciesChart(species);
+                    updateActiveButton(this, '.species-btn');
+                });
+            });
+        }
+
+        function updateSpeciesChart(species) {
+            speciesChart.data.datasets[0] = speciesData[species];
+            speciesChart.update('active');
+        }
+
+        function updateActiveButton(activeBtn, selector) {
+            document.querySelectorAll(selector).forEach(btn => {
+                btn.classList.remove('active');
+            });
+            activeBtn.classList.add('active');
+        }
+
+        // Clearance animation
+        function initializeClearanceAnimation() {
+            const clearanceGraphic = document.getElementById('clearance-graphic');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const fills = entry.target.querySelectorAll('.clearance-fill');
+                        fills.forEach(fill => {
+                            fill.style.width = fill.style.getPropertyValue('--fill-width');
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(clearanceGraphic);
+        }
+
+        // Enzyme tabs functionality
+        function initializeEnzymeTabs() {
+            document.querySelectorAll('.enzyme-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    // Update active tab
+                    updateActiveButton(this, '.enzyme-tab');
+                    
+                    // Show/hide content
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId + '-content').classList.add('active');
+                });
+            });
+        }
+
+        // Smooth scrolling for navigation
+        function initializeSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 </html>
