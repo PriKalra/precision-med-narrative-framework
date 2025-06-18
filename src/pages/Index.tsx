@@ -7,10 +7,12 @@ const IntroductionSection = lazy(() => import('@/components/sections/Introductio
 const ChallengeSection = lazy(() => import('@/components/sections/ChallengeSection'));
 const SolutionSection = lazy(() => import('@/components/sections/SolutionSection'));
 const UseCasesSection = lazy(() => import('@/components/sections/UseCasesSection'));
+const FrameworkSection = lazy(() => import('@/components/sections/FrameworkSection'));
+const BenefitsSection = lazy(() => import('@/components/sections/BenefitsSection'));
 const FutureSection = lazy(() => import('@/components/sections/FutureSection'));
 const Footer = lazy(() => import('@/components/layout/Footer'));
 
-const sectionIds = ['introduction', 'the-challenge', 'the-solution', 'use-cases', 'future'];
+const sectionIds = ['introduction', 'the-challenge', 'the-solution', 'use-cases', 'framework', 'benefits', 'future'];
 
 const Index = () => {
     const [activeSection, setActiveSection] = useState('');
@@ -42,7 +44,7 @@ const Index = () => {
     }, []);
 
     return (
-        <div className="">
+        <div className="scroll-smooth">
             <Header activeSection={activeSection} />
             <main>
                 <HeroSection />
@@ -51,6 +53,8 @@ const Index = () => {
                     <ChallengeSection id="the-challenge" />
                     <SolutionSection id="the-solution" />
                     <UseCasesSection id="use-cases" />
+                    <FrameworkSection id="framework" />
+                    <BenefitsSection id="benefits" />
                     <FutureSection id="future" />
                 </Suspense>
             </main>
